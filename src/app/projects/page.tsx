@@ -1,0 +1,211 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import PageHero from "@/components/PageHero";
+
+const projects = [
+  {
+    slug: "meridian-residences",
+    title: "The Meridian Residences",
+    category: "Residential",
+    year: "2024",
+    location: "Dubai, UAE",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
+  },
+  {
+    slug: "wadi-cultural-centre",
+    title: "Wadi Cultural Centre",
+    category: "Cultural",
+    year: "2023",
+    location: "Riyadh, KSA",
+    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80",
+  },
+  {
+    slug: "skyline-commerce-tower",
+    title: "Skyline Commerce Tower",
+    category: "Commercial",
+    year: "2023",
+    location: "Abu Dhabi, UAE",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+  },
+  {
+    slug: "salam-villa-estate",
+    title: "Salam Villa Estate",
+    category: "Residential",
+    year: "2022",
+    location: "Muscat, Oman",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+  },
+  {
+    slug: "al-noor-urban-plaza",
+    title: "Al Noor Urban Plaza",
+    category: "Urban",
+    year: "2022",
+    location: "Sharjah, UAE",
+    image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800&q=80",
+  },
+  {
+    slug: "the-archive-library",
+    title: "The Archive Library",
+    category: "Cultural",
+    year: "2021",
+    location: "Cairo, Egypt",
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
+  },
+];
+
+const categories = ["All", "Residential", "Commercial", "Cultural", "Urban"];
+
+export default function ProjectsPage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filtered =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
+
+  return (
+    <>
+      <Header />
+      <main>
+        <PageHero
+          eyebrow="Our Portfolio"
+          title="Featured"
+          titleAccent="Projects"
+          subtitle="A selection of work across residential, commercial, cultural, and urban typologies."
+        />
+
+        {/* Filter + Grid */}
+        <section style={{ background: "var(--em-bg)", paddingTop: "6rem", paddingBottom: "6rem" }}>
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+
+            {/* Category filter tabs — horizontally scrollable on mobile */}
+            <div className="flex items-center gap-2 mb-14 overflow-x-auto pb-2 scrollbar-hide">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className="px-5 py-2 text-xs tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap flex-shrink-0"
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      background: isActive ? "#E85830" : "transparent",
+                      color: isActive ? "#FFFFFF" : "var(--em-muted)",
+                      border: isActive ? "1px solid #E85830" : `1px solid var(--em-border)`,
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#E85830";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#E85830";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--em-border)";
+                        (e.currentTarget as HTMLButtonElement).style.color = "var(--em-muted)";
+                      }
+                    }}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Project grid */}
+            {filtered.length === 0 ? (
+              <div className="py-24 text-center">
+                <p
+                  className="text-lg"
+                  style={{ fontFamily: "var(--font-cormorant)", color: "var(--em-muted)" }}
+                >
+                  No projects found in this category.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filtered.map((project) => (
+                  <Link
+                    key={project.slug}
+                    href={`/projects/${project.slug}`}
+                    className="group block"
+                    style={{ textDecoration: "none" }}
+                  >
+                    {/* Image */}
+                    <div
+                      style={{ height: "260px", overflow: "hidden", position: "relative" }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          transition: "transform 0.5s ease",
+                        }}
+                        className="group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Card info */}
+                    <div style={{ paddingTop: "1rem" }}>
+                      <div
+                        className="flex items-center gap-3 mb-2"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                      >
+                        <span
+                          className="text-xs tracking-[0.2em] uppercase"
+                          style={{ color: "#E85830" }}
+                        >
+                          {project.category}
+                        </span>
+                        <span
+                          className="text-xs tracking-[0.15em]"
+                          style={{ color: "var(--em-border)" }}
+                        >
+                          ·
+                        </span>
+                        <span
+                          className="text-xs tracking-[0.15em]"
+                          style={{ color: "var(--em-muted)" }}
+                        >
+                          {project.year}
+                        </span>
+                      </div>
+
+                      <h3
+                        className="mb-1 leading-snug transition-colors duration-300 group-hover:text-[#E85830]"
+                        style={{
+                          fontFamily: "var(--font-cormorant)",
+                          fontWeight: 400,
+                          fontSize: "1.35rem",
+                          color: "var(--em-text)",
+                        }}
+                      >
+                        {project.title}
+                      </h3>
+
+                      <p
+                        className="text-xs tracking-[0.1em]"
+                        style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                      >
+                        {project.location}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
