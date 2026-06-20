@@ -30,7 +30,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "#1A1916", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <footer style={{ background: "#441919", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
@@ -38,7 +38,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
             <Link href="/" className="flex items-center gap-3 mb-8 w-fit">
-              <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#E85830" }}>
+              <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
                 <span className="w-3 h-3 bg-white" />
               </span>
               <span className="text-white tracking-[0.25em] uppercase text-sm font-light" style={{ fontFamily: "var(--font-inter)" }}>
@@ -61,7 +61,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-xs tracking-[0.15em] uppercase transition-colors duration-300"
                   style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.25)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#E85830")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#993434")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
                 >
                   {s.label}
@@ -83,7 +83,7 @@ export default function Footer() {
                       href={item.href}
                       className="text-sm transition-colors duration-300"
                       style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#E85830")}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "#993434")}
                       onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
                     >
                       {item.label}

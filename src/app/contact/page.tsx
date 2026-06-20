@@ -81,7 +81,7 @@ export default function ContactPage() {
                   }}
                 >
                   Our studio is open<br />
-                  <em style={{ color: "#E85830" }}>Monday to Friday</em>, 9am – 6pm.
+                  <em style={{ color: "#993434" }}>Monday to Friday</em>, 9am – 6pm.
                 </h2>
 
                 {/* Contact details */}
@@ -93,7 +93,7 @@ export default function ContactPage() {
                         style={{
                           width: "2.5rem",
                           height: "2.5rem",
-                          border: "1px solid #E85830",
+                          border: "1px solid #993434",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -101,7 +101,7 @@ export default function ContactPage() {
                           marginTop: "0.125rem",
                         }}
                       >
-                        <Icon size={14} color="#E85830" />
+                        <Icon size={14} color="#993434" />
                       </div>
                       <div>
                         <p
@@ -153,8 +153,8 @@ export default function ContactPage() {
                           display: "inline-block",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.color = "#E85830";
-                          e.currentTarget.style.borderColor = "#E85830";
+                          e.currentTarget.style.color = "#993434";
+                          e.currentTarget.style.borderColor = "#993434";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.color = "var(--em-text)";
@@ -183,7 +183,7 @@ export default function ContactPage() {
                       style={{
                         width: "3rem",
                         height: "3rem",
-                        background: "#E85830",
+                        background: "#993434",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -251,7 +251,7 @@ export default function ContactPage() {
                               outline: "none",
                               transition: "border-color 0.2s",
                             }}
-                            onFocus={(e) => ((e.currentTarget as HTMLInputElement).style.borderColor = "#E85830")}
+                            onFocus={(e) => ((e.currentTarget as HTMLInputElement).style.borderColor = "#993434")}
                             onBlur={(e) => ((e.currentTarget as HTMLInputElement).style.borderColor = "var(--em-border)")}
                           />
                         </div>
@@ -277,15 +277,15 @@ export default function ContactPage() {
                               className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-200"
                               style={{
                                 fontFamily: "var(--font-inter)",
-                                background: isActive ? "#E85830" : "transparent",
+                                background: isActive ? "#993434" : "transparent",
                                 color: isActive ? "#FFFFFF" : "var(--em-muted)",
-                                border: isActive ? "1px solid #E85830" : `1px solid var(--em-border)`,
+                                border: isActive ? "1px solid #993434" : `1px solid var(--em-border)`,
                                 borderRadius: "9999px",
                               }}
                               onMouseEnter={(e) => {
                                 if (!isActive) {
-                                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#E85830";
-                                  (e.currentTarget as HTMLButtonElement).style.color = "#E85830";
+                                  (e.currentTarget as HTMLButtonElement).style.borderColor = "#993434";
+                                  (e.currentTarget as HTMLButtonElement).style.color = "#993434";
                                 }
                               }}
                               onMouseLeave={(e) => {
@@ -330,7 +330,7 @@ export default function ContactPage() {
                           resize: "vertical",
                           transition: "border-color 0.2s",
                         }}
-                        onFocus={(e) => ((e.currentTarget as HTMLTextAreaElement).style.borderColor = "#E85830")}
+                        onFocus={(e) => ((e.currentTarget as HTMLTextAreaElement).style.borderColor = "#993434")}
                         onBlur={(e) => ((e.currentTarget as HTMLTextAreaElement).style.borderColor = "var(--em-border)")}
                       />
                     </div>
@@ -341,10 +341,10 @@ export default function ContactPage() {
                       className="w-full py-4 text-xs tracking-[0.25em] uppercase text-white transition-all duration-300"
                       style={{
                         fontFamily: "var(--font-inter)",
-                        background: "#E85830",
+                        background: "#993434",
                       }}
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#C44422")}
-                      onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#E85830")}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#682A2A")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#993434")}
                     >
                       Send Enquiry →
                     </button>

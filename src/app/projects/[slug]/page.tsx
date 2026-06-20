@@ -160,7 +160,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <div className="flex items-center gap-3 mb-4">
                 <span
                   className="text-xs tracking-[0.25em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+                  style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
                 >
                   {project.category}
                 </span>
@@ -220,7 +220,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     <div key={label}>
                       <p
                         className="text-xs tracking-[0.25em] uppercase mb-1"
-                        style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+                        style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
                       >
                         {label}
                       </p>
@@ -257,7 +257,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </section>
 
         {/* Next project — intentionally always dark */}
-        <section style={{ background: "#1A1916", paddingTop: "4rem", paddingBottom: "4rem" }}>
+        <section style={{ background: "#441919", paddingTop: "4rem", paddingBottom: "4rem" }}>
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>

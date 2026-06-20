@@ -60,7 +60,7 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#E85830" }}>
+            <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
               <span className="w-3 h-3 bg-white" />
             </span>
             <span
@@ -84,13 +84,13 @@ export default function Header() {
                     fontFamily: "var(--font-inter)",
                     fontWeight: 400,
                     color: solid
-                      ? active ? "#E85830" : "var(--em-header-text)"
-                      : active ? "#E85830" : "rgba(255,255,255,0.85)",
+                      ? active ? "#993434" : "var(--em-header-text)"
+                      : active ? "#993434" : "rgba(255,255,255,0.85)",
                   }}
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-px" style={{ background: "#E85830" }} />
+                    <span className="absolute -bottom-1 left-0 right-0 h-px" style={{ background: "#993434" }} />
                   )}
                 </Link>
               );
@@ -111,9 +111,9 @@ export default function Header() {
             <Link
               href="/contact"
               className="hidden lg:inline-flex items-center px-6 py-2.5 text-xs tracking-[0.2em] uppercase transition-all duration-300"
-              style={{ fontFamily: "var(--font-inter)", background: "#E85830", color: "#fff" }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#C44422")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#E85830")}
+              style={{ fontFamily: "var(--font-inter)", background: "#993434", color: "#fff" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#682A2A")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#993434")}
             >
               Enquire
             </Link>
@@ -149,7 +149,7 @@ export default function Header() {
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontWeight: 400,
-                color: pathname === link.href ? "#E85830" : "var(--em-text)",
+                color: pathname === link.href ? "#993434" : "var(--em-text)",
               }}
             >
               {link.label}
@@ -159,7 +159,7 @@ export default function Header() {
             href="/contact"
             onClick={() => setMobileOpen(false)}
             className="mt-4 px-10 py-3 text-sm tracking-[0.2em] uppercase text-white"
-            style={{ fontFamily: "var(--font-inter)", background: "#E85830" }}
+            style={{ fontFamily: "var(--font-inter)", background: "#993434" }}
           >
             Enquire
           </Link>

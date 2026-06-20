@@ -93,14 +93,14 @@ export default function ProjectsPage() {
                     className="px-5 py-2 text-xs tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap flex-shrink-0"
                     style={{
                       fontFamily: "var(--font-inter)",
-                      background: isActive ? "#E85830" : "transparent",
+                      background: isActive ? "#993434" : "transparent",
                       color: isActive ? "#FFFFFF" : "var(--em-muted)",
-                      border: isActive ? "1px solid #E85830" : `1px solid var(--em-border)`,
+                      border: isActive ? "1px solid #993434" : `1px solid var(--em-border)`,
                     }}
                     onMouseEnter={(e) => {
                       if (!isActive) {
-                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#E85830";
-                        (e.currentTarget as HTMLButtonElement).style.color = "#E85830";
+                        (e.currentTarget as HTMLButtonElement).style.borderColor = "#993434";
+                        (e.currentTarget as HTMLButtonElement).style.color = "#993434";
                       }
                     }}
                     onMouseLeave={(e) => {
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                       >
                         <span
                           className="text-xs tracking-[0.2em] uppercase"
-                          style={{ color: "#E85830" }}
+                          style={{ color: "#993434" }}
                         >
                           {project.category}
                         </span>
@@ -180,7 +180,7 @@ export default function ProjectsPage() {
                       </div>
 
                       <h3
-                        className="mb-1 leading-snug transition-colors duration-300 group-hover:text-[#E85830]"
+                        className="mb-1 leading-snug transition-colors duration-300 group-hover:text-[#993434]"
                         style={{
                           fontFamily: "var(--font-cormorant)",
                           fontWeight: 400,

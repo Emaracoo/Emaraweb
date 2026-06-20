@@ -69,10 +69,10 @@ function StudioStory() {
           >
             {/* Eyebrow */}
             <div className="flex items-center gap-3 mb-8">
-              <span className="w-10 h-px" style={{ background: "#E85830" }} />
+              <span className="w-10 h-px" style={{ background: "#993434" }} />
               <span
                 className="text-xs tracking-[0.3em] uppercase"
-                style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+                style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
               >
                 Who we are
               </span>
@@ -124,7 +124,7 @@ function StudioStory() {
                 >
                   <div
                     className="font-light leading-none mb-1"
-                    style={{ fontFamily: "var(--font-cormorant)", fontSize: "2.5rem", color: "#E85830" }}
+                    style={{ fontFamily: "var(--font-cormorant)", fontSize: "2.5rem", color: "#993434" }}
                   >
                     {stat.value}
                   </div>
@@ -183,10 +183,10 @@ function Values() {
             transition: "opacity 0.6s ease, transform 0.6s ease",
           }}
         >
-          <span className="w-10 h-px" style={{ background: "#E85830" }} />
+          <span className="w-10 h-px" style={{ background: "#993434" }} />
           <span
             className="text-xs tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+            style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
           >
             Our Values
           </span>
@@ -272,10 +272,10 @@ function Timeline() {
           }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="w-10 h-px" style={{ background: "#E85830" }} />
+            <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
             >
               Milestones
             </span>
@@ -311,7 +311,7 @@ function Timeline() {
                 style={{
                   fontFamily: "var(--font-cormorant)",
                   fontSize: "1.5rem",
-                  color: "#E85830",
+                  color: "#993434",
                 }}
               >
                 {item.year}
@@ -362,10 +362,10 @@ function BuiltOnExpertise() {
           }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <span className="w-10 h-px" style={{ background: "#E85830" }} />
+            <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
             >
               The Studio
             </span>

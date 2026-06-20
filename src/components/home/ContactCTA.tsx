@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function ContactCTA() {
   return (
-    <section style={{ background: "#E85830" }}>
+    <section style={{ background: "#993434" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-24">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div>
@@ -23,9 +23,9 @@ export default function ContactCTA() {
             <Link
               href="/contact"
               className="flex items-center gap-3 px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-300 group"
-              style={{ background: "#1A1916", color: "#fff", fontFamily: "var(--font-inter)" }}
+              style={{ background: "#441919", color: "#fff", fontFamily: "var(--font-inter)" }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "#000")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#1A1916")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#441919")}
             >
               Start a Project
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />

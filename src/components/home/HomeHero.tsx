@@ -83,7 +83,7 @@ export default function HomeHero() {
   return (
     <section
       className="relative overflow-hidden flex flex-col"
-      style={{ height: "100svh", minHeight: "640px", background: "#1A1916" }}
+      style={{ height: "100svh", minHeight: "640px", background: "#441919" }}
     >
       {/* Background image — keyed by active so Ken Burns restarts per slide */}
       <div
@@ -118,7 +118,7 @@ export default function HomeHero() {
             style={{
               width: "1px",
               height: i === active ? "36px" : "12px",
-              background: i === active ? "#E85830" : "rgba(255,255,255,0.2)",
+              background: i === active ? "#993434" : "rgba(255,255,255,0.2)",
             }}
           />
         ))}
@@ -135,8 +135,8 @@ export default function HomeHero() {
             style={{ opacity: fading ? 0 : 1, transform: fading ? "translateY(12px)" : "translateY(0)" }}
           >
             <div className="flex items-center gap-3 mb-8">
-              <span className="w-8 h-px" style={{ background: "#E85830" }} />
-              <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}>
+              <span className="w-8 h-px" style={{ background: "#993434" }} />
+              <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
                 {slide.tag}
               </span>
             </div>
@@ -158,7 +158,7 @@ export default function HomeHero() {
                 href="/projects"
                 className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
                 style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "#E85830"; e.currentTarget.style.borderColor = "#E85830"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
               >
                 View Our Work
@@ -181,8 +181,8 @@ export default function HomeHero() {
           className="absolute bottom-10 right-8 lg:right-16 max-w-[260px] hidden lg:block transition-all duration-500"
           style={{ opacity: fading ? 0 : 1 }}
         >
-          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderLeft: "2px solid #E85830" }}>
-            <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}>
+          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderLeft: "2px solid #993434" }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
               Current Project
             </p>
             <p className="font-light mb-0.5" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.15rem", color: "#fff" }}>
@@ -195,7 +195,7 @@ export default function HomeHero() {
               href={slide.href}
               className="text-xs tracking-[0.2em] uppercase pb-px border-b transition-all duration-300 w-fit inline-flex items-center gap-2"
               style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.15)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "#E85830"; e.currentTarget.style.borderColor = "#E85830"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
             >
               Details →
@@ -214,7 +214,7 @@ export default function HomeHero() {
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
             {STATS.map((s, i) => (
               <div key={s.label} className="py-4 px-4 lg:px-8 flex items-center gap-3">
-                <span className="font-light tabular-nums" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.9rem", color: "#E85830" }}>
+                <span className="font-light tabular-nums" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.9rem", color: "#993434" }}>
                   {counts[i]}{s.suffix}
                 </span>
                 <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.35)" }}>

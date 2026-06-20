@@ -97,8 +97,8 @@ function ServiceCard({
     <div
       className="relative flex flex-col p-8 border overflow-hidden cursor-default"
       style={{
-        background: hovered ? "#1A1916" : "var(--em-card)",
-        borderColor: hovered ? "#1A1916" : "var(--em-border)",
+        background: hovered ? "#441919" : "var(--em-card)",
+        borderColor: hovered ? "#441919" : "var(--em-border)",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(28px)",
         transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms, background 0.35s ease, border-color 0.35s ease`,
@@ -113,7 +113,7 @@ function ServiceCard({
           top: 0,
           left: 0,
           height: "3px",
-          background: "#E85830",
+          background: "#993434",
           width: hovered ? "100%" : "0%",
           transition: "width 0.45s ease",
         }}
@@ -122,7 +122,7 @@ function ServiceCard({
       {/* Icon */}
       <div
         className="mb-6"
-        style={{ color: "#E85830", transition: "color 0.3s ease" }}
+        style={{ color: "#993434", transition: "color 0.3s ease" }}
       >
         <Icon size={22} strokeWidth={1.5} />
       </div>
@@ -159,7 +159,7 @@ function ServiceCard({
         className="text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors duration-300"
         style={{
           fontFamily: "var(--font-inter)",
-          color: hovered ? "#E85830" : "var(--em-muted)",
+          color: hovered ? "#993434" : "var(--em-muted)",
         }}
       >
         Learn more
@@ -190,10 +190,10 @@ function ServicesGrid() {
           }}
         >
           <div className="flex items-center gap-3 mb-6">
-            <span className="w-10 h-px" style={{ background: "#E85830" }} />
+            <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
             >
               Our Services
             </span>

@@ -44,10 +44,10 @@ export default function ProcessSteps() {
           className="flex items-center gap-4 mb-16 transition-all duration-700"
           style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)" }}
         >
-          <span className="w-10 h-px" style={{ background: "#E85830" }} />
+          <span className="w-10 h-px" style={{ background: "#993434" }} />
           <span
             className="text-xs tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+            style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
           >
             How We Work
           </span>
@@ -69,7 +69,7 @@ export default function ProcessSteps() {
               {/* Hover top border becomes orange */}
               <div
                 className="absolute top-0 left-0 h-0.5 transition-all duration-500 group-hover:w-full"
-                style={{ background: "#E85830", width: 0 }}
+                style={{ background: "#993434", width: 0 }}
               />
 
               {/* Number */}
@@ -82,7 +82,7 @@ export default function ProcessSteps() {
 
               {/* Title */}
               <h3
-                className="text-lg font-light mb-3 group-hover:text-[#E85830] transition-colors duration-300"
+                className="text-lg font-light mb-3 group-hover:text-[#993434] transition-colors duration-300"
                 style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.5rem", color: "var(--em-text)" }}
               >
                 {step.title}

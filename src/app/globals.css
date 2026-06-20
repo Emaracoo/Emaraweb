@@ -3,45 +3,45 @@
 /* ─── Semantic theme tokens ─────────────────────────────────────────────── */
 :root {
   --em-bg:            #FFFFFF;
-  --em-surface:       #F7F5F2;
-  --em-surface-2:     #EFECEA;
-  --em-border:        #E3E0DC;
-  --em-text:          #1A1916;
-  --em-muted:         #7A7875;
+  --em-surface:       #F5F5F5;
+  --em-surface-2:     #EBEBEB;
+  --em-border:        #DBDBDB;
+  --em-text:          #3A3A3A;
+  --em-muted:         #7A7A7A;
   --em-card:          #FFFFFF;
-  --em-card-hover:    #1A1916;
+  --em-card-hover:    #441919;
   --em-header-bg:     rgba(255, 255, 255, 0.97);
-  --em-header-border: #E3E0DC;
-  --em-header-text:   #1A1916;
+  --em-header-border: #DBDBDB;
+  --em-header-text:   #3A3A3A;
 }
 
 [data-theme="dark"] {
-  --em-bg:            #141210;
-  --em-surface:       #1C1A17;
-  --em-surface-2:     #201E1B;
-  --em-border:        #2E2C29;
+  --em-bg:            #1A0D0D;
+  --em-surface:       #220F0F;
+  --em-surface-2:     #2A1212;
+  --em-border:        #3D1F1F;
   --em-text:          #F0EDE9;
   --em-muted:         #9A9693;
-  --em-card:          #1E1C19;
-  --em-card-hover:    #2E2C29;
-  --em-header-bg:     rgba(20, 18, 16, 0.97);
-  --em-header-border: #2E2C29;
+  --em-card:          #1F0E0E;
+  --em-card-hover:    #3D1F1F;
+  --em-header-bg:     rgba(26, 13, 13, 0.97);
+  --em-header-border: #3D1F1F;
   --em-header-text:   #F0EDE9;
 }
 /* ────────────────────────────────────────────────────────────────────────── */
 
 @theme inline {
-  /* Brand palette — white-dominant + vibrant orange */
+  /* Brand palette — white-dominant + deep red */
   --color-emara-white:   #FFFFFF;
-  --color-emara-cream:   #F7F5F2;
-  --color-emara-light:   #EFECEA;
-  --color-emara-border:  #E3E0DC;
-  --color-emara-gray:    #7A7875;
-  --color-emara-dark:    #1A1916;
-  --color-emara-black:   #0D0C0A;
-  --color-emara-orange:  #E85830;
-  --color-emara-orange-dark: #C44422;
-  --color-emara-orange-light: #FF7246;
+  --color-emara-cream:   #F5F5F5;
+  --color-emara-light:   #EBEBEB;
+  --color-emara-border:  #DBDBDB;
+  --color-emara-gray:    #7A7A7A;
+  --color-emara-dark:    #3A3A3A;
+  --color-emara-black:   #441919;
+  --color-emara-orange:  #993434;
+  --color-emara-orange-dark: #682A2A;
+  --color-emara-orange-light: #B34040;
 
   --font-serif: var(--font-cormorant);
   --font-sans:  var(--font-inter);
@@ -91,13 +91,13 @@
 }
 
 ::selection {
-  background: #E85830;
+  background: #993434;
   color: #fff;
 }
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--em-surface); }
-::-webkit-scrollbar-thumb { background: #E85830; }
+::-webkit-scrollbar-thumb { background: #993434; }
 
 /* Fade-up animation used by intersection-observer reveals */
 @keyframes fadeUp {

@@ -11,7 +11,7 @@ const ITEMS = [
   "157 Projects",
 ];
 
-const SEP = <span style={{ color: "#E85830", margin: "0 1.5rem" }}>·</span>;
+const SEP = <span style={{ color: "#993434", margin: "0 1.5rem" }}>·</span>;
 
 export default function Ticker() {
   /* Build one copy of the track — CSS duplicates it via the ticker-track animation */
@@ -20,7 +20,7 @@ export default function Ticker() {
   return (
     <div
       className="overflow-hidden select-none"
-      style={{ background: "#1A1916", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "1rem 0" }}
+      style={{ background: "#441919", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "1rem 0" }}
       aria-hidden
     >
       <div className="ticker-track flex items-center" style={{ width: "max-content" }}>

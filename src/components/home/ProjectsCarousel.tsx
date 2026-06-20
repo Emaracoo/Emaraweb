@@ -78,7 +78,7 @@ export default function ProjectsCarousel() {
   const next = () => setOffset((o) => Math.min(maxOffset, o + STEP));
 
   return (
-    <section className="py-32 lg:py-44 overflow-hidden" style={{ background: "#1A1916" }} ref={ref}>
+    <section className="py-32 lg:py-44 overflow-hidden" style={{ background: "#441919" }} ref={ref}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Header */}
@@ -88,8 +88,8 @@ export default function ProjectsCarousel() {
         >
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-10 h-px" style={{ background: "#E85830" }} />
-              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}>
+              <span className="w-10 h-px" style={{ background: "#993434" }} />
+              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
                 Selected Work
               </span>
             </div>
@@ -97,7 +97,7 @@ export default function ProjectsCarousel() {
               className="text-white font-light leading-[1.08]"
               style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2.5rem, 4vw, 3.75rem)" }}
             >
-              Featured<br /><em style={{ color: "#E85830" }}>Projects</em>
+              Featured<br /><em style={{ color: "#993434" }}>Projects</em>
             </h2>
           </div>
 
@@ -111,7 +111,7 @@ export default function ProjectsCarousel() {
                 borderColor: canPrev ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)",
                 color: canPrev ? "#fff" : "rgba(255,255,255,0.2)",
               }}
-              onMouseEnter={(e) => canPrev && (e.currentTarget.style.borderColor = "#E85830", e.currentTarget.style.color = "#E85830")}
+              onMouseEnter={(e) => canPrev && (e.currentTarget.style.borderColor = "#993434", e.currentTarget.style.color = "#993434")}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = canPrev ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)", e.currentTarget.style.color = canPrev ? "#fff" : "rgba(255,255,255,0.2)")}
             >
               <ArrowLeft size={16} />
@@ -124,7 +124,7 @@ export default function ProjectsCarousel() {
                 borderColor: canNext ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)",
                 color: canNext ? "#fff" : "rgba(255,255,255,0.2)",
               }}
-              onMouseEnter={(e) => canNext && (e.currentTarget.style.borderColor = "#E85830", e.currentTarget.style.color = "#E85830")}
+              onMouseEnter={(e) => canNext && (e.currentTarget.style.borderColor = "#993434", e.currentTarget.style.color = "#993434")}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = canNext ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)", e.currentTarget.style.color = canNext ? "#fff" : "rgba(255,255,255,0.2)")}
             >
               <ArrowRight size={16} />
@@ -133,7 +133,7 @@ export default function ProjectsCarousel() {
               href="/projects"
               className="ml-4 text-xs tracking-[0.2em] uppercase border-b pb-0.5 transition-colors duration-300"
               style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.2)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "#E85830"; e.currentTarget.style.borderColor = "#E85830"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
             >
               All Projects
@@ -175,7 +175,7 @@ export default function ProjectsCarousel() {
                   <div className="flex items-center gap-2 mb-2">
                     <span
                       className="text-xs tracking-[0.15em] uppercase"
-                      style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
+                      style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
                     >
                       {p.category}
                     </span>
@@ -185,7 +185,7 @@ export default function ProjectsCarousel() {
                     </span>
                   </div>
                   <h3
-                    className="font-light group-hover:text-[#E85830] transition-colors duration-300"
+                    className="font-light group-hover:text-[#993434] transition-colors duration-300"
                     style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.4rem", color: "#fff" }}
                   >
                     {p.title}
