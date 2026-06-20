@@ -8,56 +8,56 @@ import PageHero from "@/components/PageHero";
 
 const projects = [
   {
-    slug: "meridian-residences",
-    title: "The Meridian Residences",
-    category: "Residential",
-    year: "2024",
-    location: "Dubai, UAE",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
+    slug: "al-arabiya-studios",
+    title: "Al Arabiya News Studios",
+    category: "Administrative",
+    year: "2011",
+    location: "Maspero, Cairo",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
   },
   {
-    slug: "wadi-cultural-centre",
-    title: "Wadi Cultural Centre",
-    category: "Cultural",
-    year: "2023",
-    location: "Riyadh, KSA",
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80",
+    slug: "mbc-group-office",
+    title: "MBC Group Administrative Office",
+    category: "Administrative",
+    year: "2007",
+    location: "El Mohandeseen, Cairo",
+    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
   },
   {
-    slug: "skyline-commerce-tower",
-    title: "Skyline Commerce Tower",
-    category: "Commercial",
-    year: "2023",
-    location: "Abu Dhabi, UAE",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+    slug: "sphinx-cancer-centre",
+    title: "Sphinx Comprehensive Cancer Centre",
+    category: "Medical",
+    year: "2015",
+    location: "El Mohandeseen, Cairo",
+    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&q=80",
   },
   {
-    slug: "salam-villa-estate",
-    title: "Salam Villa Estate",
+    slug: "villa-mina-garden-city",
+    title: "Villa TN, Mina Garden City",
     category: "Residential",
     year: "2022",
-    location: "Muscat, Oman",
+    location: "Mina Garden City, Cairo",
     image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
   },
   {
-    slug: "al-noor-urban-plaza",
-    title: "Al Noor Urban Plaza",
-    category: "Urban",
-    year: "2022",
-    location: "Sharjah, UAE",
-    image: "https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?w=800&q=80",
+    slug: "villa-al-badrashin",
+    title: "Villa WM, Al-Badrashin",
+    category: "Residential",
+    year: "2001",
+    location: "Al-Badrashin, Giza",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
   },
   {
-    slug: "the-archive-library",
-    title: "The Archive Library",
-    category: "Cultural",
-    year: "2021",
-    location: "Cairo, Egypt",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80",
+    slug: "manar-tex-factory",
+    title: "Manar Tex Factory",
+    category: "Industrial",
+    year: "1989",
+    location: "10th of Ramadan City",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
   },
 ];
 
-const categories = ["All", "Residential", "Commercial", "Cultural", "Urban"];
+const categories = ["All", "Residential", "Administrative", "Industrial", "Medical"];
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -75,7 +75,7 @@ export default function ProjectsPage() {
           eyebrow="Our Portfolio"
           title="Featured"
           titleAccent="Projects"
-          subtitle="A selection of work across residential, commercial, cultural, and urban typologies."
+          subtitle="A selection of work across residential, administrative, industrial, and medical typologies."
         />
 
         {/* Filter + Grid */}

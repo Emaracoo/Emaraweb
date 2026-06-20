@@ -5,28 +5,28 @@ import Link from "next/link";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80",
-    tag: "Residential · Dubai, UAE",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+    tag: "Residential · Mina Garden City, Cairo",
     title: "Designing Spaces,\nCreating Experiences",
-    project: "The Meridian Residences",
-    location: "Dubai, UAE",
-    href: "/projects/meridian-residences",
+    project: "Villa TN, Mina Garden City",
+    location: "Mina Garden City, Cairo",
+    href: "/projects/villa-mina-garden-city",
   },
   {
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80",
-    tag: "Cultural · Riyadh, KSA",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
+    tag: "Administrative · Maspero, Cairo",
     title: "Building Vision,\nCrafting Reality",
-    project: "Wadi Cultural Centre",
-    location: "Riyadh, KSA",
-    href: "/projects/wadi-cultural-centre",
+    project: "Al Arabiya News Studios",
+    location: "Maspero, Cairo",
+    href: "/projects/al-arabiya-studios",
   },
   {
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=80",
-    tag: "Commercial · Abu Dhabi",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80",
+    tag: "Industrial · 10th of Ramadan City",
     title: "Architecture\nThat Endures",
-    project: "Skyline Commerce Tower",
-    location: "Abu Dhabi, UAE",
-    href: "/projects/skyline-commerce-tower",
+    project: "Manar Tex Factory",
+    location: "10th of Ramadan City",
+    href: "/projects/manar-tex-factory",
   },
 ];
 

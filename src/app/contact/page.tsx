@@ -10,29 +10,33 @@ import ContactCTA from "@/components/home/ContactCTA";
 const projectTypes = [
   "Residential",
   "Commercial",
-  "Cultural/Civic",
-  "Urban Planning",
+  "Administrative",
+  "Industrial",
   "Interior",
+  "Landscape",
   "Other",
 ];
 
-const socials = ["Instagram", "Behance", "LinkedIn", "Pinterest"];
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/emaraconstruction/" },
+  { label: "Facebook",  href: "https://www.facebook.com/emaraconstruction/" },
+];
 
 const contactDetails = [
   {
     icon: MapPin,
     label: "Studio",
-    value: "Level 22, DIFC Gate Building\nDubai, United Arab Emirates",
+    value: "5 Al-Hariry St, beside Tivoli Dome\nHeliopolis, Cairo, Egypt",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+971 4 123 4567",
+    value: "+20 116 424 5471",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "studio@emara.ae",
+    value: "Info@EmaraCo.com",
   },
 ];
 
@@ -135,26 +139,30 @@ export default function ContactPage() {
                     Follow our work
                   </p>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                    {socials.map((social) => (
-                      <button
-                        key={social}
+                    {socials.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-300"
                         style={{
                           fontFamily: "var(--font-inter)",
                           color: "var(--em-text)",
                           border: "1px solid var(--em-border)",
+                          display: "inline-block",
                         }}
                         onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.color = "#E85830";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "#E85830";
+                          e.currentTarget.style.color = "#E85830";
+                          e.currentTarget.style.borderColor = "#E85830";
                         }}
                         onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLButtonElement).style.color = "var(--em-text)";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--em-border)";
+                          e.currentTarget.style.color = "var(--em-text)";
+                          e.currentTarget.style.borderColor = "var(--em-border)";
                         }}
                       >
-                        {social}
-                      </button>
+                        {s.label}
+                      </a>
                     ))}
                   </div>
                 </div>

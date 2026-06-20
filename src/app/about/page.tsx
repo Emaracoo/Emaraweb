@@ -31,9 +31,9 @@ function StudioStory() {
   const { ref, visible } = useFadeIn();
 
   const stats = [
-    { value: "40+", label: "Team members" },
-    { value: "12", label: "Countries" },
-    { value: "18", label: "Years" },
+    { value: "40+", label: "Years of Practice" },
+    { value: "100+", label: "Projects Completed" },
+    { value: "50+", label: "Clients Served" },
   ];
 
   return (
@@ -87,7 +87,7 @@ function StudioStory() {
                 color: "var(--em-text)",
               }}
             >
-              Architecture that serves both the individual and the city.
+              Four decades of design, built on the smallest details.
             </h2>
 
             {/* Body */}
@@ -95,20 +95,20 @@ function StudioStory() {
               className="leading-relaxed mb-5"
               style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
             >
-              Since our founding in Dubai in 2006, Emara has built its reputation on the belief that
-              great architecture is neither about spectacle nor mere utility — it is the disciplined
-              pursuit of both. Every project begins with a question: what does this place truly need?
-              That inquiry guides every decision from the first sketch to the final handover.
+              With over four decades of experience in design and construction, our journey began with
+              miniature architectural models (maquettes), with attention paid to the smallest details,
+              combining functionality and aesthetics. Our construction journey began with industrial
+              buildings, then gradually extended to commercial and residential projects, including many
+              villas and palaces.
             </p>
             <p
               className="leading-relaxed mb-12"
               style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
             >
-              Across residential towers, cultural institutions, master-planned communities, and
-              intimate private residences, we bring the same rigour and curiosity to each brief.
-              Our interdisciplinary team of architects, interior designers, and urban strategists
-              works as one — ensuring a coherence of vision from the broadest urban gesture to the
-              smallest material detail.
+              Our experience is diverse, spanning distinguished architectural projects, interior
+              architecture, and site landscaping, incorporating design and execution of concrete and
+              steel structures, utilization of materials such as concrete, steel, and glass, coupled
+              with proficiency in restoration and strengthening.
             </p>
 
             {/* Stats */}
@@ -151,18 +151,18 @@ function StudioStory() {
 const values = [
   {
     num: "01",
-    title: "Craft & Detail",
-    desc: "We believe the quality of a building is expressed in its details. Every joint, threshold, and surface is an opportunity to demonstrate care — and care is what endures.",
+    title: "Mission",
+    desc: "We set new industry standards in design and construction by crafting distinctive structures using concrete, steel, and glass. With fastidious attention to details, we ensure harmonious outcomes across diverse architectural ventures, drawing from our expertise in both industrial and residential sectors.",
   },
   {
     num: "02",
-    title: "Contextual Sensitivity",
-    desc: "Architecture that ignores its surroundings impoverishes them. We listen to place — its climate, culture, and memory — before proposing anything new.",
+    title: "Vision",
+    desc: "To transcend boundaries in the expansive realm of design and construction, leaving an indelible mark on a global scale. We aim to lead the industry by driving innovation, setting international benchmarks, and contributing to the creation of iconic structures worldwide.",
   },
   {
     num: "03",
-    title: "Sustainable Thinking",
-    desc: "True sustainability is not a checklist but a disposition. We design for longevity: buildings that consume less, age gracefully, and remain relevant across generations.",
+    title: "Our Approach",
+    desc: "Every project begins with maquette-level attention to detail — the same craft that defined our origins in architectural model making. From industrial facilities to intimate residences, we bring structural rigour and aesthetic sensibility to every discipline we practise.",
   },
 ];
 
@@ -245,12 +245,14 @@ function Values() {
 // ---------------------------------------------------------------------------
 
 const timeline = [
-  { year: "2006", title: "Studio Founded", desc: "Emara opens its first studio in the DIFC, Dubai, with a founding team of seven architects." },
-  { year: "2009", title: "First Cultural Commission", desc: "Selected to design the Al Barari Cultural Pavilion — our first major public commission." },
-  { year: "2012", title: "Regional Expansion", desc: "Offices established in Riyadh and Abu Dhabi, extending our reach across the Gulf." },
-  { year: "2016", title: "Aga Khan Award Shortlist", desc: "The Wadi Residential Quarter is shortlisted for the Aga Khan Award for Architecture." },
-  { year: "2020", title: "Sustainability Charter", desc: "Launch of Emara's own Sustainability Charter, pledging net-zero operations by 2035." },
-  { year: "2024", title: "MENA Architecture Award", desc: "Named Studio of the Year at the MENA Architecture Awards for the Diriyah Cultural Gate." },
+  { year: "1989", title: "Founded", desc: "Emara is established in Heliopolis, Cairo. The Manar Tex Factory (11,000 m²) in 10th of Ramadan City marks our first major industrial commission." },
+  { year: "1992", title: "Abu Simbel Factory", desc: "Construction of the Abu Simbel Factory in Qalyub (4,200 m²) — deepening our capability in large-scale industrial construction." },
+  { year: "2001", title: "Villa WM, Al-Badrashin", desc: "Our first landmark private residential villa — four floors, integrated landscaping, and an indoor swimming pool in Al-Badrashin, Giza." },
+  { year: "2004", title: "Medical Union Pharmaceuticals HQ", desc: "Design and construction of a six-floor, 300 m² headquarters in Masr El Gadeda, Cairo — expanding our footprint into corporate architecture." },
+  { year: "2007", title: "MBC Group Office, El Mohandeseen", desc: "Interior design, décor, and construction supervision for MBC Group's 200 m² administrative office in Cairo's elite El Mohandeseen district." },
+  { year: "2011", title: "Al Arabiya News Studios, Maspero", desc: "Interior design and construction supervision for Al Arabiya News studios and offices (600 m²) in the historic Maspero broadcasting district." },
+  { year: "2015", title: "Sphinx Comprehensive Cancer Centre", desc: "A 700 m² medical environment in El Mohandeseen designed with exceptional care for the wellbeing of patients and clinical staff alike." },
+  { year: "2022", title: "Villa TN, Mina Garden City", desc: "Three-floor private villa on a 660 m² plot — a synthesis of four decades of residential expertise and contemporary architectural craft." },
 ];
 
 function Timeline() {
@@ -275,7 +277,7 @@ function Timeline() {
               className="text-xs tracking-[0.3em] uppercase"
               style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
             >
-              Recognition
+              Milestones
             </span>
           </div>
           <h2
@@ -287,7 +289,7 @@ function Timeline() {
               maxWidth: "32rem",
             }}
           >
-            Eighteen Years of Achievement
+            Four Decades of Continuous Practice
           </h2>
         </div>
 
@@ -341,132 +343,25 @@ function Timeline() {
 }
 
 // ---------------------------------------------------------------------------
-// Team
+// Built on Expertise
 // ---------------------------------------------------------------------------
 
-const team = [
-  {
-    name: "Karim Al-Rashid",
-    role: "Founding Partner",
-    bio: "Twenty years shaping the built environment across the Gulf and beyond.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-  },
-  {
-    name: "Layla Mansour",
-    role: "Design Director",
-    bio: "Harvard GSD graduate with a specialism in cultural and civic architecture.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80",
-  },
-  {
-    name: "Omar Haddad",
-    role: "Principal Architect",
-    bio: "Led over thirty award-winning residential and hospitality projects.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
-  },
-  {
-    name: "Nour El-Sayed",
-    role: "Interior Design Lead",
-    bio: "Transforms spatial concepts into tactile, atmosphere-rich environments.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
-  },
-  {
-    name: "Tariq Yousef",
-    role: "Sustainability Director",
-    bio: "Chartered engineer and LEED AP with a focus on passive design strategies.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80",
-  },
-  {
-    name: "Rana Khalil",
-    role: "Urban Planning Lead",
-    bio: "Specialises in master-planning and large-scale mixed-use urban quarters.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
-  },
-  {
-    name: "Sami Boutros",
-    role: "Associate Architect",
-    bio: "Detail-obsessed designer with a background in parametric and fabrication workflows.",
-    image: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&q=80",
-  },
-  {
-    name: "Dina Al-Farsi",
-    role: "Project Director",
-    bio: "Expert in client relations and complex, multi-phase delivery programmes.",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=80",
-  },
-];
-
-function TeamCard({ member, delay }: { member: typeof team[0]; delay: number }) {
-  const { ref, visible } = useFadeIn(0.05);
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
-      }}
-    >
-      {/* Image */}
-      <div
-        className="overflow-hidden mb-4"
-        style={{ aspectRatio: "1/1" }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={member.image}
-          alt={member.name}
-          className="w-full h-full object-cover transition-all duration-500"
-          style={{
-            filter: hovered ? "grayscale(0%)" : "grayscale(100%)",
-            transform: hovered ? "scale(1.04)" : "scale(1)",
-          }}
-        />
-      </div>
-
-      {/* Info */}
-      <h3
-        className="font-light mb-0.5"
-        style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.2rem", color: "var(--em-text)" }}
-      >
-        {member.name}
-      </h3>
-      <div
-        className="text-xs tracking-[0.15em] uppercase mb-2"
-        style={{ fontFamily: "var(--font-inter)", color: "#E85830" }}
-      >
-        {member.role}
-      </div>
-      <p
-        className="text-sm leading-relaxed"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-muted)" }}
-      >
-        {member.bio}
-      </p>
-    </div>
-  );
-}
-
-function Team() {
+function BuiltOnExpertise() {
   const { ref, visible } = useFadeIn();
 
   return (
     <section className="py-24" style={{ background: "var(--em-surface)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
-        {/* Header */}
         <div
           ref={ref}
+          className="max-w-3xl"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease, transform 0.6s ease",
           }}
         >
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-8">
             <span className="w-10 h-px" style={{ background: "#E85830" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
@@ -476,23 +371,41 @@ function Team() {
             </span>
           </div>
           <h2
-            className="font-light leading-[1.1] mb-16"
+            className="font-light leading-[1.1] mb-8"
             style={{
               fontFamily: "var(--font-cormorant)",
               fontSize: "clamp(2rem, 3.5vw, 3rem)",
               color: "var(--em-text)",
-              maxWidth: "32rem",
             }}
           >
-            Meet the People Behind the Work
+            Built on Expertise
           </h2>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-10">
-          {team.map((member, i) => (
-            <TeamCard key={member.name} member={member} delay={i * 80} />
-          ))}
+          <p
+            className="leading-relaxed mb-5"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+          >
+            Emara was founded in Heliopolis, Cairo — and that is where we remain. Our work is rooted
+            in the Egyptian built environment: its codes, its climate, its materials, and the clients
+            who call it home. Over four decades, we have accumulated a depth of local knowledge that
+            no single project could teach.
+          </p>
+          <p
+            className="leading-relaxed mb-5"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+          >
+            Our practice spans structural engineering, architectural design, interior architecture,
+            landscape, restoration, construction supervision, and the architectural model making that
+            started it all. That breadth is not incidental — it means every discipline informs every
+            other, and every project benefits from the whole.
+          </p>
+          <p
+            className="leading-relaxed"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+          >
+            We are committed to pushing the boundaries of innovation and excellence — drawing from
+            Egyptian and international codes alike, and delivering results that stand as a testament
+            to rigorous craft.
+          </p>
         </div>
       </div>
     </section>
@@ -510,15 +423,15 @@ export default function AboutPage() {
       <main>
         <PageHero
           eyebrow="Our Story"
-          title="Making Architecture"
-          titleAccent="with Intention"
-          subtitle="Founded in 2006, Emara has grown into one of the MENA region's most celebrated studios."
+          title="Four Decades of"
+          titleAccent="Design & Construction"
+          subtitle="Based in Heliopolis, Cairo — building with concrete, steel, and glass since 1989."
           image="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?w=1200&q=80"
         />
         <StudioStory />
         <Values />
         <Timeline />
-        <Team />
+        <BuiltOnExpertise />
       </main>
       <Footer />
     </>

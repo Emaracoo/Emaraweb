@@ -3,15 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
-  Search,
-  Lightbulb,
+  Building2,
   Layers,
-  Sofa,
-  Map,
-  Trees,
-  RefreshCw,
-  Leaf,
-  ClipboardList,
+  PenLine,
+  TreePine,
+  Wrench,
+  HardHat,
+  Box,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -43,49 +41,39 @@ function useFadeIn(threshold = 0.12) {
 
 const services = [
   {
-    icon: Search,
-    title: "Feasibility Studies",
-    desc: "Rigorous analysis of site, programme, and market conditions to validate the opportunity before a line is drawn.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Conceptual Design",
-    desc: "Bold architectural ideas translated into spatial narratives — defining character, massing, and the organisational logic of a project.",
+    icon: Building2,
+    title: "Structural Designs for Concrete & Steel",
+    desc: "Design of steel and concrete facilities in compliance with Egyptian and international codes (American, European, British). Safe and cost-effective sections, construction drawings and section tables using specialized design software.",
   },
   {
     icon: Layers,
     title: "Architectural Design",
-    desc: "Full RIBA-stage design from schematic through technical documentation, coordinated with structure and MEP.",
+    desc: "Exterior and interior designs for homes, restaurants, villas, palaces, chalets, cafes, food courts, building facades, factories, and stores. Emphasis on the correlation between a building's function, form, and surrounding environment.",
   },
   {
-    icon: Sofa,
-    title: "Interior Architecture",
-    desc: "Interiors conceived as extensions of the architecture — material palettes, bespoke joinery, and spatial sequences aligned with the building's identity.",
+    icon: PenLine,
+    title: "Interior Architecture & Decoration",
+    desc: "Planning and designing interior spaces to meet functional requirements while adhering to building standards. Both technical and artistic aspects, maximizing spatial utilization across all environments.",
   },
   {
-    icon: Map,
-    title: "Urban Planning",
-    desc: "Master-planning and strategic frameworks for mixed-use districts, new towns, and cultural quarters at every scale.",
-  },
-  {
-    icon: Trees,
+    icon: TreePine,
     title: "Landscape Design",
-    desc: "Outdoor environments that respond to climate, ecology, and cultural context — from intimate courtyards to large public realms.",
+    desc: "Softscape: cultivation of trees, flowers, vines, green areas, palms, and irrigation systems. Hardscape: pergolas, fountains, swimming pools, walkways, sculptures, and lighting.",
   },
   {
-    icon: RefreshCw,
-    title: "Renovation & Adaptive Reuse",
-    desc: "Breathing new purpose into existing structures while preserving the embodied value, memory, and craft of the original.",
+    icon: Wrench,
+    title: "Restoration & Strengthening",
+    desc: "Strengthening and repair of structural elements, treatment of cracks and fissures — preserving and reinforcing the built fabric for generations to come.",
   },
   {
-    icon: Leaf,
-    title: "Sustainability Consulting",
-    desc: "Passive design strategies, environmental modelling, and pathway-to-certification support across LEED, BREEAM, and Estidama.",
+    icon: HardHat,
+    title: "Construction Supervision",
+    desc: "Comprehensive review of project specs, examination of drawings, quantity schedules, on-site inspections, soil reports, and preparation of architectural and construction drawings.",
   },
   {
-    icon: ClipboardList,
-    title: "Project Management",
-    desc: "End-to-end programme and cost management ensuring projects are delivered on time, on budget, and true to design intent.",
+    icon: Box,
+    title: "Model Making (Maquettes)",
+    desc: "Architectural models drawn to scale, illuminating all essential details. Used for client presentations, real estate conferences, and exhibitions — the craft that founded our practice.",
   },
 ];
 
@@ -134,7 +122,7 @@ function ServiceCard({
       {/* Icon */}
       <div
         className="mb-6"
-        style={{ color: hovered ? "#E85830" : "#E85830", transition: "color 0.3s ease" }}
+        style={{ color: "#E85830", transition: "color 0.3s ease" }}
       >
         <Icon size={22} strokeWidth={1.5} />
       </div>
@@ -247,9 +235,9 @@ export default function ServicesPage() {
       <main>
         <PageHero
           eyebrow="What We Do"
-          title="A Full Spectrum"
-          titleAccent="of Expertise"
-          subtitle="From the first sketch to final handover — architecture, interiors, landscape, and strategy."
+          title="From Structural Engineering"
+          titleAccent="to Architectural Models"
+          subtitle="From structural engineering to architectural models — seven disciplines, one studio."
         />
         <ServicesGrid />
         <ProcessSteps />
