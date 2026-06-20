@@ -18,23 +18,8 @@ const GHOSTS = [
 
 export default function ContactCTA() {
   const sectionRef  = useRef<HTMLElement>(null);
-  const bgRef       = useRef<HTMLDivElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);
   const ghostRefs   = useRef<(HTMLHeadingElement | null)[]>([]);
-
-  /* ── Parallax background ──────────────────────────────────────────── */
-  useEffect(() => {
-    const el = bgRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-      el.style.transform = `translateY(${progress * 120 - 60}px)`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   /* ── Scroll-scrubbed ghost text animation ─────────────────────────── */
   useEffect(() => {
@@ -108,22 +93,18 @@ export default function ContactCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}
+      className="relative"
+      style={{
+        minHeight: "520px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
     >
-      {/* Parallax background */}
-      <div
-        ref={bgRef}
-        className="absolute inset-0 will-change-transform"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          top: "-80px",
-          bottom: "-80px",
-        }}
-      />
-
       {/* Overlay */}
       <div
         className="absolute inset-0"
