@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeHero from "@/components/home/HomeHero";
+import Ticker from "@/components/home/Ticker";
 import ProcessSteps from "@/components/home/ProcessSteps";
 import ServicesTeaser from "@/components/home/ServicesTeaser";
 import ProjectsCarousel from "@/components/home/ProjectsCarousel";
@@ -13,6 +14,7 @@ export default function Home() {
       <Header />
       <main>
         <HomeHero />
+        <Ticker />
         <ProcessSteps />
         <ServicesTeaser />
         <ProjectsCarousel />
