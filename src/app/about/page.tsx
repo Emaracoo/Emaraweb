@@ -72,7 +72,7 @@ function StudioStory() {
               <span className="w-10 h-px" style={{ background: "#993434" }} />
               <span
                 className="text-xs tracking-[0.3em] uppercase"
-                style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
               >
                 Who we are
               </span>
@@ -93,7 +93,7 @@ function StudioStory() {
             {/* Body */}
             <p
               className="leading-relaxed mb-5"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
             >
               With over four decades of experience in design and construction, our journey began with
               miniature architectural models (maquettes), with attention paid to the smallest details,
@@ -103,7 +103,7 @@ function StudioStory() {
             </p>
             <p
               className="leading-relaxed mb-12"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}
             >
               Our experience is diverse, spanning distinguished architectural projects, interior
               architecture, and site landscaping, incorporating design and execution of concrete and
@@ -130,7 +130,7 @@ function StudioStory() {
                   </div>
                   <div
                     className="text-xs tracking-[0.15em] uppercase"
-                    style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                    style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                   >
                     {stat.label}
                   </div>
@@ -186,7 +186,7 @@ function Values() {
           <span className="w-10 h-px" style={{ background: "#993434" }} />
           <span
             className="text-xs tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+            style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
           >
             Our Values
           </span>
@@ -228,7 +228,7 @@ function Values() {
               </h3>
               <p
                 className="leading-relaxed text-sm"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-muted)" }}
+                style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "var(--em-muted)" }}
               >
                 {v.desc}
               </p>
@@ -275,7 +275,7 @@ function Timeline() {
             <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               Milestones
             </span>
@@ -329,7 +329,7 @@ function Timeline() {
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-muted)" }}
+                  style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "var(--em-muted)" }}
                 >
                   {item.desc}
                 </p>
@@ -365,7 +365,7 @@ function BuiltOnExpertise() {
             <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               The Studio
             </span>
@@ -382,7 +382,7 @@ function BuiltOnExpertise() {
           </h2>
           <p
             className="leading-relaxed mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+            style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
           >
             Emara was founded in Heliopolis, Cairo — and that is where we remain. Our work is rooted
             in the Egyptian built environment: its codes, its climate, its materials, and the clients
@@ -391,7 +391,7 @@ function BuiltOnExpertise() {
           </p>
           <p
             className="leading-relaxed mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+            style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
           >
             Our practice spans structural engineering, architectural design, interior architecture,
             landscape, restoration, construction supervision, and the architectural model making that
@@ -400,7 +400,7 @@ function BuiltOnExpertise() {
           </p>
           <p
             className="leading-relaxed"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
+            style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.95rem", color: "var(--em-muted)" }}
           >
             We are committed to pushing the boundaries of innovation and excellence — drawing from
             Egyptian and international codes alike, and delivering results that stand as a testament

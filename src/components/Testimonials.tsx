@@ -71,7 +71,7 @@ export default function Testimonials() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Client Stories
             </span>
@@ -106,13 +106,13 @@ export default function Testimonials() {
           </blockquote>
           <div
             className="text-[#8A8A8A] text-xs tracking-[0.2em] uppercase mb-1"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-saira)" }}
           >
             {t.author}
           </div>
           <div
             className="text-[#B89155] text-xs tracking-[0.15em]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-saira)" }}
           >
             {t.role} — {t.location}
           </div>

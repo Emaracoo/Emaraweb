@@ -73,7 +73,7 @@ export default function Timeline() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Recognition
             </span>
@@ -88,7 +88,7 @@ export default function Timeline() {
             </h2>
             <p
               className="text-[#8A8A8A] text-sm leading-relaxed lg:pb-2"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
             >
               A journey of growth, recognition, and deepening craft — from a five-person startup to one of the MENA region's most awarded studios.
             </p>
@@ -168,7 +168,7 @@ function TimelineCard({ milestone, align = "left" }: {
           {milestone.year}
         </span>
         {milestone.award && (
-          <span className="flex items-center gap-1 bg-[#B89155]/10 text-[#B89155] text-xs px-3 py-1 tracking-[0.1em] uppercase" style={{ fontFamily: "var(--font-inter)" }}>
+          <span className="flex items-center gap-1 bg-[#B89155]/10 text-[#B89155] text-xs px-3 py-1 tracking-[0.1em] uppercase" style={{ fontFamily: "var(--font-saira)" }}>
             <Trophy size={10} />
             {milestone.award}
           </span>
@@ -183,7 +183,7 @@ function TimelineCard({ milestone, align = "left" }: {
       <p
         className="text-[#8A8A8A] text-sm leading-relaxed max-w-sm"
         style={{
-          fontFamily: "var(--font-inter)",
+          fontFamily: "var(--font-saira)",
           fontWeight: 300,
           marginLeft: align === "right" ? "auto" : undefined,
         }}

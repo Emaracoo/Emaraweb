@@ -39,7 +39,7 @@ export default function Contact() {
               <span className="w-12 h-px bg-[#B89155]" />
               <span
                 className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-saira)" }}
               >
                 Get in Touch
               </span>
@@ -55,7 +55,7 @@ export default function Contact() {
 
             <p
               className="text-white/50 text-sm leading-relaxed mb-14 max-w-md"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
             >
               Whether you have a clear brief or an early idea, we'd love to hear from you. Every great project begins with a conversation.
             </p>
@@ -69,13 +69,13 @@ export default function Contact() {
                 <div>
                   <div
                     className="text-white text-sm mb-1 tracking-[0.1em] uppercase"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-saira)" }}
                   >
                     Studio
                   </div>
                   <div
                     className="text-white/50 text-sm leading-relaxed"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                   >
                     Level 22, DIFC Gate Building<br />
                     Dubai International Financial Centre<br />
@@ -91,13 +91,13 @@ export default function Contact() {
                 <div>
                   <div
                     className="text-white text-sm mb-1 tracking-[0.1em] uppercase"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-saira)" }}
                   >
                     Phone
                   </div>
                   <div
                     className="text-white/50 text-sm"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                   >
                     +971 4 000 0000
                   </div>
@@ -111,13 +111,13 @@ export default function Contact() {
                 <div>
                   <div
                     className="text-white text-sm mb-1 tracking-[0.1em] uppercase"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-saira)" }}
                   >
                     Email
                   </div>
                   <div
                     className="text-white/50 text-sm"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                   >
                     studio@emara.ae
                   </div>
@@ -134,7 +134,7 @@ export default function Contact() {
                 <button
                   key={s}
                   className="text-white/30 hover:text-[#B89155] text-xs tracking-[0.15em] uppercase transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-saira)" }}
                 >
                   {s}
                 </button>
@@ -160,7 +160,7 @@ export default function Contact() {
                 </h3>
                 <p
                   className="text-white/50 text-sm leading-relaxed max-w-sm"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                 >
                   Thank you for reaching out. A member of the Emara team will be in touch within two business days.
                 </p>
@@ -188,7 +188,7 @@ export default function Contact() {
                 <div>
                   <label
                     className="block text-white/40 text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-saira)" }}
                   >
                     Project Type
                   </label>
@@ -200,7 +200,7 @@ export default function Contact() {
                         onClick={() => setForm({ ...form, type: t })}
                         className="px-4 py-2 text-xs tracking-[0.1em] uppercase transition-all duration-200"
                         style={{
-                          fontFamily: "var(--font-inter)",
+                          fontFamily: "var(--font-saira)",
                           border: "1px solid",
                           borderColor: form.type === t ? "#B89155" : "rgba(255,255,255,0.1)",
                           color: form.type === t ? "#B89155" : "rgba(255,255,255,0.4)",
@@ -217,7 +217,7 @@ export default function Contact() {
                 <div>
                   <label
                     className="block text-white/40 text-xs tracking-[0.2em] uppercase mb-3"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-saira)" }}
                   >
                     Tell Us About Your Project
                   </label>
@@ -227,7 +227,7 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     required
                     className="w-full bg-transparent border border-white/10 focus:border-[#B89155] outline-none text-white/70 text-sm px-4 py-3 resize-none transition-colors duration-300 placeholder:text-white/20"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                    style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                     placeholder="Briefly describe your project, timeline, and location..."
                   />
                 </div>
@@ -235,7 +235,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   className="self-start flex items-center gap-3 bg-[#B89155] hover:bg-[#D4AD7A] text-white transition-colors duration-300 px-10 py-4 text-xs tracking-[0.2em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-saira)" }}
                 >
                   Send Enquiry
                   <ArrowRight size={14} />
@@ -258,7 +258,7 @@ function FormInput({
     <div>
       <label
         className="block text-white/40 text-xs tracking-[0.2em] uppercase mb-3"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-saira)" }}
       >
         {label}
       </label>
@@ -268,7 +268,7 @@ function FormInput({
         onChange={(e) => onChange(e.target.value)}
         required={required}
         className="w-full bg-transparent border-b border-white/10 focus:border-[#B89155] outline-none text-white text-sm py-3 transition-colors duration-300 placeholder:text-white/20"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
         placeholder={label}
       />
     </div>

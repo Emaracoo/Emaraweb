@@ -44,7 +44,7 @@ export default function FeaturedProjects() {
           <div>
             <p
               className="text-xs tracking-[0.25em] uppercase mb-4"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               Featured Work
             </p>
@@ -65,7 +65,7 @@ export default function FeaturedProjects() {
             href="/projects"
             className="text-xs tracking-[0.2em] uppercase shrink-0"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",
@@ -102,7 +102,7 @@ export default function FeaturedProjects() {
               <div style={{ paddingTop: "1.25rem" }}>
                 <p
                   className="text-xs tracking-[0.25em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
                 >
                   {project.category}
                 </p>
@@ -125,7 +125,7 @@ export default function FeaturedProjects() {
                 >
                   <span
                     style={{
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-saira)",
                       fontWeight: 300,
                       fontSize: "0.75rem",
                       color: "var(--em-muted)",
@@ -135,7 +135,7 @@ export default function FeaturedProjects() {
                   </span>
                   <span
                     style={{
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-saira)",
                       fontWeight: 300,
                       fontSize: "0.75rem",
                       color: "var(--em-muted)",
@@ -155,7 +155,7 @@ export default function FeaturedProjects() {
             href="/projects"
             className="text-xs tracking-[0.2em] uppercase"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",

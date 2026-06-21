@@ -47,7 +47,7 @@ export default function ProcessSteps() {
           <span className="w-10 h-px" style={{ background: "#993434" }} />
           <span
             className="text-xs tracking-[0.3em] uppercase"
-            style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+            style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
           >
             How We Work
           </span>
@@ -91,7 +91,7 @@ export default function ProcessSteps() {
               {/* Desc */}
               <p
                 className="text-sm leading-relaxed"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-muted)" }}
+                style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "var(--em-muted)" }}
               >
                 {step.desc}
               </p>

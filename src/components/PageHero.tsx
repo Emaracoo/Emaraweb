@@ -16,7 +16,7 @@ export default function PageHero({ eyebrow, title, titleAccent, subtitle, image 
               <span className="w-10 h-px" style={{ background: "#993434" }} />
               <span
                 className="text-xs tracking-[0.3em] uppercase"
-                style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
               >
                 {eyebrow}
               </span>
@@ -33,7 +33,7 @@ export default function PageHero({ eyebrow, title, titleAccent, subtitle, image 
             {subtitle && (
               <p
                 className="leading-relaxed max-w-md"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300, fontSize: "0.9rem", color: "rgba(255,255,255,0.5)" }}
+                style={{ fontFamily: "var(--font-saira)", fontWeight: 300, fontSize: "0.9rem", color: "rgba(255,255,255,0.5)" }}
               >
                 {subtitle}
               </p>

@@ -115,7 +115,7 @@ export default function ContactCTA() {
       <div className="relative z-10 text-center px-6 py-24 max-w-3xl mx-auto w-full">
         <p
           className="text-xs tracking-[0.35em] uppercase mb-6"
-          style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.55)" }}
+          style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.55)" }}
         >
           Have a project in mind?
         </p>
@@ -154,7 +154,7 @@ export default function ContactCTA() {
           href="/contact"
           className="inline-flex items-center gap-3 px-10 py-4 text-sm tracking-[0.2em] uppercase text-white transition-all duration-300"
           style={{
-            fontFamily: "var(--font-inter)",
+            fontFamily: "var(--font-saira)",
             border: "1px solid rgba(255,255,255,0.55)",
             borderRadius: "9999px",
           }}

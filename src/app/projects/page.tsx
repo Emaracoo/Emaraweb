@@ -92,7 +92,7 @@ export default function ProjectsPage() {
                     onClick={() => setActiveCategory(cat)}
                     className="px-5 py-2 text-xs tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap flex-shrink-0"
                     style={{
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-saira)",
                       background: isActive ? "#993434" : "transparent",
                       color: isActive ? "#FFFFFF" : "var(--em-muted)",
                       border: isActive ? "1px solid #993434" : `1px solid var(--em-border)`,
@@ -157,7 +157,7 @@ export default function ProjectsPage() {
                     <div style={{ paddingTop: "1rem" }}>
                       <div
                         className="flex items-center gap-3 mb-2"
-                        style={{ fontFamily: "var(--font-inter)" }}
+                        style={{ fontFamily: "var(--font-saira)" }}
                       >
                         <span
                           className="text-xs tracking-[0.2em] uppercase"
@@ -193,7 +193,7 @@ export default function ProjectsPage() {
 
                       <p
                         className="text-xs tracking-[0.1em]"
-                        style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                        style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                       >
                         {project.location}
                       </p>

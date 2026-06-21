@@ -22,7 +22,7 @@ export default function AboutSnapshot() {
         <div>
           <p
             className="text-xs tracking-[0.25em] uppercase mb-6"
-            style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+            style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
           >
             About Emara
           </p>
@@ -42,7 +42,7 @@ export default function AboutSnapshot() {
           <p
             className="mb-8"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               fontWeight: 300,
               fontSize: "0.9rem",
               color: "var(--em-muted)",
@@ -60,7 +60,7 @@ export default function AboutSnapshot() {
             href="/about"
             className="text-xs tracking-[0.2em] uppercase"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",
@@ -90,7 +90,7 @@ export default function AboutSnapshot() {
               </p>
               <p
                 className="text-xs tracking-[0.25em] uppercase"
-                style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
               >
                 {stat.label}
               </p>

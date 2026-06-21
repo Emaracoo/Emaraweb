@@ -44,7 +44,7 @@
   --color-emara-orange-light: #B34040;
 
   --font-serif: var(--font-cormorant);
-  --font-sans:  var(--font-inter);
+  --font-sans:  var(--font-saira);
 }
 
 @layer base {
@@ -59,7 +59,7 @@
   body {
     background: var(--em-bg);
     color: var(--em-text);
-    font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-saira), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

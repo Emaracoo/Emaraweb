@@ -169,7 +169,7 @@ export default function StoryScroll() {
         >
           <span
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               fontSize: "0.6rem",
               letterSpacing: "0.32em",
               textTransform: "uppercase",
@@ -252,7 +252,7 @@ export default function StoryScroll() {
                 <span
                   className="ch-eye"
                   style={{
-                    fontFamily: "var(--font-inter)",
+                    fontFamily: "var(--font-saira)",
                     fontSize: "0.6rem",
                     letterSpacing: "0.32em",
                     textTransform: "uppercase",
@@ -284,7 +284,7 @@ export default function StoryScroll() {
               <p
                 className="ch-body"
                 style={{
-                  fontFamily: "var(--font-inter)",
+                  fontFamily: "var(--font-saira)",
                   fontWeight: 300,
                   fontSize: "0.875rem",
                   lineHeight: 1.85,

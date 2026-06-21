@@ -160,14 +160,14 @@ export default async function ProjectDetailPage({ params }: Props) {
               <div className="flex items-center gap-3 mb-4">
                 <span
                   className="text-xs tracking-[0.25em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
                 >
                   {project.category}
                 </span>
                 <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.75rem" }}>·</span>
                 <span
                   className="text-xs tracking-[0.15em]"
-                  style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.6)" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.6)" }}
                 >
                   {project.location}
                 </span>
@@ -220,13 +220,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                     <div key={label}>
                       <p
                         className="text-xs tracking-[0.25em] uppercase mb-1"
-                        style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                        style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
                       >
                         {label}
                       </p>
                       <p
                         className="text-base"
-                        style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-text)" }}
+                        style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "var(--em-text)" }}
                       >
                         {value}
                       </p>
@@ -263,7 +263,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <div>
                 <p
                   className="text-xs tracking-[0.3em] uppercase mb-3"
-                  style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.4)" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.4)" }}
                 >
                   Next Project
                 </p>
@@ -278,7 +278,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </p>
                 <p
                   className="text-xs tracking-[0.15em] mt-2"
-                  style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.4)" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.4)" }}
                 >
                   {nextProject.location}
                 </p>

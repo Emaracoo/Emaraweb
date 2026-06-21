@@ -144,7 +144,7 @@ function ServiceCard({
       <p
         className="text-sm leading-relaxed flex-1 mb-6"
         style={{
-          fontFamily: "var(--font-inter)",
+          fontFamily: "var(--font-saira)",
           fontWeight: 300,
           color: hovered ? "rgba(255,255,255,0.55)" : "var(--em-muted)",
           transition: "color 0.3s ease",
@@ -158,7 +158,7 @@ function ServiceCard({
         href="/contact"
         className="text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors duration-300"
         style={{
-          fontFamily: "var(--font-inter)",
+          fontFamily: "var(--font-saira)",
           color: hovered ? "#993434" : "var(--em-muted)",
         }}
       >
@@ -193,7 +193,7 @@ function ServicesGrid() {
             <span className="w-10 h-px" style={{ background: "#993434" }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               Our Services
             </span>

@@ -76,7 +76,7 @@ export default function Services() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               What We Do
             </span>
@@ -91,7 +91,7 @@ export default function Services() {
             </h2>
             <p
               className="text-[#8A8A8A] text-sm leading-relaxed lg:pb-2"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
             >
               From the first sketch to the final handover, we offer a complete range of architectural and design services tailored to every scale and ambition.
             </p>
@@ -128,7 +128,7 @@ export default function Services() {
                 </h3>
                 <p
                   className="text-[#8A8A8A] group-hover:text-white/50 text-sm leading-relaxed transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                 >
                   {s.desc}
                 </p>

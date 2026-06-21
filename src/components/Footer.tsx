@@ -41,14 +41,14 @@ export default function Footer() {
               <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
                 <span className="w-3 h-3 bg-white" />
               </span>
-              <span className="text-white tracking-[0.25em] uppercase text-sm font-light" style={{ fontFamily: "var(--font-inter)" }}>
+              <span className="text-white tracking-[0.25em] uppercase text-sm font-light" style={{ fontFamily: "var(--font-saira)" }}>
                 Emara
               </span>
             </Link>
-            <p className="text-sm leading-relaxed mb-8" style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "rgba(255,255,255,0.4)", maxWidth: "280px" }}>
+            <p className="text-sm leading-relaxed mb-8" style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "rgba(255,255,255,0.4)", maxWidth: "280px" }}>
               Four decades of experience in design and construction. From industrial structures to villas and palaces — based in Heliopolis, Cairo.
             </p>
-            <div className="text-xs leading-relaxed mb-10" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.2)" }}>
+            <div className="text-xs leading-relaxed mb-10" style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.2)" }}>
               5 Al-Hariry St, beside Tivoli Dome<br />
               Heliopolis, Cairo, Egypt · Info@EmaraCo.com
             </div>
@@ -60,7 +60,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs tracking-[0.15em] uppercase transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.25)" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.25)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#993434")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
                 >
@@ -73,7 +73,7 @@ export default function Footer() {
           {/* Nav columns */}
           {Object.entries(nav).map(([section, items]) => (
             <div key={section}>
-              <div className="text-xs tracking-[0.25em] uppercase mb-6 text-white" style={{ fontFamily: "var(--font-inter)" }}>
+              <div className="text-xs tracking-[0.25em] uppercase mb-6 text-white" style={{ fontFamily: "var(--font-saira)" }}>
                 {section}
               </div>
               <ul className="flex flex-col gap-3">
@@ -82,7 +82,7 @@ export default function Footer() {
                     <Link
                       href={item.href}
                       className="text-sm transition-colors duration-300"
-                      style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}
+                      style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "rgba(255,255,255,0.4)" }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = "#993434")}
                       onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
                     >
@@ -97,7 +97,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-16 pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-          <div className="text-xs" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.2)" }}>
+          <div className="text-xs" style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.2)" }}>
             © {new Date().getFullYear()} Emara Construction. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
@@ -105,7 +105,7 @@ export default function Footer() {
               <button
                 key={item}
                 className="text-xs transition-colors duration-300"
-                style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.2)" }}
+                style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.2)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.2)")}
               >

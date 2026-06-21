@@ -107,7 +107,7 @@ export default function HomeHero() {
 
       {/* Left edge: vertical slide counter */}
       <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-3">
-        <span className="text-xs text-white/30 mb-1" style={{ fontFamily: "var(--font-inter)", writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
+        <span className="text-xs text-white/30 mb-1" style={{ fontFamily: "var(--font-saira)", writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
           0{active + 1}
         </span>
         {slides.map((_, i) => (
@@ -122,7 +122,7 @@ export default function HomeHero() {
             }}
           />
         ))}
-        <span className="text-xs text-white/20 mt-1" style={{ fontFamily: "var(--font-inter)", writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
+        <span className="text-xs text-white/20 mt-1" style={{ fontFamily: "var(--font-saira)", writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
           0{slides.length}
         </span>
       </div>
@@ -136,7 +136,7 @@ export default function HomeHero() {
           >
             <div className="flex items-center gap-3 mb-8">
               <span className="w-8 h-px" style={{ background: "#993434" }} />
-              <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+              <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
                 {slide.tag}
               </span>
             </div>
@@ -157,7 +157,7 @@ export default function HomeHero() {
               <Link
                 href="/projects"
                 className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
-                style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
+                style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
               >
@@ -166,7 +166,7 @@ export default function HomeHero() {
               <Link
                 href="/about"
                 className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
-                style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)" }}
+                style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)" }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
               >
@@ -182,19 +182,19 @@ export default function HomeHero() {
           style={{ opacity: fading ? 0 : 1 }}
         >
           <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderLeft: "2px solid #993434" }}>
-            <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
               Current Project
             </p>
             <p className="font-light mb-0.5" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.15rem", color: "#fff" }}>
               {slide.project}
             </p>
-            <p className="text-xs mb-4" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.35)" }}>
+            <p className="text-xs mb-4" style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.35)" }}>
               {slide.location}
             </p>
             <Link
               href={slide.href}
               className="text-xs tracking-[0.2em] uppercase pb-px border-b transition-all duration-300 w-fit inline-flex items-center gap-2"
-              style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.15)" }}
+              style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.15)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
             >
@@ -217,7 +217,7 @@ export default function HomeHero() {
                 <span className="font-light tabular-nums" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.9rem", color: "#993434" }}>
                   {counts[i]}{s.suffix}
                 </span>
-                <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.35)" }}>
+                <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.35)" }}>
                   {s.label}
                 </span>
               </div>

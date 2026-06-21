@@ -87,7 +87,7 @@ export default function Projects() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Our Work
             </span>
@@ -102,7 +102,7 @@ export default function Projects() {
             </h2>
             <p
               className="text-[#8A8A8A] text-sm leading-relaxed lg:pb-2"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
             >
               A selection of recent work across residential, commercial, and cultural typologies spanning the Gulf region and beyond.
             </p>
@@ -116,7 +116,7 @@ export default function Projects() {
                 onClick={() => setActiveFilter(cat)}
                 className="px-5 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-300"
                 style={{
-                  fontFamily: "var(--font-inter)",
+                  fontFamily: "var(--font-saira)",
                   background: activeFilter === cat ? "#111" : "transparent",
                   color: activeFilter === cat ? "#fff" : "#8A8A8A",
                   border: "1px solid",
@@ -174,7 +174,7 @@ export default function Projects() {
                   <div className="flex items-center justify-between mb-2">
                     <span
                       className="text-[#B89155] text-xs tracking-[0.2em] uppercase"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-saira)" }}
                     >
                       {project.category} · {project.year}
                     </span>
@@ -193,7 +193,7 @@ export default function Projects() {
                   <p
                     className="text-white/50 text-xs mt-1 transition-all duration-500"
                     style={{
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-saira)",
                       opacity: hovered === i ? 1 : 0,
                       maxHeight: hovered === i ? "20px" : "0",
                     }}
@@ -210,7 +210,7 @@ export default function Projects() {
         <div className="flex justify-center mt-16">
           <button
             className="border border-[#111] text-[#111] hover:bg-[#111] hover:text-white transition-all duration-300 px-14 py-4 text-xs tracking-[0.2em] uppercase"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-saira)" }}
           >
             View All Projects
           </button>

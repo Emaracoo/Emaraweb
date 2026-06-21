@@ -106,13 +106,13 @@ export default function ContactPage() {
                       <div>
                         <p
                           className="text-xs tracking-[0.2em] uppercase mb-1"
-                          style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                          style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                         >
                           {label}
                         </p>
                         <p
                           style={{
-                            fontFamily: "var(--font-inter)",
+                            fontFamily: "var(--font-saira)",
                             fontWeight: 300,
                             fontSize: "0.9rem",
                             color: "var(--em-text)",
@@ -134,7 +134,7 @@ export default function ContactPage() {
                 <div>
                   <p
                     className="text-xs tracking-[0.25em] uppercase mb-4"
-                    style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                    style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                   >
                     Follow our work
                   </p>
@@ -147,7 +147,7 @@ export default function ContactPage() {
                         rel="noopener noreferrer"
                         className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-300"
                         style={{
-                          fontFamily: "var(--font-inter)",
+                          fontFamily: "var(--font-saira)",
                           color: "var(--em-text)",
                           border: "1px solid var(--em-border)",
                           display: "inline-block",
@@ -206,7 +206,7 @@ export default function ContactPage() {
                     </h3>
                     <p
                       style={{
-                        fontFamily: "var(--font-inter)",
+                        fontFamily: "var(--font-saira)",
                         fontWeight: 300,
                         fontSize: "0.875rem",
                         color: "var(--em-muted)",
@@ -229,7 +229,7 @@ export default function ContactPage() {
                           <label
                             htmlFor={id}
                             className="text-xs tracking-[0.2em] uppercase"
-                            style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                            style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                           >
                             {label}
                           </label>
@@ -240,7 +240,7 @@ export default function ContactPage() {
                             value={form[key]}
                             onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                             style={{
-                              fontFamily: "var(--font-inter)",
+                              fontFamily: "var(--font-saira)",
                               fontWeight: 300,
                               fontSize: "0.9rem",
                               color: "var(--em-text)",
@@ -262,7 +262,7 @@ export default function ContactPage() {
                     <div>
                       <p
                         className="text-xs tracking-[0.2em] uppercase mb-3"
-                        style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                        style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                       >
                         Project Type
                       </p>
@@ -276,7 +276,7 @@ export default function ContactPage() {
                               onClick={() => setSelectedType(isActive ? null : type)}
                               className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-200"
                               style={{
-                                fontFamily: "var(--font-inter)",
+                                fontFamily: "var(--font-saira)",
                                 background: isActive ? "#993434" : "transparent",
                                 color: isActive ? "#FFFFFF" : "var(--em-muted)",
                                 border: isActive ? "1px solid #993434" : `1px solid var(--em-border)`,
@@ -307,7 +307,7 @@ export default function ContactPage() {
                       <label
                         htmlFor="message"
                         className="text-xs tracking-[0.2em] uppercase"
-                        style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                        style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                       >
                         Tell us about your project
                       </label>
@@ -319,7 +319,7 @@ export default function ContactPage() {
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
                         placeholder="Describe your vision, brief, or simply say hello…"
                         style={{
-                          fontFamily: "var(--font-inter)",
+                          fontFamily: "var(--font-saira)",
                           fontWeight: 300,
                           fontSize: "0.9rem",
                           color: "var(--em-text)",
@@ -340,7 +340,7 @@ export default function ContactPage() {
                       type="submit"
                       className="w-full py-4 text-xs tracking-[0.25em] uppercase text-white transition-all duration-300"
                       style={{
-                        fontFamily: "var(--font-inter)",
+                        fontFamily: "var(--font-saira)",
                         background: "#993434",
                       }}
                       onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "#682A2A")}

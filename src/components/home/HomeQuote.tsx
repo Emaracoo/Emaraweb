@@ -13,7 +13,7 @@ export default function HomeQuote() {
           <div>
             <div className="flex items-center gap-3 mb-8">
               <span className="w-10 h-px" style={{ background: "#993434" }} />
-              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
                 Client Stories
               </span>
             </div>
@@ -24,10 +24,10 @@ export default function HomeQuote() {
               "Working with Emara was transformative. They didn't just design our headquarters — they understood our culture and translated it into architecture."
             </blockquote>
             <div>
-              <div className="text-sm font-medium mb-0.5" style={{ fontFamily: "var(--font-inter)", color: "var(--em-text)" }}>
+              <div className="text-sm font-medium mb-0.5" style={{ fontFamily: "var(--font-saira)", color: "var(--em-text)" }}>
                 Khalid Al-Mansouri
               </div>
-              <div className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+              <div className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
                 CEO, Al-Mansouri Group · Dubai
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function HomeQuote() {
               onMouseEnter={(e) => (e.currentTarget.style.background = "var(--em-surface-2)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "var(--em-surface)")}
             >
-              <span className="text-xs tracking-[0.2em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "var(--em-text)" }}>
+              <span className="text-xs tracking-[0.2em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "var(--em-text)" }}>
                 Read our story
               </span>
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" style={{ color: "#993434" }} />

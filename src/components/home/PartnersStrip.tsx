@@ -17,7 +17,7 @@ export default function PartnersStrip() {
       <p
         className="text-xs tracking-[0.35em] uppercase text-center"
         style={{
-          fontFamily: "var(--font-inter)",
+          fontFamily: "var(--font-saira)",
           color: "var(--em-muted)",
           marginBottom: "2.5rem",
         }}
@@ -46,7 +46,7 @@ export default function PartnersStrip() {
             />
             <p
               style={{
-                fontFamily: "var(--font-inter)",
+                fontFamily: "var(--font-saira)",
                 fontSize: "0.75rem",
                 fontWeight: 500,
                 letterSpacing: "0.15em",

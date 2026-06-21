@@ -71,7 +71,7 @@ export default function About() {
               </div>
               <div
                 className="text-xs tracking-[0.15em] uppercase mt-1"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-saira)" }}
               >
                 Years
               </div>
@@ -87,7 +87,7 @@ export default function About() {
               <span className="w-12 h-px bg-[#B89155]" />
               <span
                 className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-saira)" }}
               >
                 About Emara
               </span>
@@ -109,7 +109,7 @@ export default function About() {
                   onClick={() => setActiveTab(tab.id)}
                   className="pb-4 mr-8 text-xs tracking-[0.15em] uppercase relative transition-colors duration-300"
                   style={{
-                    fontFamily: "var(--font-inter)",
+                    fontFamily: "var(--font-saira)",
                     color: activeTab === tab.id ? "#B89155" : "#8A8A8A",
                   }}
                 >
@@ -128,7 +128,7 @@ export default function About() {
             >
               <p
                 className="text-white/60 text-base leading-relaxed mb-10"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
               >
                 {current.content}
               </p>
@@ -138,7 +138,7 @@ export default function About() {
             <button
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               className="border border-[#B89155] text-[#B89155] hover:bg-[#B89155] hover:text-white transition-all duration-300 px-10 py-4 text-xs tracking-[0.2em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Work With Us
             </button>

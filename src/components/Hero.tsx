@@ -88,7 +88,7 @@ export default function Hero() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Architecture Studio
             </span>
@@ -105,7 +105,7 @@ export default function Hero() {
           {/* Subtitle */}
           <p
             className="text-white/60 text-base lg:text-lg max-w-lg leading-relaxed mb-12"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+            style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
           >
             {slides[active].sub}
           </p>
@@ -115,14 +115,14 @@ export default function Hero() {
             <button
               onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
               className="bg-[#B89155] text-white hover:bg-[#D4AD7A] transition-colors px-10 py-4 text-xs tracking-[0.2em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               View Our Work
             </button>
             <button
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               className="border border-white/40 text-white/80 hover:border-[#B89155] hover:text-[#B89155] transition-all px-10 py-4 text-xs tracking-[0.2em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               Start a Project
             </button>
@@ -168,7 +168,7 @@ export default function Hero() {
                 </div>
                 <div
                   className="text-white/50 text-xs tracking-[0.15em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-saira)" }}
                 >
                   {s.label}
                 </div>
@@ -186,7 +186,7 @@ export default function Hero() {
       >
         <span
           className="text-xs tracking-[0.2em] uppercase rotate-90 origin-center"
-          style={{ fontFamily: "var(--font-inter)", writingMode: "vertical-lr" }}
+          style={{ fontFamily: "var(--font-saira)", writingMode: "vertical-lr" }}
         >
           Scroll
         </span>

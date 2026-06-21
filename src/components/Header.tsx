@@ -67,7 +67,7 @@ export default function Header() {
             </span>
             <span
               className="tracking-[0.25em] uppercase text-sm font-medium transition-colors duration-300"
-              style={{ fontFamily: "var(--font-inter)", color: solid ? "var(--em-header-text)" : "#fff" }}
+              style={{ fontFamily: "var(--font-saira)", color: solid ? "var(--em-header-text)" : "#fff" }}
             >
               Emara
             </span>
@@ -83,7 +83,7 @@ export default function Header() {
                   href={link.href}
                   className="relative text-xs tracking-[0.2em] uppercase transition-colors duration-300"
                   style={{
-                    fontFamily: "var(--font-inter)",
+                    fontFamily: "var(--font-saira)",
                     fontWeight: 400,
                     color: solid
                       ? active ? "#993434" : "var(--em-header-text)"
@@ -112,7 +112,7 @@ export default function Header() {
 
             <button
               className="hidden lg:inline-flex items-center px-3 py-1 text-xs transition-colors duration-300"
-              style={{ fontFamily: "var(--font-inter)", color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.85)" }}
+              style={{ fontFamily: "var(--font-saira)", color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.85)" }}
               aria-label="Switch language"
             >
               EN | ع
@@ -121,7 +121,7 @@ export default function Header() {
             <Link
               href="/contact"
               className="hidden lg:inline-flex items-center px-6 py-2.5 text-xs tracking-[0.2em] uppercase transition-all duration-300"
-              style={{ fontFamily: "var(--font-inter)", background: "#993434", color: "#fff" }}
+              style={{ fontFamily: "var(--font-saira)", background: "#993434", color: "#fff" }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "#682A2A")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "#993434")}
             >
@@ -169,7 +169,7 @@ export default function Header() {
             href="/contact"
             onClick={() => setMobileOpen(false)}
             className="mt-4 px-10 py-3 text-sm tracking-[0.2em] uppercase text-white"
-            style={{ fontFamily: "var(--font-inter)", background: "#993434" }}
+            style={{ fontFamily: "var(--font-saira)", background: "#993434" }}
           >
             Enquire
           </Link>

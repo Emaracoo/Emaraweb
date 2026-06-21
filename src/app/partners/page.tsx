@@ -13,7 +13,7 @@ export default function PartnersPage() {
           titleAccent="Trust"
           subtitle="The clients and collaborators who have shaped four decades of practice."
         />
-        <div style={{ textAlign:"center", padding:"8rem 2rem", color:"var(--em-muted)", fontFamily:"var(--font-inter)", fontSize:"0.875rem", fontWeight:300 }}>
+        <div style={{ textAlign:"center", padding:"8rem 2rem", color:"var(--em-muted)", fontFamily:"var(--font-saira)", fontSize:"0.875rem", fontWeight:300 }}>
           Partner profiles coming soon.
         </div>
       </main>

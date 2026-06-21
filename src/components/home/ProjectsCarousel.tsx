@@ -89,7 +89,7 @@ export default function ProjectsCarousel() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-10 h-px" style={{ background: "#993434" }} />
-              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
                 Selected Work
               </span>
             </div>
@@ -132,7 +132,7 @@ export default function ProjectsCarousel() {
             <Link
               href="/projects"
               className="ml-4 text-xs tracking-[0.2em] uppercase border-b pb-0.5 transition-colors duration-300"
-              style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.2)" }}
+              style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.2)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
             >
@@ -175,12 +175,12 @@ export default function ProjectsCarousel() {
                   <div className="flex items-center gap-2 mb-2">
                     <span
                       className="text-xs tracking-[0.15em] uppercase"
-                      style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                      style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
                     >
                       {p.category}
                     </span>
                     <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.65rem" }}>·</span>
-                    <span className="text-xs" style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.35)" }}>
+                    <span className="text-xs" style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.35)" }}>
                       {p.location}
                     </span>
                   </div>
@@ -198,7 +198,7 @@ export default function ProjectsCarousel() {
 
         {/* Mobile link */}
         <div className="flex justify-center mt-10 lg:hidden">
-          <Link href="/projects" className="flex items-center gap-2 text-xs tracking-[0.2em] uppercase border-b pb-1" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.2)", fontFamily: "var(--font-inter)" }}>
+          <Link href="/projects" className="flex items-center gap-2 text-xs tracking-[0.2em] uppercase border-b pb-1" style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.2)", fontFamily: "var(--font-saira)" }}>
             All Projects <ArrowRight size={12} />
           </Link>
         </div>

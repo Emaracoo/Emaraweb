@@ -18,7 +18,7 @@ export default function BlogPage() {
             textAlign: "center",
             padding: "8rem 2rem",
             color: "var(--em-muted)",
-            fontFamily: "var(--font-inter)",
+            fontFamily: "var(--font-saira)",
             fontSize: "0.875rem",
           }}
         >

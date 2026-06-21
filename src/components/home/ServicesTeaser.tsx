@@ -47,7 +47,7 @@ export default function ServicesTeaser() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-10 h-px" style={{ background: "#993434" }} />
-              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-inter)", color: "#993434" }}>
+              <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: "var(--font-saira)", color: "#993434" }}>
                 What We Do
               </span>
             </div>
@@ -61,7 +61,7 @@ export default function ServicesTeaser() {
           <Link
             href="/services"
             className="hidden lg:flex items-center gap-2 text-xs tracking-[0.2em] uppercase pb-1 border-b transition-all duration-300 group"
-            style={{ fontFamily: "var(--font-inter)", color: "#441919", borderColor: "#441919" }}
+            style={{ fontFamily: "var(--font-saira)", color: "#441919", borderColor: "#441919" }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#993434";
               e.currentTarget.style.borderColor = "#993434";
@@ -108,7 +108,7 @@ export default function ServicesTeaser() {
                   </h3>
                   <p
                     className="text-sm leading-relaxed group-hover:text-white/50 transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 300, color: "var(--em-muted)" }}
+                    style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: "var(--em-muted)" }}
                   >
                     {s.desc}
                   </p>
@@ -116,7 +116,7 @@ export default function ServicesTeaser() {
                 <div className="mt-auto">
                   <span
                     className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase pb-px border-b transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-inter)", color: "#993434", borderColor: "rgba(232,88,48,0.3)" }}
+                    style={{ fontFamily: "var(--font-saira)", color: "#993434", borderColor: "rgba(232,88,48,0.3)" }}
                   >
                     Learn more <ArrowRight size={11} />
                   </span>
@@ -128,7 +128,7 @@ export default function ServicesTeaser() {
 
         {/* Mobile link */}
         <div className="flex justify-center mt-10 lg:hidden">
-          <Link href="/services" className="flex items-center gap-2 text-xs tracking-[0.2em] uppercase border-b pb-1" style={{ color: "#441919", borderColor: "#441919", fontFamily: "var(--font-inter)" }}>
+          <Link href="/services" className="flex items-center gap-2 text-xs tracking-[0.2em] uppercase border-b pb-1" style={{ color: "#441919", borderColor: "#441919", fontFamily: "var(--font-saira)" }}>
             All Services <ArrowRight size={12} />
           </Link>
         </div>

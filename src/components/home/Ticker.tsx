@@ -28,7 +28,7 @@ export default function Ticker() {
           <span key={i} className="flex items-center">
             <span
               className="text-xs tracking-[0.3em] uppercase whitespace-nowrap"
-              style={{ fontFamily: "var(--font-inter)", color: "rgba(255,255,255,0.25)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.25)", fontWeight: 300 }}
             >
               {item}
             </span>

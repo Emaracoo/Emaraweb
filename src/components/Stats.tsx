@@ -51,13 +51,13 @@ function StatItem({ value, suffix, label, desc, visible, delay }: {
       </div>
       <div
         className="text-white text-xs tracking-[0.2em] uppercase mb-2"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-saira)" }}
       >
         {label}
       </div>
       <div
         className="text-white/35 text-xs"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
       >
         {desc}
       </div>

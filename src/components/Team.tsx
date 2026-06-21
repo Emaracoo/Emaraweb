@@ -80,7 +80,7 @@ export default function Team() {
             <span className="w-12 h-px bg-[#B89155]" />
             <span
               className="text-[#B89155] text-xs tracking-[0.3em] uppercase"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-saira)" }}
             >
               The Studio
             </span>
@@ -95,7 +95,7 @@ export default function Team() {
             </h2>
             <p
               className="text-[#8A8A8A] text-sm leading-relaxed lg:pb-2"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+              style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
             >
               A diverse team of forty architects, engineers, landscape designers, and researchers — united by curiosity and a commitment to excellence.
             </p>
@@ -153,13 +153,13 @@ export default function Team() {
                 </h3>
                 <div
                   className="text-[#B89155] text-xs tracking-[0.15em] uppercase mb-2"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-saira)" }}
                 >
                   {member.role}
                 </div>
                 <p
                   className="text-[#8A8A8A] text-xs leading-relaxed"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-saira)", fontWeight: 300 }}
                 >
                   {member.bio}
                 </p>

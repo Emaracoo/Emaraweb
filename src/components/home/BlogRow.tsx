@@ -47,7 +47,7 @@ export default function BlogRow() {
           <div>
             <p
               className="text-xs tracking-[0.25em] uppercase mb-4"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               Journal
             </p>
@@ -68,7 +68,7 @@ export default function BlogRow() {
             href="/blog"
             className="text-xs tracking-[0.2em] uppercase shrink-0"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",
@@ -105,13 +105,13 @@ export default function BlogRow() {
               <div className="flex gap-3" style={{ marginTop: "1.25rem" }}>
                 <span
                   className="text-xs tracking-[0.15em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)", color: "var(--em-muted)" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
                 >
                   {post.date}
                 </span>
                 <span
                   className="text-xs tracking-[0.15em] uppercase"
-                  style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+                  style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
                 >
                   {post.category}
                 </span>
@@ -132,7 +132,7 @@ export default function BlogRow() {
 
               <p
                 style={{
-                  fontFamily: "var(--font-inter)",
+                  fontFamily: "var(--font-saira)",
                   fontWeight: 300,
                   fontSize: "0.8rem",
                   color: "var(--em-muted)",
@@ -156,7 +156,7 @@ export default function BlogRow() {
             href="/blog"
             className="text-xs tracking-[0.2em] uppercase"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",

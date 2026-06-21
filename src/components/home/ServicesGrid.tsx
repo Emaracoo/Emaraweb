@@ -79,7 +79,7 @@ export default function ServicesGrid() {
           <div>
             <p
               className="text-xs tracking-[0.25em] uppercase mb-4"
-              style={{ fontFamily: "var(--font-inter)", color: "#993434" }}
+              style={{ fontFamily: "var(--font-saira)", color: "#993434" }}
             >
               07 Services
             </p>
@@ -100,7 +100,7 @@ export default function ServicesGrid() {
             href="/services"
             className="text-xs tracking-[0.2em] uppercase shrink-0"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-saira)",
               color: "#993434",
               borderBottom: "1px solid #993434",
               paddingBottom: "2px",
@@ -136,7 +136,7 @@ export default function ServicesGrid() {
                 <div style={{ marginTop: "1rem", marginBottom: "0.5rem" }}>
                   <span
                     style={{
-                      fontFamily: "var(--font-inter)",
+                      fontFamily: "var(--font-saira)",
                       fontSize: "0.8rem",
                       fontWeight: 500,
                       color: "var(--em-text)",
@@ -166,7 +166,7 @@ export default function ServicesGrid() {
 
                 <p
                   style={{
-                    fontFamily: "var(--font-inter)",
+                    fontFamily: "var(--font-saira)",
                     fontWeight: 300,
                     fontSize: "0.8rem",
                     color: "var(--em-muted)",
