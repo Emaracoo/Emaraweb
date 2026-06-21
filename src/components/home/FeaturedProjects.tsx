@@ -1,31 +1,7 @@
 import Link from "next/link";
+import { getFeaturedProjects } from "@/data/projects";
 
-const FEATURED = [
-  {
-    slug: "al-arabiya-studios",
-    title: "Al Arabiya News Studios",
-    category: "Administrative",
-    location: "Maspero, Cairo",
-    year: "2011",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-  },
-  {
-    slug: "villa-mina-garden-city",
-    title: "Villa TN, Mina Garden City",
-    category: "Residential",
-    location: "Mina Garden City, Cairo",
-    year: "2022",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-  },
-  {
-    slug: "manar-tex-factory",
-    title: "Manar Tex Factory",
-    category: "Industrial",
-    location: "10th of Ramadan City",
-    year: "1989",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-  },
-];
+const FEATURED = getFeaturedProjects();
 
 export default function FeaturedProjects() {
   return (
