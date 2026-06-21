@@ -1,12 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeHero from "@/components/home/HomeHero";
-import Ticker from "@/components/home/Ticker";
-import ProcessSteps from "@/components/home/ProcessSteps";
-import ServicesTeaser from "@/components/home/ServicesTeaser";
-import ProjectsCarousel from "@/components/home/ProjectsCarousel";
-import StoryScroll from "@/components/home/StoryScroll";
-import HomeQuote from "@/components/home/HomeQuote";
+import AboutSnapshot from "@/components/home/AboutSnapshot";
+import ServicesGrid from "@/components/home/ServicesGrid";
+import FeaturedProjects from "@/components/home/FeaturedProjects";
+import PartnersStrip from "@/components/home/PartnersStrip";
+import BlogRow from "@/components/home/BlogRow";
 import ContactCTA from "@/components/home/ContactCTA";
 
 export default function Home() {
@@ -15,12 +14,11 @@ export default function Home() {
       <Header />
       <main>
         <HomeHero />
-        <Ticker />
-        <ProcessSteps />
-        <ServicesTeaser />
-        <ProjectsCarousel />
-        <StoryScroll />
-        <HomeQuote />
+        <AboutSnapshot />
+        <ServicesGrid />
+        <FeaturedProjects />
+        <PartnersStrip />
+        <BlogRow />
         <ContactCTA />
       </main>
       <Footer />

@@ -10,6 +10,8 @@ const links = [
   { label: "About",    href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
+  { label: "Partners", href: "/partners" },
+  { label: "Blog",     href: "/blog"     },
   { label: "Contact",  href: "/contact" },
 ];
 
@@ -106,6 +108,14 @@ export default function Header() {
               aria-label="Toggle dark mode"
             >
               {dark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
+            </button>
+
+            <button
+              className="hidden lg:inline-flex items-center px-3 py-1 text-xs transition-colors duration-300"
+              style={{ fontFamily: "var(--font-inter)", color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.85)" }}
+              aria-label="Switch language"
+            >
+              EN | ع
             </button>
 
             <Link
