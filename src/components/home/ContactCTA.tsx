@@ -4,24 +4,38 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLang } from "@/components/LangProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HEADLINE = ["Let's build something", "extraordinary together."];
-
-// Ghost layers: opacity, blur, y-offset (starting state before scroll resolves them)
 const GHOSTS = [
   { opacity: 0.18, blur: 4,  y: 48,  scaleX: 1.018 },
   { opacity: 0.10, blur: 8,  y: 90,  scaleX: 1.032 },
   { opacity: 0.05, blur: 14, y: 140, scaleX: 1.05  },
 ];
 
+const T = {
+  en: {
+    eyebrow: "Have a project in mind?",
+    headline: "Let's build something\nextraordinary together.",
+    cta: "Let's Talk",
+  },
+  ar: {
+    eyebrow: "لديك مشروع في ذهنك؟",
+    headline: "لنبنِ معاً\nشيئاً استثنائياً.",
+    cta: "تواصل معنا",
+  },
+};
+
 export default function ContactCTA() {
+  const lang        = useLang();
+  const t           = T[lang];
+  const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
+  const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);
   const ghostRefs   = useRef<(HTMLHeadingElement | null)[]>([]);
 
-  /* ── Scroll-scrubbed ghost text animation ─────────────────────────── */
   useEffect(() => {
     const section = sectionRef.current;
     const main    = mainTextRef.current;
@@ -29,42 +43,20 @@ export default function ContactCTA() {
     if (!section || !main || ghosts.length === 0) return;
 
     const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        end: "center 40%",
-        scrub: 1.4,        // silky lag — higher = more inertia
-      },
+      scrollTrigger: { trigger: section, start: "top 80%", end: "center 40%", scrub: 1.4 },
     });
 
-    // Main text: slides up from below, fades in
-    tl.fromTo(
-      main,
+    tl.fromTo(main,
       { y: 56, opacity: 0, filter: "blur(2px)", letterSpacing: "0.06em" },
       { y: 0,  opacity: 1, filter: "blur(0px)", letterSpacing: "normal", ease: "power3.out" },
       0
     );
 
-    // Ghost layers: each starts further behind, resolves to invisible
-    // They stagger in start position so they peel away as scroll advances
     ghosts.forEach((ghost, i) => {
       const g = GHOSTS[i];
-      tl.fromTo(
-        ghost,
-        {
-          y:       g.y,
-          opacity: g.opacity,
-          filter:  `blur(${g.blur}px)`,
-          scaleX:  g.scaleX,
-        },
-        {
-          y:       0,
-          opacity: 0,
-          filter:  "blur(0px)",
-          scaleX:  1,
-          ease:    "power2.out",
-        },
-        // Each ghost starts animating a bit before the previous one clears
+      tl.fromTo(ghost,
+        { y: g.y, opacity: g.opacity, filter: `blur(${g.blur}px)`, scaleX: g.scaleX },
+        { y: 0,   opacity: 0,         filter: "blur(0px)",          scaleX: 1, ease: "power2.out" },
         i * 0.08
       );
     });
@@ -73,13 +65,13 @@ export default function ContactCTA() {
   }, []);
 
   const headlineStyle: React.CSSProperties = {
-    fontFamily: "var(--font-cormorant)",
+    fontFamily: fs,
     fontSize: "clamp(2.8rem, 6vw, 5rem)",
     fontWeight: 300,
     lineHeight: 1.12,
     color: "#fff",
-    whiteSpace: "pre-wrap" as const,
-    position: "absolute" as const,
+    whiteSpace: "pre-wrap",
+    position: "absolute",
     top: 0,
     left: 0,
     width: "100%",
@@ -105,31 +97,14 @@ export default function ContactCTA() {
         backgroundAttachment: "fixed",
       }}
     >
-      {/* Overlay */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.78) 0%, rgba(68,25,25,0.65) 100%)" }}
-      />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.78) 0%, rgba(68,25,25,0.65) 100%)" }} />
 
-      {/* Content */}
       <div className="relative z-10 text-center px-6 py-24 max-w-3xl mx-auto w-full">
-        <p
-          className="text-xs tracking-[0.35em] uppercase mb-6"
-          style={{ fontFamily: "var(--font-saira)", color: "rgba(255,255,255,0.55)" }}
-        >
-          Have a project in mind?
+        <p className="text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: f, color: "rgba(255,255,255,0.55)" }}>
+          {t.eyebrow}
         </p>
 
-        {/* Ghost text stack */}
-        <div
-          className="relative mx-auto mb-12"
-          style={{
-            perspective: "1000px",
-            // height is set to match the headline so ghosts don't shift layout
-            height: "clamp(7rem, 14vw, 12rem)",
-          }}
-        >
-          {/* Ghost copies (rendered behind, in reverse order) */}
+        <div className="relative mx-auto mb-12" style={{ perspective: "1000px", height: "clamp(7rem, 14vw, 12rem)" }}>
           {GHOSTS.map((_, i) => (
             <h2
               key={i}
@@ -137,39 +112,22 @@ export default function ContactCTA() {
               style={{ ...headlineStyle, pointerEvents: "none", userSelect: "none" }}
               aria-hidden
             >
-              {HEADLINE.join("\n")}
+              {t.headline}
             </h2>
           ))}
-
-          {/* Main (real) text on top */}
-          <h2
-            ref={mainTextRef}
-            style={{ ...headlineStyle, position: "absolute" }}
-          >
-            {HEADLINE.join("\n")}
+          <h2 ref={mainTextRef} style={{ ...headlineStyle, position: "absolute" }}>
+            {t.headline}
           </h2>
         </div>
 
         <Link
-          href="/contact"
+          href={`/${lang}/contact`}
           className="inline-flex items-center gap-3 px-10 py-4 text-sm tracking-[0.2em] uppercase text-white transition-all duration-300"
-          style={{
-            fontFamily: "var(--font-saira)",
-            border: "1px solid rgba(255,255,255,0.55)",
-            borderRadius: "9999px",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#fff";
-            e.currentTarget.style.color = "#441919";
-            e.currentTarget.style.borderColor = "#fff";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "#fff";
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.55)";
-          }}
+          style={{ fontFamily: f, border: "1px solid rgba(255,255,255,0.55)", borderRadius: "9999px" }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#441919"; e.currentTarget.style.borderColor = "#fff"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.55)"; }}
         >
-          Let's Talk
+          {t.cta}
           <span style={{ fontSize: "1rem" }}>↗</span>
         </Link>
       </div>

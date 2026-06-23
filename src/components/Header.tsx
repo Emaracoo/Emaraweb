@@ -2,26 +2,45 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { useLang } from "./LangProvider";
 
-const links = [
-  { label: "Home",     href: "/" },
-  { label: "About",    href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "Partners", href: "/partners" },
-  { label: "Blog",     href: "/blog"     },
-  { label: "Contact",  href: "/contact" },
-];
+const NAV_LABELS = {
+  en: {
+    home: "Home", about: "About", services: "Services",
+    projects: "Projects", partners: "Partners", blog: "Blog", contact: "Contact",
+    enquire: "Enquire", langSwitch: "ع",
+  },
+  ar: {
+    home: "الرئيسية", about: "من نحن", services: "خدماتنا",
+    projects: "مشاريعنا", partners: "شركاؤنا", blog: "المدونة", contact: "اتصل بنا",
+    enquire: "استفسر", langSwitch: "EN",
+  },
+};
 
 export default function Header() {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [mobileOpen,  setMobileOpen]  = useState(false);
-  const [dark,        setDark]        = useState(false);
-  const pathname = usePathname();
+  const lang      = useLang();
+  const t         = NAV_LABELS[lang];
+  const pathname  = usePathname();
+  const router    = useRouter();
 
-  const isHome = pathname === "/";
+  const [scrolled,   setScrolled]   = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [dark,       setDark]       = useState(false);
+
+  const prefix   = `/${lang}`;
+  const isHome   = pathname === prefix || pathname === `${prefix}/`;
+
+  const links = [
+    { label: t.home,     href: `/${lang}` },
+    { label: t.about,    href: `/${lang}/about` },
+    { label: t.services, href: `/${lang}/services` },
+    { label: t.projects, href: `/${lang}/projects` },
+    { label: t.partners, href: `/${lang}/partners` },
+    { label: t.blog,     href: `/${lang}/blog` },
+    { label: t.contact,  href: `/${lang}/contact` },
+  ];
 
   useEffect(() => {
     setDark(document.documentElement.getAttribute("data-theme") === "dark");
@@ -46,6 +65,13 @@ export default function Header() {
     }
   };
 
+  const switchLang = () => {
+    const other = lang === "en" ? "ar" : "en";
+    // swap /en/ → /ar/ keeping the rest of the path
+    const newPath = pathname.replace(`/${lang}`, `/${other}`);
+    router.push(newPath);
+  };
+
   const solid = scrolled || !isHome;
 
   return (
@@ -53,15 +79,15 @@ export default function Header() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
-          background:    solid ? "var(--em-header-bg)"     : "transparent",
-          backdropFilter: solid ? "blur(12px)"              : "none",
-          borderBottom:  solid ? "1px solid var(--em-header-border)" : "none",
+          background:     solid ? "var(--em-header-bg)"     : "transparent",
+          backdropFilter: solid ? "blur(12px)"               : "none",
+          borderBottom:   solid ? "1px solid var(--em-header-border)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href={`/${lang}`} className="flex items-center gap-3 group">
             <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
               <span className="w-3 h-3 bg-white" />
             </span>
@@ -83,7 +109,7 @@ export default function Header() {
                   href={link.href}
                   className="relative text-xs tracking-[0.2em] uppercase transition-colors duration-300"
                   style={{
-                    fontFamily: "var(--font-saira)",
+                    fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
                     fontWeight: 400,
                     color: solid
                       ? active ? "#993434" : "var(--em-header-text)"
@@ -99,7 +125,7 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Right: theme toggle + enquire + hamburger */}
+          {/* Right: theme + lang switch + enquire + hamburger */}
           <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
@@ -111,21 +137,29 @@ export default function Header() {
             </button>
 
             <button
-              className="hidden lg:inline-flex items-center px-3 py-1 text-xs transition-colors duration-300"
-              style={{ fontFamily: "var(--font-saira)", color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.85)" }}
+              onClick={switchLang}
+              className="hidden lg:inline-flex items-center px-3 py-1 text-xs tracking-[0.1em] transition-colors duration-300"
+              style={{
+                fontFamily: "var(--font-saira)",
+                color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.85)",
+              }}
               aria-label="Switch language"
             >
-              EN | ع
+              {t.langSwitch}
             </button>
 
             <Link
-              href="/contact"
+              href={`/${lang}/contact`}
               className="hidden lg:inline-flex items-center px-6 py-2.5 text-xs tracking-[0.2em] uppercase transition-all duration-300"
-              style={{ fontFamily: "var(--font-saira)", background: "#993434", color: "#fff" }}
+              style={{
+                fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
+                background: "#993434",
+                color: "#fff",
+              }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "#682A2A")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "#993434")}
             >
-              Enquire
+              {t.enquire}
             </Link>
 
             <button
@@ -157,7 +191,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="text-3xl tracking-[0.1em] uppercase transition-colors"
               style={{
-                fontFamily: "var(--font-cormorant)",
+                fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)",
                 fontWeight: 400,
                 color: pathname === link.href ? "#993434" : "var(--em-text)",
               }}
@@ -165,13 +199,23 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            onClick={() => setMobileOpen(false)}
-            className="mt-4 px-10 py-3 text-sm tracking-[0.2em] uppercase text-white"
-            style={{ fontFamily: "var(--font-saira)", background: "#993434" }}
+          <button
+            onClick={() => { switchLang(); setMobileOpen(false); }}
+            className="mt-2 text-sm tracking-[0.15em]"
+            style={{ fontFamily: "var(--font-saira)", color: "var(--em-muted)" }}
           >
-            Enquire
+            {t.langSwitch}
+          </button>
+          <Link
+            href={`/${lang}/contact`}
+            onClick={() => setMobileOpen(false)}
+            className="mt-2 px-10 py-3 text-sm tracking-[0.2em] uppercase text-white"
+            style={{
+              fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
+              background: "#993434",
+            }}
+          >
+            {t.enquire}
           </Link>
         </div>
       </div>

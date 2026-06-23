@@ -1,0 +1,252 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "partners": "Partners",
+    "blog": "Blog",
+    "contact": "Contact",
+    "enquire": "Enquire",
+    "langSwitch": "ع"
+  },
+  "hero": {
+    "slides": [
+      {
+        "tag": "Residential · Mina Garden City, Cairo",
+        "title": "Designing Spaces,\nCreating Experiences",
+        "project": "Villa TN, Mina Garden City",
+        "location": "Mina Garden City, Cairo"
+      },
+      {
+        "tag": "Administrative · Maspero, Cairo",
+        "title": "Building Vision,\nCrafting Reality",
+        "project": "Al Arabiya News Studios",
+        "location": "Maspero, Cairo"
+      },
+      {
+        "tag": "Industrial · 10th of Ramadan City",
+        "title": "Architecture\nThat Endures",
+        "project": "Manar Tex Factory",
+        "location": "10th of Ramadan City"
+      }
+    ],
+    "stats": {
+      "projects": "Projects",
+      "clients": "Clients",
+      "years": "Years",
+      "awards": "Awards"
+    },
+    "viewWork": "View Our Work",
+    "aboutEmara": "About Emara",
+    "currentProject": "Current Project",
+    "details": "Details"
+  },
+  "about": {
+    "eyebrow": "About Emara",
+    "headline": "Four decades of design,\nconstruction & craft.",
+    "body": "With over four decades of experience, our journey began with miniature architectural models — combining functionality and aesthetics with fastidious attention to detail. From industrial buildings to palaces and villas, we have shaped spaces across Egypt.",
+    "readMore": "Read more",
+    "stats": {
+      "years": "Years of Practice",
+      "projects": "Projects Delivered",
+      "clients": "Clients Served"
+    }
+  },
+  "services": {
+    "eyebrow": "07 Services",
+    "headline": "Every discipline,\nin one studio.",
+    "viewAll": "View all services",
+    "items": [
+      {
+        "title": "Structural Design",
+        "desc": "Concrete & steel facilities per Egyptian, American, European and British codes."
+      },
+      {
+        "title": "Architectural Design",
+        "desc": "Exterior and interior designs for villas, palaces, factories, restaurants, and more."
+      },
+      {
+        "title": "Interior Architecture",
+        "desc": "Planning interiors to meet functional requirements while maximising spatial utilisation."
+      },
+      {
+        "title": "Landscape Design",
+        "desc": "Softscape planting and hardscape — pergolas, pools, walkways, fountains, and lighting."
+      },
+      {
+        "title": "Restoration & Strengthening",
+        "desc": "Repair of structural elements, treatment of cracks and fissures."
+      },
+      {
+        "title": "Construction Supervision",
+        "desc": "Full review of specs, drawings, schedules, on-site inspection and soil reports."
+      },
+      {
+        "title": "Model Making",
+        "desc": "Scaled architectural maquettes — the craft that started Emara in 1989.",
+        "badge": "Gallery"
+      }
+    ]
+  },
+  "featured": {
+    "eyebrow": "Featured Work",
+    "headline": "Selected\nprojects.",
+    "viewAll": "View all projects"
+  },
+  "cta": {
+    "tagline": "Have a project in mind?",
+    "headline": "Let's build something\nextraordinary together.",
+    "button": "Let's Talk"
+  },
+  "footer": {
+    "tagline": "Four decades of experience in design and construction. From industrial structures to villas and palaces — based in Heliopolis, Cairo.",
+    "address": "5 Al-Hariry St, beside Tivoli Dome\nHeliopolis, Cairo, Egypt · Info@EmaraCo.com",
+    "sections": {
+      "studio": "Studio",
+      "services": "Services",
+      "work": "Work"
+    },
+    "nav": {
+      "about": "About Us",
+      "story": "Our Story",
+      "contact": "Contact",
+      "structural": "Structural Design",
+      "architecture": "Architecture",
+      "interior": "Interior Design",
+      "landscape": "Landscape",
+      "maquettes": "Maquettes",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial",
+      "administrative": "Administrative"
+    },
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "rights": "All rights reserved."
+  },
+  "projects": {
+    "eyebrow": "Our Portfolio",
+    "title": "Featured",
+    "titleAccent": "Projects",
+    "subtitle": "Four decades of work across residential, administrative, industrial, and commercial typologies throughout Egypt.",
+    "filter": {
+      "all": "All",
+      "residential": "Residential",
+      "administrative": "Administrative",
+      "industrial": "Industrial",
+      "commercial": "Commercial"
+    },
+    "empty": "No projects found in this category."
+  },
+  "projectDetail": {
+    "labels": {
+      "client": "Client",
+      "location": "Location",
+      "area": "Area",
+      "year": "Year",
+      "category": "Category",
+      "status": "Status",
+      "completed": "Completed"
+    },
+    "nextProject": "Next Project",
+    "viewProject": "View Project"
+  },
+  "about_page": {
+    "eyebrow": "Our Story",
+    "title": "Four Decades of",
+    "titleAccent": "Design & Construction",
+    "subtitle": "Based in Heliopolis, Cairo — building with concrete, steel, and glass since 1989.",
+    "story": {
+      "eyebrow": "Who we are",
+      "headline": "Four decades of design, built on the smallest details.",
+      "body1": "With over four decades of experience in design and construction, our journey began with miniature architectural models (maquettes), with attention paid to the smallest details, combining functionality and aesthetics. Our construction journey began with industrial buildings, then gradually extended to commercial and residential projects, including many villas and palaces.",
+      "body2": "Our experience is diverse, spanning distinguished architectural projects, interior architecture, and site landscaping, incorporating design and execution of concrete and steel structures, utilization of materials such as concrete, steel, and glass, coupled with proficiency in restoration and strengthening."
+    },
+    "values": {
+      "eyebrow": "Our Values",
+      "items": [
+        {
+          "num": "01",
+          "title": "Mission",
+          "desc": "We set new industry standards in design and construction by crafting distinctive structures using concrete, steel, and glass. With fastidious attention to details, we ensure harmonious outcomes across diverse architectural ventures, drawing from our expertise in both industrial and residential sectors."
+        },
+        {
+          "num": "02",
+          "title": "Vision",
+          "desc": "To transcend boundaries in the expansive realm of design and construction, leaving an indelible mark on a global scale. We aim to lead the industry by driving innovation, setting international benchmarks, and contributing to the creation of iconic structures worldwide."
+        },
+        {
+          "num": "03",
+          "title": "Our Approach",
+          "desc": "Every project begins with maquette-level attention to detail — the same craft that defined our origins in architectural model making. From industrial facilities to intimate residences, we bring structural rigour and aesthetic sensibility to every discipline we practise."
+        }
+      ]
+    },
+    "timeline": {
+      "eyebrow": "Milestones",
+      "headline": "Four Decades of Continuous Practice",
+      "items": [
+        { "year": "1989", "title": "Founded", "desc": "Emara is established in Heliopolis, Cairo. The Manar Tex Factory (11,000 m²) in 10th of Ramadan City marks our first major industrial commission." },
+        { "year": "1992", "title": "Abu Simbel Factory", "desc": "Construction of the Abu Simbel Factory in Qalyub (4,200 m²) — deepening our capability in large-scale industrial construction." },
+        { "year": "2001", "title": "Villa WM, Al-Badrashin", "desc": "Our first landmark private residential villa — four floors, integrated landscaping, and an indoor swimming pool in Al-Badrashin, Giza." },
+        { "year": "2004", "title": "Medical Union Pharmaceuticals HQ", "desc": "Design and construction of a six-floor, 300 m² headquarters in Masr El Gadeda, Cairo — expanding our footprint into corporate architecture." },
+        { "year": "2007", "title": "MBC Group Office, El Mohandeseen", "desc": "Interior design, décor, and construction supervision for MBC Group's 200 m² administrative office in Cairo's elite El Mohandeseen district." },
+        { "year": "2011", "title": "Al Arabiya News Studios, Maspero", "desc": "Interior design and construction supervision for Al Arabiya News studios and offices (600 m²) in the historic Maspero broadcasting district." },
+        { "year": "2015", "title": "Sphinx Comprehensive Cancer Centre", "desc": "A 700 m² medical environment in El Mohandeseen designed with exceptional care for the wellbeing of patients and clinical staff alike." },
+        { "year": "2022", "title": "Villa TN, Mina Garden City", "desc": "Three-floor private villa on a 660 m² plot — a synthesis of four decades of residential expertise and contemporary architectural craft." }
+      ]
+    },
+    "studio": {
+      "eyebrow": "The Studio",
+      "headline": "Built on Expertise",
+      "body1": "Emara was founded in Heliopolis, Cairo — and that is where we remain. Our work is rooted in the Egyptian built environment: its codes, its climate, its materials, and the clients who call it home. Over four decades, we have accumulated a depth of local knowledge that no single project could teach.",
+      "body2": "Our practice spans structural engineering, architectural design, interior architecture, landscape, restoration, construction supervision, and the architectural model making that started it all. That breadth is not incidental — it means every discipline informs every other, and every project benefits from the whole.",
+      "body3": "We are committed to pushing the boundaries of innovation and excellence — drawing from Egyptian and international codes alike, and delivering results that stand as a testament to rigorous craft."
+    }
+  },
+  "services_page": {
+    "eyebrow": "What We Do",
+    "title": "Our",
+    "titleAccent": "Services",
+    "subtitle": "Seven integrated disciplines — architecture, engineering, interiors, landscape, restoration, supervision, and model making."
+  },
+  "contact_page": {
+    "eyebrow": "Get in Touch",
+    "title": "Let's Build",
+    "titleAccent": "Something Great",
+    "subtitle": "Whether you have a clear brief or an early idea, we'd love to hear from you.",
+    "hours": "Our studio is open Monday to Friday, 9am – 6pm.",
+    "labels": {
+      "studio": "Studio",
+      "phone": "Phone",
+      "email": "Email",
+      "followWork": "Follow our work",
+      "yourName": "Your Name",
+      "emailAddress": "Email Address",
+      "projectType": "Project Type",
+      "message": "Tell us about your project",
+      "messagePlaceholder": "Describe your vision, brief, or simply say hello…",
+      "send": "Send Enquiry →"
+    },
+    "projectTypes": ["Residential", "Commercial", "Administrative", "Industrial", "Interior", "Landscape", "Other"],
+    "success": {
+      "headline": "Thank you for reaching out.",
+      "body": "Your enquiry has been received. A member of our studio team will be in touch within two business days."
+    }
+  },
+  "blog_page": {
+    "eyebrow": "Journal",
+    "title": "From Our",
+    "titleAccent": "Practice",
+    "subtitle": "Thinking, process, and lessons from four decades of design and construction.",
+    "coming": "Posts coming soon."
+  },
+  "partners_page": {
+    "eyebrow": "Partners",
+    "title": "Built on",
+    "titleAccent": "Trust",
+    "subtitle": "The clients and collaborators who have shaped four decades of practice.",
+    "coming": "Partner profiles coming soon."
+  }
+}
