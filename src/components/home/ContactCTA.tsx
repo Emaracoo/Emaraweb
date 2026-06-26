@@ -33,35 +33,46 @@ export default function ContactCTA() {
   const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);
+  const bgRef       = useRef<HTMLDivElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);
   const ghostRefs   = useRef<(HTMLHeadingElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
+    const bg      = bgRef.current;
     const main    = mainTextRef.current;
     const ghosts  = ghostRefs.current.filter(Boolean) as HTMLHeadingElement[];
-    if (!section || !main || ghosts.length === 0) return;
+    if (!section || !bg || !main || ghosts.length === 0) return;
+
+    // GPU-composited parallax on the bg image — avoids background-attachment:fixed repaint
+    gsap.fromTo(bg,
+      { yPercent: -12 },
+      { yPercent: 12, ease: "none",
+        scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true },
+      }
+    );
 
     const tl = gsap.timeline({
       scrollTrigger: { trigger: section, start: "top 80%", end: "center 40%", scrub: 1.4 },
     });
 
+    // Animate with transform + opacity only (no filter:blur — it's expensive and blocks compositing)
     tl.fromTo(main,
-      { y: 56, opacity: 0, filter: "blur(2px)", letterSpacing: "0.06em" },
-      { y: 0,  opacity: 1, filter: "blur(0px)", letterSpacing: "normal", ease: "power3.out" },
+      { y: 56, opacity: 0 },
+      { y: 0,  opacity: 1, ease: "power3.out" },
       0
     );
 
     ghosts.forEach((ghost, i) => {
       const g = GHOSTS[i];
       tl.fromTo(ghost,
-        { y: g.y, opacity: g.opacity, filter: `blur(${g.blur}px)`, scaleX: g.scaleX },
-        { y: 0,   opacity: 0,         filter: "blur(0px)",          scaleX: 1, ease: "power2.out" },
+        { y: g.y, opacity: g.opacity, scaleX: g.scaleX },
+        { y: 0,   opacity: 0,         scaleX: 1, ease: "power2.out" },
         i * 0.08
       );
     });
 
-    return () => { tl.scrollTrigger?.kill(); tl.kill(); };
+    return () => { ScrollTrigger.getAll().forEach((st) => st.kill()); tl.kill(); };
   }, []);
 
   const headlineStyle: React.CSSProperties = {
@@ -77,7 +88,6 @@ export default function ContactCTA() {
     width: "100%",
     textAlign: "center",
     transformOrigin: "center bottom",
-    willChange: "transform, opacity, filter",
     margin: 0,
     padding: 0,
   };
@@ -85,18 +95,21 @@ export default function ContactCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative"
-      style={{
-        minHeight: "520px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      className="relative overflow-hidden"
+      style={{ minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}
     >
+      {/* Background image in its own layer so GSAP can translate it without triggering layout */}
+      <div
+        ref={bgRef}
+        className="absolute inset-x-0"
+        style={{
+          top: "-25%", bottom: "-25%",
+          backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          willChange: "transform",
+        }}
+      />
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.78) 0%, rgba(68,25,25,0.65) 100%)" }} />
 
       <div className="relative z-10 text-center px-6 py-24 max-w-3xl mx-auto w-full">
