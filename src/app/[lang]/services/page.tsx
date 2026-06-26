@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Building2, Layers, PenLine, TreePine, Wrench, HardHat, Box } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -9,17 +9,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import ContactCTA from "@/components/home/ContactCTA";
 import { useLang } from "@/components/LangProvider";
-
-function useFadeIn(threshold = 0.12) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const ob = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
-    if (ref.current) ob.observe(ref.current);
-    return () => ob.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
+import { useFadeIn } from "@/hooks/useFadeIn";
 
 interface ServiceDef { icon: LucideIcon; title: string; desc: string }
 
@@ -54,6 +44,9 @@ const GRID_LABELS = {
 };
 
 function ServiceCard({ service, delay, visible, learnMore, href }: { service: ServiceDef; delay: number; visible: boolean; learnMore: string; href: string }) {
+  const lang = useLang();
+  const f    = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
+  const fs   = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const [hovered, setHovered] = useState(false);
   const Icon = service.icon;
   return (
@@ -65,13 +58,13 @@ function ServiceCard({ service, delay, visible, learnMore, href }: { service: Se
     >
       <div style={{ position: "absolute", top: 0, left: 0, height: "3px", background: "#993434", width: hovered ? "100%" : "0%", transition: "width 0.45s ease" }} />
       <div className="mb-6" style={{ color: "#993434" }}><Icon size={22} strokeWidth={1.5} /></div>
-      <h3 className="font-light mb-3" style={{ fontFamily: "var(--font-cormorant)", fontSize: "1.4rem", color: hovered ? "#FFFFFF" : "var(--em-text)", transition: "color 0.3s ease" }}>
+      <h3 className="font-light mb-3" style={{ fontFamily: fs, fontSize: "1.4rem", color: hovered ? "#FFFFFF" : "var(--em-text)", transition: "color 0.3s ease" }}>
         {service.title}
       </h3>
-      <p className="text-sm leading-relaxed flex-1 mb-6" style={{ fontFamily: "var(--font-saira)", fontWeight: 300, color: hovered ? "rgba(255,255,255,0.55)" : "var(--em-muted)", transition: "color 0.3s ease" }}>
+      <p className="text-sm leading-relaxed flex-1 mb-6" style={{ fontFamily: f, fontWeight: 300, color: hovered ? "rgba(255,255,255,0.55)" : "var(--em-muted)", transition: "color 0.3s ease" }}>
         {service.desc}
       </p>
-      <Link href={href} className="text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors duration-300" style={{ fontFamily: "var(--font-saira)", color: hovered ? "#993434" : "var(--em-muted)" }}>
+      <Link href={href} className="text-xs tracking-[0.2em] uppercase flex items-center gap-2 transition-colors duration-300" style={{ fontFamily: f, color: hovered ? "#993434" : "var(--em-muted)" }}>
         {learnMore}
       </Link>
     </div>

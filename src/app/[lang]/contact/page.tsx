@@ -152,7 +152,7 @@ export default function ContactPage() {
                           return (
                             <button key={type} type="button" onClick={() => setSelectedType(isActive ? null : type)}
                               className="px-4 py-2 text-xs tracking-[0.15em] uppercase transition-all duration-200"
-                              style={{ fontFamily: f, background: isActive ? "#993434" : "transparent", color: isActive ? "#FFFFFF" : "var(--em-muted)", border: isActive ? "1px solid #993434" : "1px solid var(--em-border)", borderRadius: "9999px" }}
+                              style={{ fontFamily: f, background: isActive ? "#993434" : "transparent", color: isActive ? "#FFFFFF" : "var(--em-muted)", border: isActive ? "1px solid #993434" : "1px solid var(--em-border)" }}
                               onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.borderColor = "#993434"; e.currentTarget.style.color = "#993434"; } }}
                               onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.borderColor = "var(--em-border)"; e.currentTarget.style.color = "var(--em-muted)"; } }}
                             >

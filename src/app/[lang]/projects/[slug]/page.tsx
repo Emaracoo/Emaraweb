@@ -118,7 +118,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {project.galleryImages.map((src, i) => (
-                <div key={i} style={{ height: "280px", overflow: "hidden" }}>
+                <div key={i} className="overflow-hidden" style={{ aspectRatio: "4/3" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={src} alt={`${project.title} — view ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>

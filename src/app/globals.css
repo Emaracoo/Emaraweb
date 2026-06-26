@@ -13,6 +13,10 @@
   --em-header-bg:     rgba(255, 255, 255, 0.97);
   --em-header-border: #DBDBDB;
   --em-header-text:   #3A3A3A;
+  /* Brand accent colours */
+  --em-brand:         #993434;
+  --em-brand-dark:    #682A2A;
+  --em-brand-cta:     #441919;
 }
 
 [data-theme="dark"] {

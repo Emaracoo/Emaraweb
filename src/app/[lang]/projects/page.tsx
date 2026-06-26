@@ -103,15 +103,22 @@ export default function ProjectsPage() {
                   key={project.slug}
                   href={`/${lang}/projects/${project.slug}`}
                   className="group block"
-                  style={{ textDecoration: "none" }}
                 >
-                  <div className="overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                  <div className="overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-5"
+                      style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 65%)" }}
+                    >
+                      <span className="text-white text-xs tracking-[0.2em] uppercase" style={{ fontFamily: f }}>
+                        {t.viewProject}
+                      </span>
+                    </div>
                   </div>
                   <div style={{ paddingTop: "1.25rem" }}>
                     <p className="text-xs tracking-[0.25em] uppercase mb-1" style={{ fontFamily: f, color: "#993434" }}>
@@ -128,14 +135,6 @@ export default function ProjectsPage() {
                         {project.year}
                       </span>
                     </div>
-                    <p
-                      className="text-xs tracking-[0.15em] uppercase mt-3 transition-colors duration-300"
-                      style={{ fontFamily: f, color: "var(--em-muted)" }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#993434")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--em-muted)")}
-                    >
-                      {t.viewProject}
-                    </p>
                   </div>
                 </Link>
               ))}

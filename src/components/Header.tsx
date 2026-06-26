@@ -191,7 +191,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="text-3xl tracking-[0.1em] uppercase transition-colors"
               style={{
-                fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)",
+                fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
                 fontWeight: 400,
                 color: pathname === link.href ? "#993434" : "var(--em-text)",
               }}
