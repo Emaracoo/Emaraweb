@@ -131,7 +131,7 @@ export default function HomeHero() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={slide.image} alt="" className="ken-burns w-full h-full object-cover" style={{ opacity: 0.75 }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(26,25,22,0.92) 30%, rgba(26,25,22,0.35) 75%, rgba(26,25,22,0.15) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(to ${isAr ? "left" : "right"}, rgba(26,25,22,0.92) 30%, rgba(26,25,22,0.35) 75%, rgba(26,25,22,0.15) 100%)` }} />
         <div className="absolute inset-x-0 top-0 h-40" style={{ background: "linear-gradient(to bottom, rgba(26,25,22,0.6) 0%, transparent 100%)" }} />
       </div>
 
@@ -203,10 +203,10 @@ export default function HomeHero() {
 
         {/* Floating project card */}
         <div
-          className="absolute bottom-10 right-8 lg:right-16 max-w-[260px] hidden lg:block transition-all duration-500"
+          className="absolute bottom-10 end-8 lg:end-16 max-w-[260px] hidden lg:block transition-all duration-500"
           style={{ opacity: fading ? 0 : 1 }}
         >
-          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderLeft: "2px solid #993434" }}>
+          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderInlineStart: "2px solid #993434" }}>
             <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: f, color: "#993434" }}>
               {isAr ? "المشروع الحالي" : "Current Project"}
             </p>
