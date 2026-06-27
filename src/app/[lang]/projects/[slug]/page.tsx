@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NextProjectLink from "@/components/NextProjectLink";
-import { PROJECTS } from "@/data/projects";
+import { PROJECTS, getProjectLocale } from "@/data/projects";
 import { hasLocale } from "../../dictionaries";
 
 const LABELS = {
@@ -40,8 +40,8 @@ export default async function ProjectDetailPage({ params }: Props) {
   const idx = PROJECTS.findIndex((p) => p.slug === slug);
   if (idx === -1) notFound();
 
-  const project     = PROJECTS[idx];
-  const nextProject = PROJECTS[(idx + 1) % PROJECTS.length];
+  const project     = getProjectLocale(PROJECTS[idx], l);
+  const nextProject = getProjectLocale(PROJECTS[(idx + 1) % PROJECTS.length], l);
 
   return (
     <>

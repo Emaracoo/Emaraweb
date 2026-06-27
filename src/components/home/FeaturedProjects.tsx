@@ -1,9 +1,15 @@
 import Link from "next/link";
-import { getFeaturedProjects } from "@/data/projects";
+import { getFeaturedProjects, getProjectLocale } from "@/data/projects";
 
 const LABELS = {
-  en: { eyebrow: "Featured Work", heading: "Selected\nprojects.", cta: "View all projects →" },
-  ar: { eyebrow: "أعمال مختارة",  heading: "مشاريع\nبارزة.",      cta: "عرض جميع المشاريع →" },
+  en: {
+    eyebrow: "Featured Work", heading: "Selected\nprojects.", cta: "View all projects →",
+    catLabels: { Residential: "Residential", Administrative: "Administrative", Industrial: "Industrial", Commercial: "Commercial" } as Record<string, string>,
+  },
+  ar: {
+    eyebrow: "أعمال مختارة",  heading: "مشاريع\nبارزة.",      cta: "عرض جميع المشاريع →",
+    catLabels: { Residential: "سكني", Administrative: "إداري", Industrial: "صناعي", Commercial: "تجاري" } as Record<string, string>,
+  },
 };
 
 interface Props { lang: "en" | "ar" }
@@ -39,26 +45,29 @@ export default function FeaturedProjects({ lang }: Props) {
 
         {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {FEATURED.map((project) => (
-            <Link key={project.slug} href={`/${lang}/projects/${project.slug}`} className="group block" style={{ textDecoration: "none" }}>
-              <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div style={{ paddingTop: "1.25rem" }}>
-                <p className="text-xs tracking-[0.25em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
-                  {project.category}
-                </p>
-                <p className="font-light" style={{ fontFamily: fs, fontSize: "1.25rem", color: "var(--em-text)", marginTop: "0.4rem" }}>
-                  {project.title}
-                </p>
-                <div className="flex justify-between" style={{ marginTop: "0.5rem" }}>
-                  <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{project.location}</span>
-                  <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{project.year}</span>
+          {FEATURED.map((raw) => {
+            const project = getProjectLocale(raw, lang);
+            return (
+              <Link key={raw.slug} href={`/${lang}/projects/${raw.slug}`} className="group block" style={{ textDecoration: "none" }}>
+                <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div style={{ paddingTop: "1.25rem" }}>
+                  <p className="text-xs tracking-[0.25em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
+                    {lbl.catLabels[raw.category] ?? raw.category}
+                  </p>
+                  <p className="font-light" style={{ fontFamily: fs, fontSize: "1.25rem", color: "var(--em-text)", marginTop: "0.4rem" }}>
+                    {project.title}
+                  </p>
+                  <div className="flex justify-between" style={{ marginTop: "0.5rem" }}>
+                    <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{project.location}</span>
+                    <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{raw.year}</span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         {/* Bottom CTA */}

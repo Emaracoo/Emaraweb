@@ -5,7 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { PROJECTS, CATEGORIES } from "@/data/projects";
+import { PROJECTS, CATEGORIES, getProjectLocale } from "@/data/projects";
 import { useLang } from "@/components/LangProvider";
 
 const T = {
@@ -98,46 +98,49 @@ export default function ProjectsPage() {
 
             {/* Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-              {filtered.map((project) => (
-                <Link
-                  key={project.slug}
-                  href={`/${lang}/projects/${project.slug}`}
-                  className="group block"
-                >
-                  <div className="overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-5"
-                      style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 65%)" }}
-                    >
-                      <span className="text-white text-xs tracking-[0.2em] uppercase" style={{ fontFamily: f }}>
-                        {t.viewProject}
-                      </span>
+              {filtered.map((raw) => {
+                const project = getProjectLocale(raw, lang);
+                return (
+                  <Link
+                    key={raw.slug}
+                    href={`/${lang}/projects/${raw.slug}`}
+                    className="group block"
+                  >
+                    <div className="overflow-hidden relative" style={{ aspectRatio: "4/3" }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-5"
+                        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 65%)" }}
+                      >
+                        <span className="text-white text-xs tracking-[0.2em] uppercase" style={{ fontFamily: f }}>
+                          {t.viewProject}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div style={{ paddingTop: "1.25rem" }}>
-                    <p className="text-xs tracking-[0.25em] uppercase mb-1" style={{ fontFamily: f, color: "#993434" }}>
-                      {t.catLabels[project.category] ?? project.category}
-                    </p>
-                    <p className="font-light" style={{ fontFamily: fs, fontSize: "1.25rem", color: "var(--em-text)", marginTop: "0.3rem" }}>
-                      {project.title}
-                    </p>
-                    <div className="flex justify-between items-center" style={{ marginTop: "0.5rem" }}>
-                      <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>
-                        {project.location}
-                      </span>
-                      <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>
-                        {project.year}
-                      </span>
+                    <div style={{ paddingTop: "1.25rem" }}>
+                      <p className="text-xs tracking-[0.25em] uppercase mb-1" style={{ fontFamily: f, color: "#993434" }}>
+                        {t.catLabels[raw.category] ?? raw.category}
+                      </p>
+                      <p className="font-light" style={{ fontFamily: fs, fontSize: "1.25rem", color: "var(--em-text)", marginTop: "0.3rem" }}>
+                        {project.title}
+                      </p>
+                      <div className="flex justify-between items-center" style={{ marginTop: "0.5rem" }}>
+                        <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>
+                          {project.location}
+                        </span>
+                        <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>
+                          {raw.year}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
