@@ -56,7 +56,7 @@ const POSTS_AR = [
 
 const LABELS = {
   en: { eyebrow: "Journal", heading: "From our\npractice.", cta: "Visit the blog →" },
-  ar: { eyebrow: "المدونة", heading: "من\nممارستنا.", cta: "زيارة المدونة →" },
+  ar: { eyebrow: "المدونة", heading: "من\nممارستنا.", cta: "زيارة المدونة ←" },
 };
 
 interface Props { lang: "en" | "ar" }

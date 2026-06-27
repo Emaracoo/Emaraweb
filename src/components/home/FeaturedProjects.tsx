@@ -7,7 +7,7 @@ const LABELS = {
     catLabels: { Residential: "Residential", Administrative: "Administrative", Industrial: "Industrial", Commercial: "Commercial" } as Record<string, string>,
   },
   ar: {
-    eyebrow: "أعمال مختارة",  heading: "مشاريع\nبارزة.",      cta: "عرض جميع المشاريع →",
+    eyebrow: "أعمال مختارة",  heading: "مشاريع\nبارزة.",      cta: "عرض جميع المشاريع ←",
     catLabels: { Residential: "سكني", Administrative: "إداري", Industrial: "صناعي", Commercial: "تجاري" } as Record<string, string>,
   },
 };

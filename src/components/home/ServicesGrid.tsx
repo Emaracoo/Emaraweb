@@ -26,7 +26,7 @@ const SERVICES_AR: Service[] = [
 
 const LABELS = {
   en: { eyebrow: "07 Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
-  ar: { eyebrow: "٠٧ خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.", cta: "عرض جميع الخدمات →" },
+  ar: { eyebrow: "٠٧ خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.", cta: "عرض جميع الخدمات ←" },
 };
 
 interface Props { lang: "en" | "ar" }

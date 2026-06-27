@@ -136,7 +136,7 @@ export default function HomeHero() {
       </div>
 
       {/* Slide counter */}
-      <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-3">
+      <div className="absolute start-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-3">
         <span className="text-xs text-white/30 mb-1" style={{ fontFamily: f, writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
           0{active + 1}
         </span>

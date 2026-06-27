@@ -142,7 +142,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   {nextProject.location}
                 </p>
               </div>
-              <NextProjectLink href={`/${l}/projects/${nextProject.slug}`} label={lbl.viewProject} />
+              <NextProjectLink href={`/${l}/projects/${nextProject.slug}`} label={lbl.viewProject} lang={l} />
             </div>
           </div>
         </section>
