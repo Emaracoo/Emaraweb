@@ -42,37 +42,42 @@ export default function ContactCTA() {
     const bg      = bgRef.current;
     const main    = mainTextRef.current;
     const ghosts  = ghostRefs.current.filter(Boolean) as HTMLHeadingElement[];
-    if (!section || !bg || !main || ghosts.length === 0) return;
+    if (!section || !main || ghosts.length === 0) return;
 
     // GPU-composited parallax on the bg image — avoids background-attachment:fixed repaint
-    gsap.fromTo(bg,
-      { yPercent: -12 },
-      { yPercent: 12, ease: "none",
-        scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true },
-      }
-    );
+    const bgTween = bg
+      ? gsap.fromTo(bg,
+          { yPercent: -12 },
+          { yPercent: 12, ease: "none",
+            scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true },
+          }
+        )
+      : null;
 
     const tl = gsap.timeline({
       scrollTrigger: { trigger: section, start: "top 80%", end: "center 40%", scrub: 1.4 },
     });
 
-    // Animate with transform + opacity only (no filter:blur — it's expensive and blocks compositing)
     tl.fromTo(main,
-      { y: 56, opacity: 0 },
-      { y: 0,  opacity: 1, ease: "power3.out" },
+      { y: 56, opacity: 0, filter: "blur(2px)" },
+      { y: 0,  opacity: 1, filter: "blur(0px)", ease: "power3.out" },
       0
     );
 
     ghosts.forEach((ghost, i) => {
       const g = GHOSTS[i];
       tl.fromTo(ghost,
-        { y: g.y, opacity: g.opacity, scaleX: g.scaleX },
-        { y: 0,   opacity: 0,         scaleX: 1, ease: "power2.out" },
+        { y: g.y, opacity: g.opacity, filter: `blur(${g.blur}px)`, scaleX: g.scaleX },
+        { y: 0,   opacity: 0,         filter: "blur(0px)",          scaleX: 1, ease: "power2.out" },
         i * 0.08
       );
     });
 
-    return () => { ScrollTrigger.getAll().forEach((st) => st.kill()); tl.kill(); };
+    return () => {
+      bgTween?.scrollTrigger?.kill();
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
   }, []);
 
   const headlineStyle: React.CSSProperties = {
@@ -88,6 +93,7 @@ export default function ContactCTA() {
     width: "100%",
     textAlign: "center",
     transformOrigin: "center bottom",
+    willChange: "transform, opacity, filter",
     margin: 0,
     padding: 0,
   };
