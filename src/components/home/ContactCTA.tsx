@@ -33,14 +33,28 @@ export default function ContactCTA() {
   const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);
+  const bgRef       = useRef<HTMLDivElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);
   const ghostRefs   = useRef<(HTMLHeadingElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
+    const bg      = bgRef.current;
     const main    = mainTextRef.current;
     const ghosts  = ghostRefs.current.filter(Boolean) as HTMLHeadingElement[];
     if (!section || !main || ghosts.length === 0) return;
+
+    // background-attachment:fixed is broken on iOS Safari — use a positioned div + GSAP instead.
+    // The bg div extends 60% above/below the section (220% total height) so a ±25 yPercent
+    // movement (~572px on a 520px section) feels as dramatic as a fixed background on all devices.
+    const bgTween = bg
+      ? gsap.fromTo(bg,
+          { yPercent: -25 },
+          { yPercent: 25, ease: "none",
+            scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true },
+          }
+        )
+      : null;
 
     const tl = gsap.timeline({
       scrollTrigger: { trigger: section, start: "top 80%", end: "center 40%", scrub: 1.4 },
@@ -62,6 +76,7 @@ export default function ContactCTA() {
     });
 
     return () => {
+      bgTween?.scrollTrigger?.kill();
       tl.scrollTrigger?.kill();
       tl.kill();
     };
@@ -88,18 +103,21 @@ export default function ContactCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative"
-      style={{
-        minHeight: "520px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      className="relative overflow-hidden"
+      style={{ minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}
     >
+      {/* Bg div is 220% tall so the ±25% yPercent travel never exposes its edges */}
+      <div
+        ref={bgRef}
+        className="absolute inset-x-0"
+        style={{
+          top: "-60%", bottom: "-60%",
+          backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          willChange: "transform",
+        }}
+      />
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.78) 0%, rgba(68,25,25,0.65) 100%)" }} />
 
       <div className="relative z-10 text-center px-6 py-24 max-w-3xl mx-auto w-full">
