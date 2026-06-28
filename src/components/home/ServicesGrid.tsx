@@ -34,15 +34,19 @@ const LABELS = {
 
 interface Props { lang: "en" | "ar" }
 
-const STACK_DEPTH  = 3;
-const CARD_H       = 380; // px — front card height
-const PEEK         = 18;  // px — how much each hidden card peeks below the one above
+const STACK_DEPTH = 3;
+const CARD_H      = 380; // px — front card height
+const PEEK        = 18;  // px — how much each hidden card peeks below
 
 export default function ServicesGrid({ lang }: Props) {
   const [active,  setActive]  = useState(0);
   const [exiting, setExiting] = useState<number | null>(null);
   const [paused,  setPaused]  = useState(false);
-  const animating = useRef(false);
+  const animating    = useRef(false);
+  const stackRef     = useRef<HTMLDivElement>(null);
+  const overStack    = useRef(false);
+  const wheelCooldown = useRef(false);
+  const touchStartY  = useRef(0);
 
   const services = lang === "ar" ? SERVICES_AR : SERVICES_EN;
   const n        = services.length;
@@ -50,22 +54,23 @@ export default function ServicesGrid({ lang }: Props) {
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
-  // Keep a ref to always-current advance so the auto-play interval captures it correctly
   const advanceFn = useRef<() => void>(() => {});
+  const goBackFn  = useRef<() => void>(() => {});
 
   const goTo = (target: number) => {
     if (animating.current || target === active) return;
     animating.current = true;
     setExiting(active);
-    setTimeout(() => {
-      setActive(target);
-      setExiting(null);
-      animating.current = false;
-    }, 420);
+    // Start the incoming card's enter animation slightly before the exit finishes
+    // so the two motions overlap and feel continuous rather than sequential.
+    setTimeout(() => { setActive(target); }, 240);
+    setTimeout(() => { setExiting(null); animating.current = false; }, 460);
   };
 
   const advance = () => goTo((active + 1) % n);
+  const goBack  = () => goTo((active - 1 + n) % n);
   advanceFn.current = advance;
+  goBackFn.current  = goBack;
 
   // Auto-play: reschedule after every active change
   useEffect(() => {
@@ -74,7 +79,24 @@ export default function ServicesGrid({ lang }: Props) {
     return () => clearTimeout(t);
   }, [active, paused]);
 
-  // Container needs room for the peeking layers below the front card
+  // Non-passive wheel listener — required so e.preventDefault() actually works
+  useEffect(() => {
+    const el = stackRef.current;
+    if (!el) return;
+    const handler = (e: WheelEvent) => {
+      if (!overStack.current) return;
+      e.preventDefault();
+      if (wheelCooldown.current || animating.current) return;
+      if (Math.abs(e.deltaY) < 5) return;
+      wheelCooldown.current = true;
+      setTimeout(() => { wheelCooldown.current = false; }, 750);
+      if (e.deltaY > 0) advanceFn.current();
+      else              goBackFn.current();
+    };
+    el.addEventListener("wheel", handler, { passive: false });
+    return () => el.removeEventListener("wheel", handler);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const containerH = CARD_H + PEEK * (STACK_DEPTH - 1);
 
   return (
@@ -109,31 +131,39 @@ export default function ServicesGrid({ lang }: Props) {
 
           {/* ── Stacked cards ──────────────────────────────────────── */}
           <div
-            className="w-full lg:flex-1 cursor-pointer select-none"
-            style={{ position: "relative", height: `${containerH}px` }}
+            ref={stackRef}
+            className="w-full lg:flex-1 select-none"
+            style={{ position: "relative", height: `${containerH}px`, cursor: "pointer" }}
             onClick={advance}
+            onMouseEnter={() => { overStack.current = true; }}
+            onMouseLeave={() => { overStack.current = false; }}
+            onTouchStart={(e) => { touchStartY.current = e.touches[0].clientY; }}
+            onTouchEnd={(e) => {
+              const delta = touchStartY.current - e.changedTouches[0].clientY;
+              if (Math.abs(delta) > 40) {
+                if (delta > 0) advanceFn.current();
+                else           goBackFn.current();
+              }
+            }}
           >
             {services.map((service, i) => {
               const isExiting = i === exiting;
               const offset    = (i - active + n) % n;
               const inStack   = offset < STACK_DEPTH;
 
-              // Cards not in the visible stack & not exiting are hidden
               if (!inStack && !isExiting) return null;
 
-              const Icon     = service.icon;
-              const isFront  = offset === 0 && !isExiting;
+              const Icon    = service.icon;
+              const isFront = offset === 0 && !isExiting;
 
-              // Stack positions: front floats up, behind cards peek from below
               let translateY: number;
               let scaleX: number;
               let opacity: number;
               let zIndex: number;
 
               if (isExiting) {
-                // Fly out upward
-                translateY = -90;
-                scaleX     = 1;
+                translateY = -80;
+                scaleX     = 0.97;
                 opacity    = 0;
                 zIndex     = 20;
               } else {
@@ -155,9 +185,11 @@ export default function ServicesGrid({ lang }: Props) {
                     zIndex,
                     transform: `translateY(${translateY}px)`,
                     opacity,
+                    // Exit: quick, decisive upward sweep
+                    // Enter: longer spring so the card settles gently into place
                     transition: isExiting
-                      ? "transform 0.38s cubic-bezier(0.4,0,1,1), opacity 0.28s ease"
-                      : "transform 0.52s cubic-bezier(0.22,1,0.36,1), opacity 0.45s ease, left 0.52s ease, right 0.52s ease",
+                      ? "transform 0.35s cubic-bezier(0.55,0,1,0.45), opacity 0.25s ease, left 0.35s ease, right 0.35s ease"
+                      : "transform 0.65s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease, left 0.65s ease, right 0.65s ease",
                     background: isFront ? "#441919" : "var(--em-card)",
                     border: "1px solid",
                     borderColor: isFront ? "#682A2A" : "var(--em-border)",
@@ -205,7 +237,7 @@ export default function ServicesGrid({ lang }: Props) {
                         {lang === "ar" ? "اعرف أكثر ←" : "Learn more →"}
                       </Link>
                       <span className="text-xs" style={{ fontFamily: f, color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>
-                        {lang === "ar" ? "اضغط للتالي" : "tap to advance"}
+                        {lang === "ar" ? "اسحب أو اضغط" : "scroll or tap"}
                       </span>
                     </div>
                   )}
