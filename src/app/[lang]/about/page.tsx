@@ -92,7 +92,7 @@ const HERO = {
 export default function AboutPage() {
   const lang = useLang();
   const f    = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs   = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
+  const fs   = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
   const h    = HERO[lang];
 
   return (

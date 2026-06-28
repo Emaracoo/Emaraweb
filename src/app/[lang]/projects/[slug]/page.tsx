@@ -35,7 +35,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const l   = lang as "en" | "ar";
   const lbl = LABELS[l];
   const f   = l === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs  = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
+  const fs  = l === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
 
   const idx = PROJECTS.findIndex((p) => p.slug === slug);
   if (idx === -1) notFound();

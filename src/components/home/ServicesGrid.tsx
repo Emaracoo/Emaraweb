@@ -52,7 +52,7 @@ export default function ServicesGrid({ lang }: Props) {
   const n        = services.length;
   const lbl      = LABELS[lang];
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
+  const fs       = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
 
   const advanceFn = useRef<() => void>(() => {});
   const goBackFn  = useRef<() => void>(() => {});

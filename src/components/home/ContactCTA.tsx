@@ -31,7 +31,7 @@ export default function ContactCTA() {
   const lang        = useLang();
   const t           = T[lang];
   const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
+  const fs          = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);
   const bgRef       = useRef<HTMLDivElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);

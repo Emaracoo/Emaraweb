@@ -9,7 +9,7 @@ interface PageHeroProps {
 
 export default function PageHero({ eyebrow, title, titleAccent, subtitle, image, lang = "en" }: PageHeroProps) {
   const f  = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
+  const fs = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
 
   return (
     <section className="pt-32 pb-0 overflow-hidden" style={{ background: "#441919" }}>
