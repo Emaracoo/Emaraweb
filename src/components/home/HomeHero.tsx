@@ -77,7 +77,7 @@ export default function HomeHero() {
   const slides  = isAr ? SLIDES_AR : SLIDES_EN;
   const STATS   = isAr ? STATS_AR  : STATS_EN;
   const f       = isAr ? "var(--font-cairo)" : "var(--font-saira)";
-  const fSerif  = isAr ? "var(--font-arabic-display)" : "var(--font-cormorant)";
+  const fSerif  = isAr ? "var(--font-cairo)" : "var(--font-cormorant)";
 
   const [active,  setActive]  = useState(0);
   const [fading,  setFading]  = useState(false);

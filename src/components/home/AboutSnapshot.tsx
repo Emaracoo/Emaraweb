@@ -30,7 +30,7 @@ interface Props { lang: "en" | "ar" }
 export default function AboutSnapshot({ lang }: Props) {
   const t   = T[lang];
   const f   = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs  = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
+  const fs  = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
   return (
     <section style={{ background: "var(--em-bg)", padding: "clamp(5rem, 10vh, 8rem) clamp(1.5rem, 8vw, 5rem)" }}>

@@ -46,7 +46,7 @@ const GRID_LABELS = {
 function ServiceCard({ service, delay, visible, learnMore, href }: { service: ServiceDef; delay: number; visible: boolean; learnMore: string; href: string }) {
   const lang = useLang();
   const f    = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs   = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
+  const fs   = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const [hovered, setHovered] = useState(false);
   const Icon = service.icon;
   return (
@@ -74,7 +74,7 @@ function ServiceCard({ service, delay, visible, learnMore, href }: { service: Se
 export default function ServicesPage() {
   const lang     = useLang();
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
-  const fs       = lang === "ar" ? "var(--font-arabic-display)" : "var(--font-cormorant)";
+  const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const h        = HERO[lang];
   const lbl      = GRID_LABELS[lang];
   const services = lang === "ar" ? SERVICES_AR : SERVICES_EN;

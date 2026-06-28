@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Saira, Almarai, Amiri } from "next/font/google";
+import { Cormorant_Garamond, Saira, Almarai } from "next/font/google";
 import "../globals.css";
 import { LangProvider } from "@/components/LangProvider";
 import { hasLocale } from "./dictionaries";
@@ -27,14 +27,6 @@ const almarai = Almarai({
   display: "swap",
 });
 
-const amiri = Amiri({
-  variable: "--font-arabic-display",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Emara — Architecture Studio",
   description: "Award-winning architecture and design studio crafting spaces that endure.",
@@ -59,7 +51,7 @@ export default async function RootLayout({ children, params }: Props) {
     <html
       lang={lang}
       dir={isAr ? "rtl" : "ltr"}
-      className={`${cormorant.variable} ${saira.variable} ${almarai.variable} ${amiri.variable}`}
+      className={`${cormorant.variable} ${saira.variable} ${almarai.variable}`}
       suppressHydrationWarning
     >
       <head>
