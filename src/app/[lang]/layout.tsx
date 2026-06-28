@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Saira, Cairo } from "next/font/google";
+import { Cormorant_Garamond, Saira, Almarai } from "next/font/google";
 import "../globals.css";
 import { LangProvider } from "@/components/LangProvider";
 import { hasLocale } from "./dictionaries";
@@ -20,10 +20,10 @@ const saira = Saira({
   display: "swap",
 });
 
-const cairo = Cairo({
+const almarai = Almarai({
   variable: "--font-cairo",
-  subsets: ["arabic", "latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["arabic"],
+  weight: ["300", "400", "700", "800"],
   display: "swap",
 });
 
@@ -51,7 +51,7 @@ export default async function RootLayout({ children, params }: Props) {
     <html
       lang={lang}
       dir={isAr ? "rtl" : "ltr"}
-      className={`${cormorant.variable} ${saira.variable} ${cairo.variable}`}
+      className={`${cormorant.variable} ${saira.variable} ${almarai.variable}`}
       suppressHydrationWarning
     >
       <head>
