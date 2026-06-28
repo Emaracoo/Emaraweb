@@ -51,7 +51,7 @@ function ServiceCard({ service, delay, visible, learnMore, href }: { service: Se
   const Icon = service.icon;
   return (
     <div
-      className="relative flex flex-col p-8 border overflow-hidden cursor-default"
+      className="relative flex flex-col p-8 border overflow-hidden cursor-default h-full"
       style={{ background: hovered ? "#441919" : "var(--em-card)", borderColor: hovered ? "#441919" : "var(--em-border)", opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(28px)", transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms, background 0.35s ease, border-color 0.35s ease` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -99,7 +99,7 @@ export default function ServicesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-l border-t" style={{ borderColor: "var(--em-border)" }}>
               {services.map((service, i) => (
-                <div key={service.title} className="border-r border-b" style={{ borderColor: "var(--em-border)" }}>
+                <div key={service.title} className="border-r border-b flex flex-col" style={{ borderColor: "var(--em-border)" }}>
                   <ServiceCard service={service} delay={i * 80} visible={visible} learnMore={lbl.learnMore} href={`/${lang}/contact`} />
                 </div>
               ))}
