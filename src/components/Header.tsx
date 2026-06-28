@@ -107,9 +107,10 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative text-xs tracking-[0.2em] uppercase transition-colors duration-300"
+                  className={`relative text-xs transition-colors duration-300 ${lang !== "ar" ? "tracking-[0.2em] uppercase" : ""}`}
                   style={{
                     fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
+                    letterSpacing: lang === "ar" ? "0" : undefined,
                     fontWeight: 400,
                     color: solid
                       ? active ? "#993434" : "var(--em-header-text)"
@@ -189,9 +190,10 @@ export default function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-3xl tracking-[0.1em] uppercase transition-colors"
+              className={`text-3xl transition-colors ${lang !== "ar" ? "tracking-[0.1em] uppercase" : ""}`}
               style={{
                 fontFamily: lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)",
+                letterSpacing: lang === "ar" ? "0" : undefined,
                 fontWeight: 400,
                 color: pathname === link.href ? "#993434" : "var(--em-text)",
               }}
