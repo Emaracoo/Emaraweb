@@ -68,13 +68,13 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2 lg:pr-12">
-            <Link href={`/${lang}`} className="flex items-center gap-3 mb-8 w-fit">
-              <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
-                <span className="w-3 h-3 bg-white" />
-              </span>
-              <span className="text-white tracking-[0.25em] uppercase text-sm font-light" style={{ fontFamily: f }}>
-                Emara
-              </span>
+            <Link href={`/${lang}`} className="flex items-center mb-8 w-fit">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Emara Co."
+                style={{ height: "42px", width: "auto", filter: "brightness(0) invert(1)" }}
+              />
             </Link>
             <p className="text-sm leading-relaxed mb-8" style={{ fontFamily: fa, fontWeight: 300, color: "rgba(255,255,255,0.4)", maxWidth: "280px" }}>
               {t.tagline}

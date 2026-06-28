@@ -87,16 +87,18 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link href={`/${lang}`} className="flex items-center gap-3 group">
-            <span className="w-8 h-8 flex items-center justify-center" style={{ background: "#993434" }}>
-              <span className="w-3 h-3 bg-white" />
-            </span>
-            <span
-              className="tracking-[0.25em] uppercase text-sm font-medium transition-colors duration-300"
-              style={{ fontFamily: "var(--font-saira)", color: solid ? "var(--em-header-text)" : "#fff" }}
-            >
-              Emara
-            </span>
+          <Link href={`/${lang}`} className="flex items-center group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="Emara Co."
+              style={{
+                height: "36px",
+                width: "auto",
+                filter: (!solid || dark) ? "brightness(0) invert(1)" : "none",
+                transition: "filter 0.4s ease",
+              }}
+            />
           </Link>
 
           {/* Desktop nav */}
