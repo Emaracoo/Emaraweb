@@ -73,7 +73,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Emara Co."
-                style={{ height: "42px", width: "auto", filter: "brightness(0) invert(1)" }}
+                style={{ height: "64px", width: "auto", filter: "brightness(0) invert(1)" }}
               />
             </Link>
             <p className="text-sm leading-relaxed mb-8" style={{ fontFamily: fa, fontWeight: 300, color: "rgba(255,255,255,0.4)", maxWidth: "280px" }}>
