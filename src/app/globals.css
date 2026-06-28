@@ -94,6 +94,13 @@
   }
 }
 
+/* Arabic script must never have letter-spacing — it severs the connecting
+   strokes that make the letters legible. This overrides every tracking-*
+   utility class site-wide whenever the page is in RTL mode. */
+html[dir="rtl"] * {
+  letter-spacing: 0 !important;
+}
+
 ::selection {
   background: #993434;
   color: #fff;
