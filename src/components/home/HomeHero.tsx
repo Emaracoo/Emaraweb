@@ -136,7 +136,7 @@ export default function HomeHero() {
       </div>
 
       {/* Slide counter */}
-      <div className="absolute start-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-3">
+      <div className="absolute top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-3" style={isAr ? { right: "1.5rem" } : { left: "1.5rem" }}>
         <span className="text-xs text-white/30 mb-1" style={{ fontFamily: f, writingMode: "vertical-rl", letterSpacing: "0.2em" }}>
           0{active + 1}
         </span>
@@ -203,10 +203,10 @@ export default function HomeHero() {
 
         {/* Floating project card */}
         <div
-          className="absolute bottom-10 end-8 lg:end-16 max-w-[260px] hidden lg:block transition-all duration-500"
-          style={{ opacity: fading ? 0 : 1 }}
+          className="absolute bottom-10 max-w-[260px] hidden lg:block transition-all duration-500"
+          style={{ opacity: fading ? 0 : 1, ...(isAr ? { left: "4rem" } : { right: "4rem" }) }}
         >
-          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", borderInlineStart: "2px solid #993434" }}>
+          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", ...(isAr ? { borderRight: "2px solid #993434" } : { borderLeft: "2px solid #993434" }) }}>
             <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: f, color: "#993434" }}>
               {isAr ? "المشروع الحالي" : "Current Project"}
             </p>
