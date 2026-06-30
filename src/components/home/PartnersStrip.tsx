@@ -1,9 +1,14 @@
-const PARTNERS = [
-  { name: "Al Arabiya Network" },
-  { name: "MBC Group"          },
-  { name: "Sphinx Medical"     },
-  { name: "Manar Tex"          },
-  { name: "Medical Union Pharma" },
+const LOGOS = [
+  { name: "Al-Arabiya",              src: "/clients/al-arabiya.png"       },
+  { name: "MBC Group",               src: "/clients/mbc.png"              },
+  { name: "Oriental Weavers",        src: "/clients/oriental-weavers.png" },
+  { name: "InterContinental",        src: "/clients/intercontinental.png" },
+  { name: "Nokia",                   src: "/clients/nokia.png"            },
+  { name: "United Colors of Benetton", src: "/clients/benetton.png"       },
+  { name: "Moulinex",                src: "/clients/moulinex.png"         },
+  { name: "Sphinx",                  src: "/clients/sphinx.png"           },
+  { name: "Oriental Weavers",        src: "/clients/oriental-weavers.png" },
+  { name: "Mac Mocket",              src: "/clients/mac-mocket.png"       },
 ];
 
 const LABELS = {
@@ -15,19 +20,39 @@ interface Props { lang: "en" | "ar" }
 
 export default function PartnersStrip({ lang }: Props) {
   const f = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
+  // Duplicate the list so the marquee loops seamlessly
+  const track = [...LOGOS, ...LOGOS];
 
   return (
-    <section style={{ background: "var(--em-surface)", padding: "clamp(3rem, 6vh, 5rem) clamp(1.5rem, 8vw, 5rem)" }}>
-      <p className="text-xs tracking-[0.35em] uppercase text-center" style={{ fontFamily: f, color: "var(--em-muted)", marginBottom: "2.5rem" }}>
+    <section style={{ background: "var(--em-surface)", padding: "clamp(2.5rem, 5vh, 4rem) 0", overflow: "hidden" }}>
+      <p
+        className="text-xs text-center"
+        style={{ fontFamily: f, color: "var(--em-muted)", marginBottom: "2rem" }}
+      >
         {LABELS[lang]}
       </p>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "2rem" }}>
-        {PARTNERS.map((partner) => (
-          <div key={partner.name} style={{ textAlign: "center" }}>
-            <div style={{ width: "24px", height: "1px", background: "var(--em-border)", margin: "0 auto 0.75rem" }} />
-            <p style={{ fontFamily: f, fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--em-muted)" }}>
-              {partner.name}
-            </p>
+
+      <div className="ticker-track" style={{ display: "flex", alignItems: "center", gap: "0", width: "max-content" }}>
+        {track.map((logo, i) => (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "180px",
+              height: "80px",
+              padding: "0 2rem",
+              flexShrink: 0,
+              borderInlineEnd: "1px solid var(--em-border)",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={logo.src}
+              alt={logo.name}
+              style={{ maxHeight: "48px", maxWidth: "120px", objectFit: "contain", filter: "grayscale(1) opacity(0.45)" }}
+            />
           </div>
         ))}
       </div>
