@@ -93,7 +93,7 @@ export default function Header() {
               src="/logo.png"
               alt="Emara Co."
               style={{
-                height: "64px",
+                height: "100px",
                 width: "auto",
                 filter: (!solid || dark) ? "brightness(0) invert(1)" : "none",
                 transition: "filter 0.4s ease",
