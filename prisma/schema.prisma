@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  ARCHIVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         UserRole @default(EDITOR)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  blogPosts    BlogPost[]
+  activityLogs ActivityLog[]
+}
+
+model Enquiry {
+  id         String        @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  subject    String?
+  message    String
+  status     EnquiryStatus @default(NEW)
+  notes      String?
+  archivedAt DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  titleEn       String
+  titleAr       String?
+  categoryEn    String
+  categoryAr    String?
+  year          String
+  locationEn    String?
+  locationAr    String?
+  area          String?
+  clientEn      String?
+  clientAr      String?
+  descriptionEn String?
+  descriptionAr String?
+  coverImage    String
+  galleryImages String[]
+  featured      Boolean       @default(false)
+  status        PublishStatus @default(DRAFT)
+  sortOrder     Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Service {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  titleEn       String
+  titleAr       String?
+  descriptionEn String?
+  descriptionAr String?
+  longDescEn    String?
+  longDescAr    String?
+  icon          String?
+  coverImage    String?
+  features      Json?
+  status        PublishStatus @default(PUBLISHED)
+  sortOrder     Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model BlogPost {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  titleEn     String
+  titleAr     String?
+  excerptEn   String?
+  excerptAr   String?
+  bodyEn      String?
+  bodyAr      String?
+  coverImage  String?
+  tags        String[]
+  category    String?
+  status      PublishStatus @default(DRAFT)
+  publishedAt DateTime?
+  authorId    String?
+  author      User?         @relation(fields: [authorId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Partner {
+  id        String        @id @default(cuid())
+  nameEn    String
+  nameAr    String?
+  sector    String
+  sectorAr  String?
+  logo      String
+  website   String?
+  status    PublishStatus @default(PUBLISHED)
+  sortOrder Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  url          String
+  publicId     String?
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  altEn        String?
+  altAr        String?
+  folder       String   @default("general")
+  createdAt    DateTime @default(now())
+}
+
+model SiteSetting {
+  key       String   @id
+  value     String
+  type      String   @default("string")
+  group     String   @default("general")
+  updatedAt DateTime @updatedAt
+}
+
+model HomepageSection {
+  id         String   @id @default(cuid())
+  key        String   @unique
+  titleEn    String?
+  titleAr    String?
+  bodyEn     String?
+  bodyAr     String?
+  ctaLabelEn String?
+  ctaLabelAr String?
+  ctaHref    String?
+  data       Json?
+  updatedAt  DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String?
+  entityId  String?
+  meta      Json?
+  createdAt DateTime @default(now())
+}
