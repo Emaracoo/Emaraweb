@@ -148,10 +148,14 @@ export default async function PartnersPage({ params }: Props) {
                   <span style={{ flex: 1, height: "1px", background: "var(--em-border)" }} />
                 </div>
 
-                {/* Logo grid — gap-px + border-color bg creates hairline grid lines */}
+                {/* Logo grid — columns capped to client count so no empty grey cells */}
                 <div
-                  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-                  style={{ gap: "1px", background: "var(--em-border)" }}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: `repeat(${Math.min(sector.clients.length, 4)}, minmax(0, 1fr))`,
+                    gap: "1px",
+                    background: "var(--em-border)",
+                  }}
                 >
                   {sector.clients.map((client) => (
                     <div
