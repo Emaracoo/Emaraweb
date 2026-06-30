@@ -161,7 +161,7 @@ export default async function PartnersPage({ params }: Props) {
                     <div
                       key={client.name}
                       className="group relative flex flex-col items-center justify-center overflow-hidden"
-                      style={{ height: "150px", background: "var(--em-card)" }}
+                      style={{ height: "190px", background: "var(--em-card)" }}
                     >
                       {/* Red reveal line */}
                       <div
@@ -172,7 +172,7 @@ export default async function PartnersPage({ params }: Props) {
                       {/* White logo mount — ensures all logos read cleanly in any mode */}
                       <div
                         className="flex items-center justify-center rounded-sm transition-transform duration-300 group-hover:scale-95"
-                        style={{ width: "75%", height: "80px", background: "#fff", padding: "0.75rem" }}
+                        style={{ width: "80%", height: "110px", background: "#fff", padding: "1rem" }}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
