@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth.config";
-import { proxy } from "./proxy";
+import { proxy } from "@/lib/locale";
 import { NextResponse } from "next/server";
 
 const { auth } = NextAuth(authConfig);
