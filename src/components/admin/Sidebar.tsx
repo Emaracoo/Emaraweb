@@ -62,47 +62,49 @@ export default function Sidebar() {
 
   return (
     <aside style={{
-      width: "220px",
+      width: "216px",
       flexShrink: 0,
-      height: "100vh",
-      background: "#111111",
-      borderRight: "1px solid #1E1E1E",
+      background: "#F7F7F8",
+      borderRadius: "28px",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
       display: "flex",
       flexDirection: "column",
       overflow: "hidden",
     }}>
+      <style>{`
+        .sb-item { display:flex; align-items:center; gap:.65rem; margin:2px 12px; padding:.55rem .9rem; font-size:12.5px; border-radius:999px; text-decoration:none; transition:all .15s; font-family:var(--font-inter),system-ui,sans-serif; }
+        .sb-item.active { background:#111111; color:#fff; font-weight:500; box-shadow:0 6px 16px rgba(0,0,0,.25); }
+        .sb-item.idle { color:#8A8A8E; font-weight:400; }
+        .sb-item.idle:hover { background:#ECECEE; color:#111; }
+        .sb-nav::-webkit-scrollbar { display:none; }
+      `}</style>
 
       {/* Logo */}
-      <div style={{ padding: "1.25rem 1.25rem 1rem", borderBottom: "1px solid #1E1E1E", flexShrink: 0 }}>
-        <Link href="/admin/dashboard">
+      <div style={{ padding: "1.4rem 1.5rem 1rem", flexShrink: 0, display: "flex", alignItems: "center", gap: ".6rem" }}>
+        <Link href="/admin/dashboard" style={{ display: "flex", alignItems: "center", gap: ".6rem", textDecoration: "none" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo.png"
-            alt="Emara Admin"
-            style={{ height: "52px", width: "auto", filter: "brightness(0) invert(1)", display: "block" }}
-          />
+          <img src="/logo.png" alt="Emara Admin" style={{ height: "44px", width: "auto", display: "block" }} />
+          <span style={{
+            fontSize: "9px",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "#B0B0B4",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
+          }}>Admin</span>
         </Link>
-        <p style={{
-          marginTop: "0.4rem",
-          fontSize: "9px",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "#3A3A3A",
-          fontFamily: "var(--font-inter), system-ui, sans-serif",
-        }}>Admin</p>
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, overflowY: "auto", padding: "0.75rem 0", scrollbarWidth: "none" }}>
+      <nav className="sb-nav" style={{ flex: 1, overflowY: "auto", padding: "0.25rem 0 0.75rem", scrollbarWidth: "none" }}>
         {NAV.map(group => (
-          <div key={group.section} style={{ marginBottom: "0.25rem" }}>
+          <div key={group.section} style={{ marginBottom: "0.35rem" }}>
             <p style={{
               fontSize: "9px",
               fontWeight: 600,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#3A3A3A",
-              padding: "0.5rem 1.25rem 0.3rem",
+              color: "#B0B0B4",
+              padding: "0.6rem 1.5rem 0.35rem",
               fontFamily: "var(--font-inter), system-ui, sans-serif",
             }}>
               {group.section}
@@ -111,37 +113,15 @@ export default function Sidebar() {
               const active = isActive(item.href);
               const Icon   = item.icon;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.625rem",
-                    padding: "0.5rem 1.25rem",
-                    fontSize: "12.5px",
-                    fontWeight: active ? 500 : 400,
-                    color: active ? "#F0ECE8" : "#5A5A5A",
-                    background: active ? "rgba(153,52,52,0.12)" : "transparent",
-                    borderLeft: active ? "2px solid #993434" : "2px solid transparent",
-                    textDecoration: "none",
-                    transition: "all 0.15s",
-                    fontFamily: "var(--font-inter), system-ui, sans-serif",
-                  }}
-                  onMouseEnter={e => {
-                    if (!active) {
-                      e.currentTarget.style.color = "#D0CCC8";
-                      e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!active) {
-                      e.currentTarget.style.color = "#5A5A5A";
-                      e.currentTarget.style.background = "transparent";
-                    }
-                  }}
-                >
-                  <Icon size={14} strokeWidth={1.5} />
+                <Link key={item.href} href={item.href} className={`sb-item ${active ? "active" : "idle"}`}>
+                  <span style={{
+                    width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                    background: active ? "rgba(255,255,255,0.14)" : "#fff",
+                    boxShadow: active ? "none" : "0 1px 3px rgba(0,0,0,0.07)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                  }}>
+                    <Icon size={13} strokeWidth={1.5} color={active ? "#fff" : "#6A6A6E"} />
+                  </span>
                   {item.label}
                 </Link>
               );
@@ -151,25 +131,27 @@ export default function Sidebar() {
       </nav>
 
       {/* Sign out */}
-      <div style={{ padding: "0.75rem", borderTop: "1px solid #1E1E1E", flexShrink: 0 }}>
+      <div style={{ padding: "0.9rem 1rem 1.1rem", borderTop: "1px solid #ECECEE", flexShrink: 0 }}>
         <button
           onClick={() => signOut({ callbackUrl: "/admin/login" })}
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "0.625rem",
+            gap: "0.65rem",
             width: "100%",
-            padding: "0.5rem 0.5rem",
+            padding: "0.55rem 0.75rem",
             fontSize: "12px",
-            color: "#4A4A4A",
-            background: "none",
+            color: "#8A8A8E",
+            background: "#fff",
             border: "none",
+            borderRadius: "999px",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
             cursor: "pointer",
             fontFamily: "var(--font-inter), system-ui, sans-serif",
             transition: "color 0.15s",
           }}
           onMouseEnter={e => (e.currentTarget.style.color = "#993434")}
-          onMouseLeave={e => (e.currentTarget.style.color = "#4A4A4A")}
+          onMouseLeave={e => (e.currentTarget.style.color = "#8A8A8E")}
         >
           <LogOut size={13} strokeWidth={1.5} />
           Sign out

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Bell } from "lucide-react";
 
 interface Props {
   userName?: string | null;
@@ -15,17 +15,15 @@ export default function TopBar({ userName, userEmail }: Props) {
 
   return (
     <header style={{
-      height: "52px",
-      background: "#161616",
-      borderBottom: "1px solid #1E1E1E",
+      height: "72px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "0 1.5rem",
+      padding: "0 2rem",
       flexShrink: 0,
     }}>
 
-      {/* Left: view site link */}
+      {/* Left: view site pill */}
       <Link
         href="/en"
         target="_blank"
@@ -33,57 +31,97 @@ export default function TopBar({ userName, userEmail }: Props) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "0.4rem",
-          fontSize: "11px",
-          color: "#4A4A4A",
+          gap: "0.5rem",
+          fontSize: "11.5px",
+          fontWeight: 500,
+          color: "#fff",
+          background: "#111111",
+          borderRadius: "999px",
+          padding: "0.55rem 1.1rem",
           textDecoration: "none",
           fontFamily: "var(--font-inter), system-ui, sans-serif",
-          transition: "color 0.15s",
+          boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+          transition: "opacity 0.15s",
         }}
-        onMouseEnter={e => (e.currentTarget.style.color = "#993434")}
-        onMouseLeave={e => (e.currentTarget.style.color = "#4A4A4A")}
+        onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
+        onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
       >
-        <ExternalLink size={12} strokeWidth={1.5} />
+        <span style={{
+          width: "22px", height: "22px", borderRadius: "50%",
+          background: "rgba(255,255,255,0.14)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <ExternalLink size={11} strokeWidth={1.5} />
+        </span>
         View site
       </Link>
 
-      {/* Right: user info */}
+      {/* Right: notifications + user pill */}
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-        <div style={{ textAlign: "right" }}>
-          <p style={{
-            fontSize: "12px",
-            fontWeight: 500,
-            color: "#D0CCC8",
-            lineHeight: 1.3,
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-          }}>
-            {userName ?? "Admin"}
-          </p>
-          <p style={{
-            fontSize: "10px",
-            color: "#4A4A4A",
-            lineHeight: 1.3,
-            fontFamily: "var(--font-inter), system-ui, sans-serif",
-          }}>
-            {userEmail ?? ""}
-          </p>
-        </div>
+        <Link
+          href="/admin/enquiries"
+          aria-label="Enquiries"
+          style={{
+            width: "38px",
+            height: "38px",
+            borderRadius: "50%",
+            background: "#fff",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          <Bell size={14} strokeWidth={1.5} color="#6A6A6E" />
+        </Link>
+
         <div style={{
-          width: "30px",
-          height: "30px",
-          borderRadius: "50%",
-          background: "rgba(153,52,52,0.2)",
-          border: "1px solid rgba(153,52,52,0.35)",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          fontSize: "11px",
-          fontWeight: 600,
-          color: "#993434",
-          fontFamily: "var(--font-inter), system-ui, sans-serif",
-          flexShrink: 0,
+          gap: "0.65rem",
+          background: "#fff",
+          borderRadius: "999px",
+          padding: "0.3rem 0.9rem 0.3rem 0.3rem",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
         }}>
-          {initials}
+          <div style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "50%",
+            background: "#111111",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "11px",
+            fontWeight: 600,
+            color: "#fff",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
+            flexShrink: 0,
+          }}>
+            {initials}
+          </div>
+          <div style={{ textAlign: "left" }}>
+            <p style={{
+              fontSize: "12px",
+              fontWeight: 500,
+              color: "#111",
+              lineHeight: 1.3,
+              margin: 0,
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
+            }}>
+              {userName ?? "Admin"}
+            </p>
+            <p style={{
+              fontSize: "10px",
+              color: "#9A9A9E",
+              lineHeight: 1.3,
+              margin: 0,
+              fontFamily: "var(--font-inter), system-ui, sans-serif",
+            }}>
+              {userEmail ?? ""}
+            </p>
+          </div>
         </div>
       </div>
     </header>
