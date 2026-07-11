@@ -64,18 +64,18 @@ export default function Sidebar() {
     <aside style={{
       width: "216px",
       flexShrink: 0,
-      background: "#F7F7F8",
+      background: "#FAF8F7",
       borderRadius: "28px",
-      boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
+      boxShadow: "0 12px 40px rgba(68,25,25,0.10)",
       display: "flex",
       flexDirection: "column",
       overflow: "hidden",
     }}>
       <style>{`
         .sb-item { display:flex; align-items:center; gap:.65rem; margin:2px 12px; padding:.55rem .9rem; font-size:12.5px; border-radius:999px; text-decoration:none; transition:all .15s; font-family:var(--font-inter),system-ui,sans-serif; }
-        .sb-item.active { background:#111111; color:#fff; font-weight:500; box-shadow:0 6px 16px rgba(0,0,0,.25); }
-        .sb-item.idle { color:#8A8A8E; font-weight:400; }
-        .sb-item.idle:hover { background:#ECECEE; color:#111; }
+        .sb-item.active { background:#441919; color:#fff; font-weight:500; box-shadow:0 6px 16px rgba(68,25,25,.3); }
+        .sb-item.idle { color:#7A7A7A; font-weight:400; }
+        .sb-item.idle:hover { background:#F0EAE7; color:#441919; }
         .sb-nav::-webkit-scrollbar { display:none; }
       `}</style>
 
@@ -88,7 +88,7 @@ export default function Sidebar() {
             fontSize: "9px",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#B0B0B4",
+            color: "#B3A6A0",
             fontFamily: "var(--font-inter), system-ui, sans-serif",
           }}>Admin</span>
         </Link>
@@ -103,7 +103,7 @@ export default function Sidebar() {
               fontWeight: 600,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#B0B0B4",
+              color: "#B3A6A0",
               padding: "0.6rem 1.5rem 0.35rem",
               fontFamily: "var(--font-inter), system-ui, sans-serif",
             }}>
@@ -117,10 +117,10 @@ export default function Sidebar() {
                   <span style={{
                     width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
                     background: active ? "rgba(255,255,255,0.14)" : "#fff",
-                    boxShadow: active ? "none" : "0 1px 3px rgba(0,0,0,0.07)",
+                    boxShadow: active ? "none" : "0 1px 3px rgba(68,25,25,0.08)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                   }}>
-                    <Icon size={13} strokeWidth={1.5} color={active ? "#fff" : "#6A6A6E"} />
+                    <Icon size={13} strokeWidth={1.5} color={active ? "#fff" : "#7A7A7A"} />
                   </span>
                   {item.label}
                 </Link>
@@ -131,7 +131,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Sign out */}
-      <div style={{ padding: "0.9rem 1rem 1.1rem", borderTop: "1px solid #ECECEE", flexShrink: 0 }}>
+      <div style={{ padding: "0.9rem 1rem 1.1rem", borderTop: "1px solid #F0EAE7", flexShrink: 0 }}>
         <button
           onClick={() => signOut({ callbackUrl: "/admin/login" })}
           style={{
@@ -141,17 +141,17 @@ export default function Sidebar() {
             width: "100%",
             padding: "0.55rem 0.75rem",
             fontSize: "12px",
-            color: "#8A8A8E",
+            color: "#7A7A7A",
             background: "#fff",
             border: "none",
             borderRadius: "999px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
+            boxShadow: "0 1px 3px rgba(68,25,25,0.08)",
             cursor: "pointer",
             fontFamily: "var(--font-inter), system-ui, sans-serif",
             transition: "color 0.15s",
           }}
           onMouseEnter={e => (e.currentTarget.style.color = "#993434")}
-          onMouseLeave={e => (e.currentTarget.style.color = "#8A8A8E")}
+          onMouseLeave={e => (e.currentTarget.style.color = "#7A7A7A")}
         >
           <LogOut size={13} strokeWidth={1.5} />
           Sign out

@@ -35,12 +35,12 @@ export default function TopBar({ userName, userEmail }: Props) {
           fontSize: "11.5px",
           fontWeight: 500,
           color: "#fff",
-          background: "#111111",
+          background: "#441919",
           borderRadius: "999px",
           padding: "0.55rem 1.1rem",
           textDecoration: "none",
           fontFamily: "var(--font-inter), system-ui, sans-serif",
-          boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+          boxShadow: "0 6px 16px rgba(68,25,25,0.25)",
           transition: "opacity 0.15s",
         }}
         onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
@@ -66,14 +66,14 @@ export default function TopBar({ userName, userEmail }: Props) {
             height: "38px",
             borderRadius: "50%",
             background: "#fff",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            boxShadow: "0 2px 8px rgba(68,25,25,0.10)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
           }}
         >
-          <Bell size={14} strokeWidth={1.5} color="#6A6A6E" />
+          <Bell size={14} strokeWidth={1.5} color="#993434" />
         </Link>
 
         <div style={{
@@ -83,13 +83,13 @@ export default function TopBar({ userName, userEmail }: Props) {
           background: "#fff",
           borderRadius: "999px",
           padding: "0.3rem 0.9rem 0.3rem 0.3rem",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+          boxShadow: "0 2px 8px rgba(68,25,25,0.10)",
         }}>
           <div style={{
             width: "32px",
             height: "32px",
             borderRadius: "50%",
-            background: "#111111",
+            background: "#993434",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -105,7 +105,7 @@ export default function TopBar({ userName, userEmail }: Props) {
             <p style={{
               fontSize: "12px",
               fontWeight: 500,
-              color: "#111",
+              color: "#3A3A3A",
               lineHeight: 1.3,
               margin: 0,
               fontFamily: "var(--font-inter), system-ui, sans-serif",

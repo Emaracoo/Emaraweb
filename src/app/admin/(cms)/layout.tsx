@@ -12,7 +12,7 @@ export default async function CMSLayout({ children }: { children: React.ReactNod
       display: "flex",
       height: "100vh",
       overflow: "hidden",
-      background: "#E4E4E6",
+      background: "#E9E4E1",
       padding: "14px",
       gap: "14px",
       boxSizing: "border-box",
@@ -24,9 +24,9 @@ export default async function CMSLayout({ children }: { children: React.ReactNod
         flexDirection: "column",
         overflow: "hidden",
         minWidth: 0,
-        background: "#F7F7F8",
+        background: "#FAF8F7",
         borderRadius: "28px",
-        boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
+        boxShadow: "0 12px 40px rgba(68,25,25,0.10)",
       }}>
         <TopBar userName={session.user?.name} userEmail={session.user?.email} />
         <main style={{ flex: 1, overflowY: "auto", padding: "0.5rem 2rem 2rem" }}>
