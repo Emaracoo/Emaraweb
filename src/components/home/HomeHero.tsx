@@ -4,71 +4,45 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/components/LangProvider";
 
-const SLIDES_EN = [
-  {
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
-    tag: "Residential · Mina Garden City, Cairo",
-    title: "Designing Spaces,\nCreating Experiences",
-    project: "Villa TN, Mina Garden City",
-    location: "Mina Garden City, Cairo",
-    href: "/projects/villa-tn",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
-    tag: "Administrative · Maspero, Cairo",
-    title: "Building Vision,\nCrafting Reality",
-    project: "Al Arabiya News Studios",
-    location: "Maspero, Cairo",
-    href: "/projects/al-arabiya-studios",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80",
-    tag: "Industrial · 10th of Ramadan City",
-    title: "Architecture\nThat Endures",
-    project: "Manar Tex Factory",
-    location: "10th of Ramadan City",
-    href: "/projects/manar-tex-factory",
-  },
+/* Real project photography — no project names overlaid on the slides */
+const SLIDE_IMAGES = [
+  "/projects/villa-tn/01.jpg",
+  "/projects/al-arabiya-studios/01.jpg",
+  "/projects/manar-tex-factory/01.jpg",
+  "/projects/villa-hm/01.jpg",
+  "/projects/abu-simbel-factory/01.jpg",
 ];
 
-const SLIDES_AR = [
-  {
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
-    tag: "سكني · مدينة مينا الحديقة، القاهرة",
-    title: "تصميم المساحات،\nصناعة التجارب",
-    project: "فيلا TN، مدينة مينا الحديقة",
-    location: "مدينة مينا الحديقة، القاهرة",
-    href: "/projects/villa-tn",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80",
-    tag: "إداري · ماسبيرو، القاهرة",
-    title: "بناء الرؤية،\nصياغة الواقع",
-    project: "استوديوهات قناة العربية",
-    location: "ماسبيرو، القاهرة",
-    href: "/projects/al-arabiya-studios",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80",
-    tag: "صناعي · مدينة العاشر من رمضان",
-    title: "هندسة\nتدوم للأجيال",
-    project: "مصنع منار تكس",
-    location: "مدينة العاشر من رمضان",
-    href: "/projects/manar-tex-factory",
-  },
+const TITLES_EN = [
+  "Designing Spaces,\nCreating Experiences",
+  "Building Vision,\nCrafting Reality",
+  "Architecture\nThat Endures",
+  "Detail by Detail,\nDecade after Decade",
+  "Engineering with\nan Artist's Eye",
 ];
+
+const TITLES_AR = [
+  "تصميم المساحات،\nصناعة التجارب",
+  "بناء الرؤية،\nصياغة الواقع",
+  "هندسة\nتدوم للأجيال",
+  "تفصيلة بتفصيلة،\nعقداً بعد عقد",
+  "هندسة\nبعين فنان",
+];
+
+const SLIDES_EN = SLIDE_IMAGES.map((image, i) => ({ image, title: TITLES_EN[i] }));
+const SLIDES_AR = SLIDE_IMAGES.map((image, i) => ({ image, title: TITLES_AR[i] }));
 
 const STATS_EN = [
-  { target: 157, suffix: "+", label: "Projects" },
-  { target: 86,  suffix: "+", label: "Clients"  },
-  { target: 18,  suffix: "+", label: "Years"    },
-  { target: 13,  suffix: "",  label: "Awards"   },
+  { target: 40,     suffix: "",  label: "Years of Experience" },
+  { target: 237,    suffix: "",  label: "Clients"             },
+  { target: 423,    suffix: "",  label: "Projects"            },
+  { target: 397587, suffix: "",  label: "Sq Feet"             },
 ];
 const STATS_AR = [
-  { target: 157, suffix: "+", label: "مشروع" },
-  { target: 86,  suffix: "+", label: "عميل"  },
-  { target: 18,  suffix: "+", label: "عام"    },
-  { target: 13,  suffix: "",  label: "جائزة"   },
+  { target: 40,     suffix: "",  label: "عاماً من الخبرة" },
+  { target: 237,    suffix: "",  label: "عميل"            },
+  { target: 423,    suffix: "",  label: "مشروع"           },
+  { target: 397587, suffix: "",  label: "قدم مربع"        },
 ];
 
 export default function HomeHero() {
@@ -160,70 +134,43 @@ export default function HomeHero() {
       {/* Main content */}
       <div className="relative z-10 flex-1 flex items-center">
         <div className="max-w-7xl mx-auto px-6 lg:px-20 w-full">
+          <div className="flex items-center gap-3 mb-8">
+            <span className="w-8 h-px" style={{ background: "#993434" }} />
+            <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
+              {isAr ? "عالم من الواقع" : "A World Of Reality"}
+            </span>
+          </div>
+
           <div
             className="transition-all duration-500"
             style={{ opacity: fading ? 0 : 1, transform: fading ? "translateY(12px)" : "translateY(0)" }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <span className="w-8 h-px" style={{ background: "#993434" }} />
-              <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
-                {slide.tag}
-              </span>
-            </div>
-
             <h1
               className="text-white font-light whitespace-pre-line mb-14"
               style={{ fontFamily: fSerif, fontSize: "clamp(3.5rem, 7vw, 7.5rem)", lineHeight: 1.02, maxWidth: "640px" }}
             >
               {slide.title}
             </h1>
-
-            <div className="flex items-center gap-6 lg:gap-10 flex-wrap">
-              <Link
-                href={`/${lang}/projects`}
-                className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
-                style={{ fontFamily: f, color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
-              >
-                {isAr ? "اكتشف أعمالنا" : "View Our Work"}
-              </Link>
-              <Link
-                href={`/${lang}/about`}
-                className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
-                style={{ fontFamily: f, color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
-              >
-                {isAr ? "عن إعمار" : "About Emara"}
-              </Link>
-            </div>
           </div>
-        </div>
 
-        {/* Floating project card */}
-        <div
-          className="absolute bottom-10 max-w-[260px] hidden lg:block transition-all duration-500"
-          style={{ opacity: fading ? 0 : 1, ...(isAr ? { left: "4rem" } : { right: "4rem" }) }}
-        >
-          <div className="p-5" style={{ background: "rgba(13,12,10,0.75)", backdropFilter: "blur(10px)", ...(isAr ? { borderRight: "2px solid #993434" } : { borderLeft: "2px solid #993434" }) }}>
-            <p className="text-xs tracking-[0.2em] uppercase mb-2" style={{ fontFamily: f, color: "#993434" }}>
-              {isAr ? "المشروع الحالي" : "Current Project"}
-            </p>
-            <p className="font-light mb-0.5" style={{ fontFamily: fSerif, fontSize: "1.15rem", color: "#fff" }}>
-              {slide.project}
-            </p>
-            <p className="text-xs mb-4" style={{ fontFamily: f, color: "rgba(255,255,255,0.35)" }}>
-              {slide.location}
-            </p>
+          <div className="flex items-center gap-6 lg:gap-10 flex-wrap">
             <Link
-              href={`/${lang}${slide.href}`}
-              className="text-xs tracking-[0.2em] uppercase pb-px border-b transition-all duration-300 w-fit inline-flex items-center gap-2"
-              style={{ fontFamily: f, color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.15)" }}
+              href={`/${lang}/projects`}
+              className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
+              style={{ fontFamily: f, color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.5)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
             >
-              {isAr ? "التفاصيل ←" : "Details →"}
+              {isAr ? "اكتشف أعمالنا" : "View Our Work"}
+            </Link>
+            <Link
+              href={`/${lang}/about`}
+              className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
+              style={{ fontFamily: f, color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
+            >
+              {isAr ? "عن إعمار" : "About Emara"}
             </Link>
           </div>
         </div>
@@ -240,7 +187,7 @@ export default function HomeHero() {
             {STATS.map((s, i) => (
               <div key={s.label} className="py-4 px-4 lg:px-8 flex items-center gap-3">
                 <span className="font-light tabular-nums" style={{ fontFamily: fSerif, fontSize: "1.9rem", color: "#993434" }}>
-                  {counts[i]}{s.suffix}
+                  {counts[i].toLocaleString(isAr ? "ar-EG" : "en-US")}{s.suffix}
                 </span>
                 <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "rgba(255,255,255,0.35)" }}>
                   {s.label}

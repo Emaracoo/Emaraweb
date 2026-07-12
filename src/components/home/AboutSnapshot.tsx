@@ -7,9 +7,9 @@ const T = {
     body: "With over four decades of experience, our journey began with miniature architectural models — combining functionality and aesthetics with fastidious attention to detail. From industrial buildings to palaces and villas, we have shaped spaces across Egypt.",
     cta: "Read more →",
     stats: [
-      { value: "40+", label: "Years of Practice" },
-      { value: "100+", label: "Projects Delivered" },
-      { value: "50+", label: "Clients Served" },
+      { value: "40", label: "Years of Experience" },
+      { value: "423", label: "Projects Delivered" },
+      { value: "237", label: "Clients Served" },
     ],
   },
   ar: {
@@ -18,9 +18,9 @@ const T = {
     body: "بخبرة تمتد لأكثر من أربعة عقود، بدأت رحلتنا بصناعة النماذج المعمارية المصغّرة — نجمع بين الوظيفية والجماليات بعناية فائقة بالتفاصيل. من المنشآت الصناعية إلى القصور والفيلات، رسمنا ملامح المكان في أرجاء مصر.",
     cta: "اقرأ المزيد ←",
     stats: [
-      { value: "+٤٠", label: "عاماً من الممارسة" },
-      { value: "+١٠٠", label: "مشروع منجز" },
-      { value: "+٥٠", label: "عميل نخدمه" },
+      { value: "٤٠", label: "عاماً من الخبرة" },
+      { value: "٤٢٣", label: "مشروع منجز" },
+      { value: "٢٣٧", label: "عميل نخدمه" },
     ],
   },
 };

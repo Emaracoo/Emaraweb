@@ -30,7 +30,6 @@ const SECTORS: Sector[] = [
     clients: [
       { name: "United Colors of Benetton", nameAr: "يونايتد كولورز أوف بنيتون", logo: "/clients/benetton.png"        },
       { name: "Farida Women Wear",         nameAr: "فريدة للأزياء النسائية",     logo: "/clients/farida.png"          },
-      { name: "Moulinex",                  nameAr: "مولينيكس",                   logo: "/clients/moulinex.png"        },
     ],
   },
   {
@@ -40,7 +39,7 @@ const SECTORS: Sector[] = [
       { name: "Oriental Weavers", nameAr: "الشرقية للسجاد", logo: "/clients/oriental-weavers.png" },
       { name: "Mac Mocket",       nameAr: "ماك موكيت",       logo: "/clients/mac-mocket.png"       },
       { name: "Nokia",            nameAr: "نوكيا",            logo: "/clients/nokia.png"            },
-      { name: "Sphinx",           nameAr: "أبو الهول",        logo: "/clients/sphinx.png"           },
+      { name: "Moulinex",         nameAr: "مولينيكس",         logo: "/clients/moulinex.png"         },
     ],
   },
   {
@@ -49,7 +48,6 @@ const SECTORS: Sector[] = [
     clients: [
       { name: "Egyptian National Police",  nameAr: "الشرطة المصرية",         logo: "/clients/egyptian-police.png"  },
       { name: "Military Survey Authority", nameAr: "إدارة المساحة العسكرية", logo: "/clients/military-survey.png"  },
-      { name: "MUP",                       nameAr: "MUP",                     logo: "/clients/mup.png"              },
     ],
   },
   {
@@ -57,6 +55,8 @@ const SECTORS: Sector[] = [
     labelAr: "الرعاية الصحية",
     clients: [
       { name: "El Bialy Dental", nameAr: "عيادة البيلي لطب الأسنان", logo: "/clients/bialy-dental.png" },
+      { name: "Sphinx Cure",     nameAr: "سفنكس كيور",               logo: "/clients/sphinx.png"       },
+      { name: "MUP",             nameAr: "MUP",                       logo: "/clients/mup.png"          },
     ],
   },
 ];
@@ -68,10 +68,10 @@ const T = {
     accent: "Trust",
     subtitle: "The clients and collaborators who have shaped four decades of practice.",
     stats: [
-      { value: "86+",  label: "Clients Served"      },
-      { value: "40+",  label: "Years of Practice"   },
-      { value: "157+", label: "Projects Delivered"  },
-      { value: "6",    label: "Sectors"             },
+      { value: "237",     label: "Clients Served"      },
+      { value: "40",      label: "Years of Experience" },
+      { value: "423",     label: "Projects Delivered"  },
+      { value: "397,587", label: "Sq Feet"             },
     ],
     allClients: "All Clients",
     ctaHeading: "Ready to join our client list?",
@@ -83,10 +83,10 @@ const T = {
     accent:  "الثقة",
     subtitle: "العملاء والشركاء الذين شكّلوا أربعة عقود من الممارسة.",
     stats: [
-      { value: "٨٦+",  label: "عميل"        },
-      { value: "٤٠+",  label: "عام خبرة"    },
-      { value: "١٥٧+", label: "مشروع منجز"  },
-      { value: "٦",    label: "قطاعات"      },
+      { value: "٢٣٧",     label: "عميل"        },
+      { value: "٤٠",      label: "عاماً من الخبرة" },
+      { value: "٤٢٣",     label: "مشروع منجز"  },
+      { value: "٣٩٧٬٥٨٧", label: "قدم مربع"    },
     ],
     allClients: "جميع العملاء",
     ctaHeading: "هل أنت مستعد للانضمام إلى قائمة عملائنا؟",

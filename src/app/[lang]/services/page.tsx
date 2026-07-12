@@ -33,6 +33,17 @@ const SERVICES_AR: ServiceDef[] = [
   { icon: Box,       title: "صناعة المجسمات",                            desc: "نماذج معمارية مصغّرة مرسومة بمقاييس دقيقة تكشف كل التفاصيل الجوهرية. تُستخدم في عروض العملاء ومؤتمرات العقارات والمعارض — الحرفة التي أسست ممارستنا." },
 ];
 
+/* Anchor ids matching footer links — index-aligned with SERVICES_EN/AR */
+const SERVICE_IDS = [
+  "structural-design",
+  "architectural-design",
+  "interior-architecture",
+  "landscape-design",
+  "restoration-strengthening",
+  "construction-supervision",
+  "model-making",
+];
+
 const HERO = {
   en: { eyebrow: "What We Do", title: "From Structural Engineering", accent: "to Architectural Models", subtitle: "Seven disciplines, one studio." },
   ar: { eyebrow: "ما نقدمه",  title: "من الهندسة الإنشائية",       accent: "إلى النماذج المعمارية",    subtitle: "سبعة تخصصات، استوديو واحد." },
@@ -99,7 +110,7 @@ export default function ServicesPage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-l border-t" style={{ borderColor: "var(--em-border)" }}>
               {services.map((service, i) => (
-                <div key={service.title} className="border-r border-b flex flex-col" style={{ borderColor: "var(--em-border)" }}>
+                <div key={service.title} id={SERVICE_IDS[i]} className="border-r border-b flex flex-col" style={{ borderColor: "var(--em-border)", scrollMarginTop: "7rem" }}>
                   <ServiceCard service={service} delay={i * 80} visible={visible} learnMore={lbl.learnMore} href={`/${lang}/contact`} />
                 </div>
               ))}

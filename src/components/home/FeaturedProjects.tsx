@@ -3,11 +3,11 @@ import { getFeaturedProjects, getProjectLocale } from "@/data/projects";
 
 const LABELS = {
   en: {
-    eyebrow: "Featured Work", heading: "Selected\nprojects.", cta: "View all projects →",
+    eyebrow: "Our Portfolio", heading: "Project\nhighlights.", cta: "View all projects →",
     catLabels: { Residential: "Residential", Administrative: "Administrative", Industrial: "Industrial", Commercial: "Commercial" } as Record<string, string>,
   },
   ar: {
-    eyebrow: "أعمال مختارة",  heading: "مشاريع\nبارزة.",      cta: "عرض جميع المشاريع ←",
+    eyebrow: "أعمالنا",        heading: "أبرز\nالمشاريع.",     cta: "عرض جميع المشاريع ←",
     catLabels: { Residential: "سكني", Administrative: "إداري", Industrial: "صناعي", Commercial: "تجاري" } as Record<string, string>,
   },
 };

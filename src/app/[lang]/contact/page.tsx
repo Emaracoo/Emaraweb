@@ -16,8 +16,8 @@ const socials = [
 const T = {
   en: {
     hero: { eyebrow: "Get in Touch", title: "Let's Build", accent: "Something Great", subtitle: "Whether you have a clear brief or an early idea, we'd love to hear from you." },
-    hours: "Our studio is open Monday to Friday, 9am – 6pm.",
-    hoursAccent: "Monday to Friday",
+    hours: "Our studio is open Saturday to Thursday, 9am – 6pm.",
+    hoursAccent: "Saturday to Thursday",
     contactDetails: [
       { icon: MapPin, label: "Studio", value: "5 Al-Hariry St, beside Tivoli Dome\nHeliopolis, Cairo, Egypt" },
       { icon: Phone,  label: "Phone",  value: "+20 116 424 5471" },
@@ -25,13 +25,13 @@ const T = {
     ],
     followWork: "Follow our work",
     projectTypes: ["Residential", "Commercial", "Administrative", "Industrial", "Interior", "Landscape", "Other"],
-    form: { name: "Your Name", email: "Email Address", projectType: "Project Type", message: "Tell us about your project", placeholder: "Describe your vision, brief, or simply say hello…", submit: "Send Enquiry →" },
+    form: { name: "Your Name", email: "Email Address", phone: "Phone Number", projectType: "Project Type", message: "Tell us about your project", placeholder: "Describe your vision, brief, or simply say hello…", submit: "Send Enquiry →", error: "Something went wrong — please try again." },
     thanks: { heading: "Thank you for reaching out.", body: "Your enquiry has been received. A member of our studio team will be in touch within two business days." },
   },
   ar: {
     hero: { eyebrow: "تواصل معنا", title: "لنبنِ", accent: "شيئاً رائعاً", subtitle: "سواء كان لديك موجز واضح أو فكرة مبكرة، يسعدنا سماعك." },
-    hours: "استوديونا مفتوح من الاثنين إلى الجمعة، من ٩ص حتى ٦م.",
-    hoursAccent: "الاثنين إلى الجمعة",
+    hours: "استوديونا مفتوح من السبت إلى الخميس، من ٩ص حتى ٦م.",
+    hoursAccent: "السبت إلى الخميس",
     contactDetails: [
       { icon: MapPin, label: "الاستوديو", value: "٥ شارع الحريري، بجوار تيفولي دوم\nمصر الجديدة، القاهرة، مصر" },
       { icon: Phone,  label: "الهاتف",    value: "+20 116 424 5471" },
@@ -39,7 +39,7 @@ const T = {
     ],
     followWork: "تابع أعمالنا",
     projectTypes: ["سكني", "تجاري", "إداري", "صناعي", "داخلي", "مناظر طبيعية", "أخرى"],
-    form: { name: "اسمك", email: "عنوان البريد الإلكتروني", projectType: "نوع المشروع", message: "أخبرنا عن مشروعك", placeholder: "صف رؤيتك أو موجزك أو تواصل معنا بكل بساطة…", submit: "← إرسال الاستفسار" },
+    form: { name: "اسمك", email: "عنوان البريد الإلكتروني", phone: "رقم الهاتف", projectType: "نوع المشروع", message: "أخبرنا عن مشروعك", placeholder: "صف رؤيتك أو موجزك أو تواصل معنا بكل بساطة…", submit: "← إرسال الاستفسار", error: "حدث خطأ ما — يرجى المحاولة مرة أخرى." },
     thanks: { heading: "شكراً على تواصلك معنا.", body: "تم استلام استفسارك. سيتواصل معك أحد أعضاء فريق الاستوديو في غضون يومي عمل." },
   },
 };
@@ -53,11 +53,33 @@ export default function ContactPage() {
 
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: selectedType,
+          message: form.message,
+        }),
+      });
+      if (!res.ok) throw new Error("failed");
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -129,6 +151,7 @@ export default function ContactPage() {
                       {[
                         { id: "name",  label: t.form.name,  type: "text",  key: "name"  as const },
                         { id: "email", label: t.form.email, type: "email", key: "email" as const },
+                        { id: "phone", label: t.form.phone, type: "tel",   key: "phone" as const },
                       ].map(({ id, label, type, key }) => (
                         <div key={id} style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                           <label htmlFor={id} className="text-xs tracking-[0.2em] uppercase" style={{ fontFamily: f, color: "var(--em-muted)" }}>{label}</label>
@@ -174,8 +197,12 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <button type="submit" className="w-full py-4 text-xs tracking-[0.25em] uppercase text-white transition-all duration-300"
-                      style={{ fontFamily: f, background: "#993434" }}
+                    {error && (
+                      <p style={{ fontFamily: f, fontSize: "0.8rem", color: "#993434" }}>{t.form.error}</p>
+                    )}
+
+                    <button type="submit" disabled={sending} className="w-full py-4 text-xs tracking-[0.25em] uppercase text-white transition-all duration-300"
+                      style={{ fontFamily: f, background: "#993434", opacity: sending ? 0.6 : 1, cursor: sending ? "wait" : "pointer" }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "#682A2A")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "#993434")}
                     >

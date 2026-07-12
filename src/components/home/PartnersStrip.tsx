@@ -6,8 +6,8 @@ const LOGOS = [
   { name: "Nokia",                   src: "/clients/nokia.png"            },
   { name: "United Colors of Benetton", src: "/clients/benetton.png"       },
   { name: "Moulinex",                src: "/clients/moulinex.png"         },
-  { name: "Sphinx",                  src: "/clients/sphinx.png"           },
-  { name: "Oriental Weavers",        src: "/clients/oriental-weavers.png" },
+  { name: "Sphinx Cure",             src: "/clients/sphinx.png"           },
+  { name: "MUP",                     src: "/clients/mup.png"              },
   { name: "Mac Mocket",              src: "/clients/mac-mocket.png"       },
 ];
 
@@ -40,8 +40,8 @@ export default function PartnersStrip({ lang }: Props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "180px",
-              height: "80px",
+              width: "220px",
+              height: "110px",
               padding: "0 2rem",
               flexShrink: 0,
               borderInlineEnd: "1px solid var(--em-border)",
@@ -51,7 +51,7 @@ export default function PartnersStrip({ lang }: Props) {
             <img
               src={logo.src}
               alt={logo.name}
-              style={{ maxHeight: "48px", maxWidth: "120px", objectFit: "contain", filter: "grayscale(1) opacity(0.45)" }}
+              style={{ maxHeight: "72px", maxWidth: "160px", objectFit: "contain" }}
             />
           </div>
         ))}

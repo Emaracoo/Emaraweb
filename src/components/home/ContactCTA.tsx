@@ -112,16 +112,16 @@ export default function ContactCTA() {
         className="absolute inset-x-0"
         style={{
           top: "-60%", bottom: "-60%",
-          backgroundImage: "url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&q=80')",
+          backgroundImage: "url('/projects/villa-tn/02.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           willChange: "transform",
         }}
       />
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.78) 0%, rgba(68,25,25,0.65) 100%)" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.88) 0%, rgba(68,25,25,0.78) 100%)" }} />
 
       <div className="relative z-10 text-center px-6 py-24 max-w-3xl mx-auto w-full">
-        <p className="text-xs tracking-[0.35em] uppercase mb-6" style={{ fontFamily: f, color: "rgba(255,255,255,0.55)" }}>
+        <p className="mb-6" style={{ fontFamily: f, fontSize: "clamp(1rem, 1.8vw, 1.35rem)", letterSpacing: "0.06em", color: "rgba(255,255,255,0.85)" }}>
           {t.eyebrow}
         </p>
 
@@ -143,7 +143,7 @@ export default function ContactCTA() {
 
         <Link
           href={`/${lang}/contact`}
-          className="inline-flex items-center gap-3 px-10 py-4 text-sm tracking-[0.2em] uppercase text-white transition-all duration-300"
+          className="inline-flex items-center gap-3 px-10 py-4 text-sm tracking-[0.06em] text-white transition-all duration-300"
           style={{ fontFamily: f, border: "1px solid rgba(255,255,255,0.55)", borderRadius: "9999px" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#441919"; e.currentTarget.style.borderColor = "#fff"; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.55)"; }}

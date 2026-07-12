@@ -84,7 +84,7 @@ export default function Header() {
           borderBottom:   solid ? "1px solid var(--em-header-border)" : "none",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24">
 
           {/* Logo */}
           <Link href={`/${lang}`} className="flex items-center group">
@@ -93,7 +93,7 @@ export default function Header() {
               src="/logo.png"
               alt="Emara Co."
               style={{
-                height: "100px",
+                height: "88px",
                 width: "auto",
                 filter: (!solid || dark) ? "brightness(0) invert(1)" : "none",
                 transition: "filter 0.4s ease",
