@@ -29,6 +29,7 @@ export default async function ProjectsPage() {
           <table className="tb">
             <thead>
               <tr>
+                <th></th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Year</th>
@@ -40,6 +41,10 @@ export default async function ProjectsPage() {
             <tbody>
               {projects.map(p => (
                 <tr key={p.id} className="tr">
+                  <td style={{ width: 60, padding: "6px 8px 6px 16px" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.coverImage} alt="" style={{ width: 52, height: 38, objectFit: "cover", display: "block", border: "1px solid #E5E3DF" }} />
+                  </td>
                   <td>
                     <Link href={`/admin/projects/${p.id}/edit`} style={{ color: "#1A1A1A", textDecoration: "none", fontWeight: 500 }}>{p.titleEn}</Link>
                     <div className="atag">/{p.slug}</div>

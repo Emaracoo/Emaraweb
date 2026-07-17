@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { S } from "@/lib/admin-styles";
 import { createProject } from "../actions";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
+import { GalleryUploadField } from "@/components/admin/GalleryUploadField";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "New Project" };
@@ -48,7 +50,7 @@ export default function NewProjectPage() {
           <div className="g3">
             <div className="frow">
               <label className="flbl">Location (EN)</label>
-              <input name="locationEn" className="finp" placeholder="Riyadh, Saudi Arabia" />
+              <input name="locationEn" className="finp" placeholder="Cairo, Egypt" />
             </div>
             <div className="frow">
               <label className="flbl">Location (AR)</label>
@@ -81,15 +83,8 @@ export default function NewProjectPage() {
           </div>
 
           <p className="fsec">Media</p>
-          <div className="frow">
-            <label className="flbl">Cover Image URL *</label>
-            <input name="coverImage" required className="finp" placeholder="https://…" />
-          </div>
-          <div className="frow">
-            <label className="flbl">Gallery Images</label>
-            <input name="galleryImages" className="finp" placeholder="https://img1.jpg, https://img2.jpg" />
-            <p className="fhint">Comma-separated image URLs</p>
-          </div>
+          <ImageUploadField name="coverImage" label="Cover Image" required folder="projects" />
+          <GalleryUploadField name="galleryImages" folder="projects" />
 
           <p className="fsec">Settings</p>
           <div className="g3">

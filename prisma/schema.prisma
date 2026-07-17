@@ -135,6 +135,7 @@ model Media {
   originalName String
   url          String
   publicId     String?
+  data         Bytes?
   mimeType     String
   size         Int
   width        Int?

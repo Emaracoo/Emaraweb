@@ -14,7 +14,11 @@ function fmtSize(bytes: number) {
 export default async function MediaPage() {
   const media = await prisma.media.findMany({
     orderBy: { createdAt: "desc" },
-    take: 100,
+    select: {
+      id: true, filename: true, originalName: true,
+      url: true, mimeType: true, size: true, folder: true,
+      altEn: true, createdAt: true,
+    },
   });
 
   return (

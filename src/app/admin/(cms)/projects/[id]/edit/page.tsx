@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { S } from "@/lib/admin-styles";
 import { updateProject, deleteProject } from "../../actions";
 import { DeleteButton } from "@/components/admin/DeleteButton";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
+import { GalleryUploadField } from "@/components/admin/GalleryUploadField";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Edit Project" };
@@ -96,15 +98,8 @@ export default async function EditProjectPage({
           </div>
 
           <p className="fsec">Media</p>
-          <div className="frow">
-            <label className="flbl">Cover Image URL *</label>
-            <input name="coverImage" required className="finp" defaultValue={p.coverImage} />
-          </div>
-          <div className="frow">
-            <label className="flbl">Gallery Images</label>
-            <input name="galleryImages" className="finp" defaultValue={p.galleryImages.join(", ")} />
-            <p className="fhint">Comma-separated image URLs</p>
-          </div>
+          <ImageUploadField name="coverImage" label="Cover Image" required defaultValue={p.coverImage} folder="projects" />
+          <GalleryUploadField name="galleryImages" defaultValue={p.galleryImages} folder="projects" />
 
           <p className="fsec">Settings</p>
           <div className="g3">
