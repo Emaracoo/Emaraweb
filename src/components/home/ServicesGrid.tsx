@@ -7,38 +7,33 @@ import type { LucideIcon } from "lucide-react";
 
 interface Service { icon: LucideIcon; title: string; desc: string; badge: string | null }
 
-const SERVICES_EN: Service[] = [
-  { icon: Building2, title: "Structural Design",            desc: "Concrete & steel facilities per Egyptian, American, European and British codes.",                           badge: null      },
-  { icon: Layers,    title: "Architectural Design",          desc: "Exterior and interior designs for villas, palaces, factories, restaurants, and more.",                     badge: null      },
-  { icon: PenLine,   title: "Interior Architecture",         desc: "Planning interiors to meet functional requirements while maximising spatial utilisation.",                 badge: null      },
-  { icon: TreePine,  title: "Landscape Design",              desc: "Softscape planting and hardscape — pergolas, pools, walkways, fountains, and lighting.",                   badge: null      },
-  { icon: Wrench,    title: "Restoration & Strengthening",   desc: "Repair of structural elements, treatment of cracks and fissures.",                                         badge: null      },
-  { icon: HardHat,   title: "Construction Supervision",      desc: "Full review of specs, drawings, schedules, on-site inspection and soil reports.",                          badge: null      },
-  { icon: Box,       title: "Model Making",                  desc: "Scaled architectural maquettes — the craft that started Emara in 1989.",                                   badge: "Gallery" },
-];
+export interface ServiceDTO {
+  titleEn: string; titleAr: string | null;
+  descriptionEn: string | null; descriptionAr: string | null;
+  icon: string | null;
+  badgeEn: string | null; badgeAr: string | null;
+}
 
-const SERVICES_AR: Service[] = [
-  { icon: Building2, title: "التصميم الإنشائي",         desc: "منشآت خرسانية وفولاذية وفق المعايير المصرية والأمريكية والأوروبية والبريطانية.", badge: null    },
-  { icon: Layers,    title: "التصميم المعماري",          desc: "تصاميم خارجية وداخلية للفيلات والقصور والمصانع والمطاعم وما سواها.",              badge: null    },
-  { icon: PenLine,   title: "العمارة الداخلية",          desc: "تخطيط الفراغات الداخلية لتلبية المتطلبات الوظيفية مع تعظيم الاستفادة المكانية.", badge: null    },
-  { icon: TreePine,  title: "تصميم المناظر الطبيعية",   desc: "الزراعة الناعمة والعناصر الصلبة — البيرغولا والمسابح والممشى والنوافير والإضاءة.", badge: null   },
-  { icon: Wrench,    title: "الترميم والتقوية",          desc: "إصلاح العناصر الإنشائية ومعالجة الشقوق والصدوع.",                                badge: null    },
-  { icon: HardHat,   title: "الإشراف على التنفيذ",      desc: "مراجعة شاملة للمواصفات والرسومات والجداول الزمنية والتفتيش الميداني وتقارير التربة.", badge: null },
-  { icon: Box,       title: "صناعة المجسمات",            desc: "نماذج معمارية مصغّرة — الحرفة التي أسست إعمار عام ١٩٨٩.",                        badge: "معرض" },
-];
+const ICONS: Record<string, LucideIcon> = { Building2, Layers, PenLine, TreePine, Wrench, HardHat, Box };
+const DEFAULT_ICON = Box;
 
 const LABELS = {
-  en: { eyebrow: "07 Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
-  ar: { eyebrow: "٠٧ خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.",  cta: "عرض جميع الخدمات ←" },
+  en: { eyebrow: "Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
+  ar: { eyebrow: "خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.",  cta: "عرض جميع الخدمات ←" },
 };
 
-interface Props { lang: "en" | "ar" }
+interface Props { lang: "en" | "ar"; services: ServiceDTO[] }
 
 const STACK_DEPTH = 3;
 const CARD_H      = 380; // px — front card height
 const PEEK        = 18;  // px — how much each hidden card peeks below
 
-export default function ServicesGrid({ lang }: Props) {
+export default function ServicesGrid({ lang, services: servicesProp }: Props) {
+  if (servicesProp.length === 0) return null;
+  return <ServicesStack lang={lang} services={servicesProp} />;
+}
+
+function ServicesStack({ lang, services: servicesProp }: Props) {
   const [active,  setActive]  = useState(0);
   const [exiting, setExiting] = useState<number | null>(null);
   const [paused,  setPaused]  = useState(false);
@@ -48,8 +43,13 @@ export default function ServicesGrid({ lang }: Props) {
   const wheelCooldown = useRef(false);
   const touchStartY  = useRef(0);
 
-  const services = lang === "ar" ? SERVICES_AR : SERVICES_EN;
-  const n        = services.length;
+  const services: Service[] = servicesProp.map(s => ({
+    icon:  (s.icon && ICONS[s.icon]) || DEFAULT_ICON,
+    title: (lang === "ar" && s.titleAr) || s.titleEn,
+    desc:  (lang === "ar" ? s.descriptionAr : s.descriptionEn) || "",
+    badge: (lang === "ar" ? s.badgeAr : s.badgeEn) || null,
+  }));
+  const n = services.length;
   const lbl      = LABELS[lang];
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";

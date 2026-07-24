@@ -88,6 +88,8 @@ model Service {
   longDescAr    String?
   icon          String?
   coverImage    String?
+  badgeEn       String?
+  badgeAr       String?
   features      Json?
   status        PublishStatus @default(PUBLISHED)
   sortOrder     Int           @default(0)
@@ -166,6 +168,15 @@ model HomepageSection {
   ctaHref    String?
   data       Json?
   updatedAt  DateTime @updatedAt
+}
+
+model HomeSlide {
+  id        String   @id @default(cuid())
+  image     String
+  titleEn   String
+  titleAr   String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
 }
 
 model ActivityLog {

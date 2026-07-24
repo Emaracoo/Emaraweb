@@ -14,7 +14,7 @@ const GHOSTS = [
   { opacity: 0.05, blur: 14, y: 140, scaleX: 1.05  },
 ];
 
-const T = {
+const FALLBACK = {
   en: {
     eyebrow: "Have a project in mind?",
     headline: "Let's build something\nextraordinary together.",
@@ -27,9 +27,23 @@ const T = {
   },
 };
 
-export default function ContactCTA() {
+interface Props {
+  eyebrowEn?: string | null;
+  eyebrowAr?: string | null;
+  headlineEn?: string | null;
+  headlineAr?: string | null;
+  ctaEn?: string | null;
+  ctaAr?: string | null;
+}
+
+export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineAr, ctaEn, ctaAr }: Props) {
   const lang        = useLang();
-  const t           = T[lang];
+  const fb          = FALLBACK[lang];
+  const t = {
+    eyebrow:  (lang === "ar" ? eyebrowAr  : eyebrowEn)  || fb.eyebrow,
+    headline: (lang === "ar" ? headlineAr : headlineEn) || fb.headline,
+    cta:      (lang === "ar" ? ctaAr      : ctaEn)      || fb.cta,
+  };
   const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);

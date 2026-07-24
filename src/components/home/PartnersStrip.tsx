@@ -1,15 +1,4 @@
-const LOGOS = [
-  { name: "Al-Arabiya",              src: "/clients/al-arabiya.png"       },
-  { name: "MBC Group",               src: "/clients/mbc.png"              },
-  { name: "Oriental Weavers",        src: "/clients/oriental-weavers.png" },
-  { name: "InterContinental",        src: "/clients/intercontinental.png" },
-  { name: "Nokia",                   src: "/clients/nokia.png"            },
-  { name: "United Colors of Benetton", src: "/clients/benetton.png"       },
-  { name: "Moulinex",                src: "/clients/moulinex.png"         },
-  { name: "Sphinx Cure",             src: "/clients/sphinx.png"           },
-  { name: "MUP",                     src: "/clients/mup.png"              },
-  { name: "Mac Mocket",              src: "/clients/mac-mocket.png"       },
-];
+import { prisma } from "@/lib/prisma";
 
 const LABELS = {
   en: "Trusted By",
@@ -18,7 +7,15 @@ const LABELS = {
 
 interface Props { lang: "en" | "ar" }
 
-export default function PartnersStrip({ lang }: Props) {
+export default async function PartnersStrip({ lang }: Props) {
+  const partners = await prisma.partner.findMany({
+    where:   { status: "PUBLISHED" },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+  });
+  if (partners.length === 0) return null;
+
+  const LOGOS = partners.map(p => ({ name: lang === "ar" && p.nameAr ? p.nameAr : p.nameEn, src: p.logo }));
+
   const f = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   // Duplicate the list so the marquee loops seamlessly
   const track = [...LOGOS, ...LOGOS];

@@ -79,9 +79,20 @@ export default async function EditServicePage({ params }: { params: Promise<{ id
               </select>
             </div>
           </div>
-          <div className="frow" style={{ maxWidth: 200 }}>
-            <label className="flbl">Sort Order</label>
-            <input name="sortOrder" type="number" className="finp" defaultValue={s.sortOrder} />
+          <div className="g3">
+            <div className="frow">
+              <label className="flbl">Badge (EN)</label>
+              <input name="badgeEn" className="finp" defaultValue={s.badgeEn ?? ""} placeholder="Gallery" />
+              <p className="fhint">Optional small badge shown on the homepage services teaser</p>
+            </div>
+            <div className="frow">
+              <label className="flbl">Badge (AR)</label>
+              <input name="badgeAr" className="finp" dir="rtl" defaultValue={s.badgeAr ?? ""} placeholder="معرض" />
+            </div>
+            <div className="frow">
+              <label className="flbl">Sort Order</label>
+              <input name="sortOrder" type="number" className="finp" defaultValue={s.sortOrder} />
+            </div>
           </div>
         </div>
         <div className="fbar">

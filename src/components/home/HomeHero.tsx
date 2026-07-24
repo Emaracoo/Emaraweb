@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/components/LangProvider";
 
-/* Real project photography — no project names overlaid on the slides */
+export interface HeroSlide { image: string; titleEn: string; titleAr: string | null }
+export interface HeroStat { value: number; suffix: string; labelEn: string; labelAr: string }
+
+/* Fallbacks used only if the database has no slides/stats configured yet */
 const SLIDE_IMAGES = [
   "/projects/villa-tn/01.jpg",
   "/projects/al-arabiya-studios/01.jpg",
@@ -29,27 +32,30 @@ const TITLES_AR = [
   "هندسة\nبعين فنان",
 ];
 
-const SLIDES_EN = SLIDE_IMAGES.map((image, i) => ({ image, title: TITLES_EN[i] }));
-const SLIDES_AR = SLIDE_IMAGES.map((image, i) => ({ image, title: TITLES_AR[i] }));
+const FALLBACK_SLIDES: HeroSlide[] = SLIDE_IMAGES.map((image, i) => ({ image, titleEn: TITLES_EN[i], titleAr: TITLES_AR[i] }));
 
-const STATS_EN = [
-  { target: 40,     suffix: "",  label: "Years of Experience" },
-  { target: 237,    suffix: "",  label: "Clients"             },
-  { target: 423,    suffix: "",  label: "Projects"            },
-  { target: 397587, suffix: "",  label: "Sq Feet"             },
-];
-const STATS_AR = [
-  { target: 40,     suffix: "",  label: "عاماً من الخبرة" },
-  { target: 237,    suffix: "",  label: "عميل"            },
-  { target: 423,    suffix: "",  label: "مشروع"           },
-  { target: 397587, suffix: "",  label: "قدم مربع"        },
+const FALLBACK_STATS: HeroStat[] = [
+  { value: 40,     suffix: "", labelEn: "Years of Experience", labelAr: "عاماً من الخبرة" },
+  { value: 237,    suffix: "", labelEn: "Clients",             labelAr: "عميل"            },
+  { value: 423,    suffix: "", labelEn: "Projects",            labelAr: "مشروع"           },
+  { value: 397587, suffix: "", labelEn: "Sq Feet",             labelAr: "قدم مربع"        },
 ];
 
-export default function HomeHero() {
+interface Props {
+  slides?: HeroSlide[];
+  stats?: HeroStat[];
+  eyebrowEn?: string | null;
+  eyebrowAr?: string | null;
+}
+
+export default function HomeHero({ slides: slidesProp, stats: statsProp, eyebrowEn, eyebrowAr }: Props) {
   const lang    = useLang();
   const isAr    = lang === "ar";
-  const slides  = isAr ? SLIDES_AR : SLIDES_EN;
-  const STATS   = isAr ? STATS_AR  : STATS_EN;
+  const rawSlides = slidesProp && slidesProp.length > 0 ? slidesProp : FALLBACK_SLIDES;
+  const slides  = rawSlides.map(s => ({ image: s.image, title: (isAr ? s.titleAr : s.titleEn) || s.titleEn }));
+  const rawStats = statsProp && statsProp.length > 0 ? statsProp : FALLBACK_STATS;
+  const STATS   = rawStats.map(s => ({ target: s.value, suffix: s.suffix, label: (isAr ? s.labelAr : s.labelEn) || s.labelEn }));
+  const eyebrow = (isAr ? eyebrowAr : eyebrowEn) || (isAr ? "عالم من الواقع" : "A World Of Reality");
   const f       = isAr ? "var(--font-cairo)" : "var(--font-saira)";
   const fSerif  = isAr ? "var(--font-cairo)" : "var(--font-cormorant)";
 
@@ -137,7 +143,7 @@ export default function HomeHero() {
           <div className="flex items-center gap-3 mb-8">
             <span className="w-8 h-px" style={{ background: "#993434" }} />
             <span className="text-xs tracking-[0.35em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
-              {isAr ? "عالم من الواقع" : "A World Of Reality"}
+              {eyebrow}
             </span>
           </div>
 

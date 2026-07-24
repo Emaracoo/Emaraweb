@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-const T = {
+const FALLBACK = {
   en: {
     eyebrow: "About Emara",
     heading: "Four decades of design,\nconstruction & craft.",
@@ -25,10 +26,25 @@ const T = {
   },
 };
 
+interface Stat { value: string; labelEn: string; labelAr: string }
+
 interface Props { lang: "en" | "ar" }
 
-export default function AboutSnapshot({ lang }: Props) {
-  const t   = T[lang];
+export default async function AboutSnapshot({ lang }: Props) {
+  const section = await prisma.homepageSection.findUnique({ where: { key: "about" } });
+  const fb = FALLBACK[lang];
+
+  const eyebrow = (lang === "ar" ? section?.titleAr : section?.titleEn) || fb.eyebrow;
+  const heading = fb.heading; // structural heading kept as-is; body/cta below are editable
+  const body    = (lang === "ar" ? section?.bodyAr : section?.bodyEn) || fb.body;
+  const cta     = (lang === "ar" ? section?.ctaLabelAr : section?.ctaLabelEn) || fb.cta;
+
+  const rawStats = (section?.data as { stats?: Stat[] } | null)?.stats;
+  const stats = rawStats && rawStats.length > 0
+    ? rawStats.map(s => ({ value: s.value, label: (lang === "ar" ? s.labelAr : s.labelEn) || "" }))
+    : fb.stats;
+
+  const t   = { eyebrow, heading, body, cta, stats };
   const f   = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs  = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
