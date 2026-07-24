@@ -34,9 +34,12 @@ interface Props {
   headlineAr?: string | null;
   ctaEn?: string | null;
   ctaAr?: string | null;
+  bgImage?: string | null;
 }
 
-export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineAr, ctaEn, ctaAr }: Props) {
+const DEFAULT_BG = "/projects/villa-tn/02.jpg";
+
+export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineAr, ctaEn, ctaAr, bgImage }: Props) {
   const lang        = useLang();
   const fb          = FALLBACK[lang];
   const t = {
@@ -126,7 +129,7 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
         className="absolute inset-x-0"
         style={{
           top: "-60%", bottom: "-60%",
-          backgroundImage: "url('/projects/villa-tn/02.jpg')",
+          backgroundImage: `url('${bgImage || DEFAULT_BG}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           willChange: "transform",

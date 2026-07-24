@@ -15,8 +15,8 @@ export interface ServiceDTO {
 }
 
 const FALLBACK = {
-  en: { eyebrow: "Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
-  ar: { eyebrow: "خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.",  cta: "عرض جميع الخدمات ←" },
+  en: { eyebrow: "Services", heading: "Every discipline,\nin one studio.", cta: "View all services →", learnMore: "Learn more →", scrollHint: "scroll or tap" },
+  ar: { eyebrow: "خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.",  cta: "عرض جميع الخدمات ←", learnMore: "اعرف أكثر ←", scrollHint: "اسحب أو اضغط" },
 };
 
 interface Props {
@@ -24,6 +24,8 @@ interface Props {
   eyebrowEn?: string | null; eyebrowAr?: string | null;
   headingEn?: string | null; headingAr?: string | null;
   ctaEn?: string | null; ctaAr?: string | null;
+  learnMoreEn?: string | null; learnMoreAr?: string | null;
+  scrollHintEn?: string | null; scrollHintAr?: string | null;
 }
 
 const STACK_DEPTH = 3;
@@ -35,7 +37,7 @@ export default function ServicesGrid(props: Props) {
   return <ServicesStack {...props} />;
 }
 
-function ServicesStack({ lang, services: servicesProp, eyebrowEn, eyebrowAr, headingEn, headingAr, ctaEn, ctaAr }: Props) {
+function ServicesStack({ lang, services: servicesProp, eyebrowEn, eyebrowAr, headingEn, headingAr, ctaEn, ctaAr, learnMoreEn, learnMoreAr, scrollHintEn, scrollHintAr }: Props) {
   const [active,  setActive]  = useState(0);
   const [exiting, setExiting] = useState<number | null>(null);
   const [paused,  setPaused]  = useState(false);
@@ -54,9 +56,11 @@ function ServicesStack({ lang, services: servicesProp, eyebrowEn, eyebrowAr, hea
   const n  = services.length;
   const fb  = FALLBACK[lang];
   const lbl = {
-    eyebrow: (lang === "ar" ? eyebrowAr : eyebrowEn) || fb.eyebrow,
-    heading: (lang === "ar" ? headingAr : headingEn) || fb.heading,
-    cta:     (lang === "ar" ? ctaAr : ctaEn) || fb.cta,
+    eyebrow:    (lang === "ar" ? eyebrowAr : eyebrowEn) || fb.eyebrow,
+    heading:    (lang === "ar" ? headingAr : headingEn) || fb.heading,
+    cta:        (lang === "ar" ? ctaAr : ctaEn) || fb.cta,
+    learnMore:  (lang === "ar" ? learnMoreAr : learnMoreEn) || fb.learnMore,
+    scrollHint: (lang === "ar" ? scrollHintAr : scrollHintEn) || fb.scrollHint,
   };
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
@@ -241,10 +245,10 @@ function ServicesStack({ lang, services: servicesProp, eyebrowEn, eyebrowAr, hea
                         style={{ fontFamily: f, color: "#cc6666", borderBottom: "1px solid rgba(204,102,102,0.35)", paddingBottom: "2px" }}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        {lang === "ar" ? "اعرف أكثر ←" : "Learn more →"}
+                        {lbl.learnMore}
                       </Link>
                       <span className="text-xs" style={{ fontFamily: f, color: "rgba(255,255,255,0.2)", letterSpacing: "0.05em" }}>
-                        {lang === "ar" ? "اسحب أو اضغط" : "scroll or tap"}
+                        {lbl.scrollHint}
                       </span>
                     </div>
                   )}

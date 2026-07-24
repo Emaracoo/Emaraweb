@@ -33,6 +33,8 @@ export default async function HomePage({ params }: Props) {
 
   const heroStats = (heroSection?.data as { stats?: HeroStat[] } | null)?.stats;
   const heroData  = (heroSection?.data as { cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string } | null) ?? {};
+  const servicesData = (servicesSection?.data as { learnMoreEn?: string; learnMoreAr?: string; scrollHintEn?: string; scrollHintAr?: string } | null) ?? {};
+  const ctaData      = (ctaSection?.data as { bgImage?: string } | null) ?? {};
 
   return (
     <>
@@ -60,6 +62,10 @@ export default async function HomePage({ params }: Props) {
           headingAr={servicesSection?.titleAr}
           ctaEn={servicesSection?.ctaLabelEn}
           ctaAr={servicesSection?.ctaLabelAr}
+          learnMoreEn={servicesData.learnMoreEn}
+          learnMoreAr={servicesData.learnMoreAr}
+          scrollHintEn={servicesData.scrollHintEn}
+          scrollHintAr={servicesData.scrollHintAr}
         />
         <FeaturedProjects lang={l} />
         <PartnersStrip lang={l} />
@@ -71,6 +77,7 @@ export default async function HomePage({ params }: Props) {
           headlineAr={ctaSection?.titleAr}
           ctaEn={ctaSection?.ctaLabelEn}
           ctaAr={ctaSection?.ctaLabelAr}
+          bgImage={ctaData.bgImage}
         />
       </main>
       <Footer />

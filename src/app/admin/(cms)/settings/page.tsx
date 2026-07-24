@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { S } from "@/lib/admin-styles";
 import { saveSettings } from "./actions";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Settings" };
@@ -54,11 +55,15 @@ export default async function SettingsPage() {
               <input name="instagram_url" className="finp" defaultValue={get("instagram_url")} placeholder="https://instagram.com/emaraco" />
             </div>
             <div className="frow">
-              <label className="flbl">LinkedIn URL</label>
-              <input name="linkedin_url" className="finp" defaultValue={get("linkedin_url")} />
+              <label className="flbl">Facebook URL</label>
+              <input name="facebook_url" className="finp" defaultValue={get("facebook_url")} placeholder="https://facebook.com/emaraco" />
             </div>
           </div>
           <div className="g2">
+            <div className="frow">
+              <label className="flbl">LinkedIn URL</label>
+              <input name="linkedin_url" className="finp" defaultValue={get("linkedin_url")} />
+            </div>
             <div className="frow">
               <label className="flbl">X / Twitter URL</label>
               <input name="twitter_url" className="finp" defaultValue={get("twitter_url")} />
@@ -66,6 +71,16 @@ export default async function SettingsPage() {
           </div>
 
           <p className="fsec">Branding</p>
+          <div className="frow">
+            <ImageUploadField name="logo_url" label="Site Logo" defaultValue={get("logo_url")} folder="branding" />
+          </div>
+          <div className="g2">
+            <div className="frow">
+              <label className="flbl">Company Name</label>
+              <input name="company_name" className="finp" defaultValue={get("company_name")} placeholder="Emara Construction" />
+            </div>
+            <div className="frow" />
+          </div>
           <div className="g2">
             <div className="frow">
               <label className="flbl">Footer Tagline (EN)</label>
@@ -74,6 +89,18 @@ export default async function SettingsPage() {
             <div className="frow">
               <label className="flbl">Footer Tagline (AR)</label>
               <input name="footer_tagline_ar" className="finp" dir="rtl" defaultValue={get("footer_tagline_ar")} />
+            </div>
+          </div>
+
+          <p className="fsec">Legal</p>
+          <div className="g2">
+            <div className="frow">
+              <label className="flbl">Privacy Policy URL</label>
+              <input name="privacy_url" className="finp" defaultValue={get("privacy_url")} placeholder="/en/privacy" />
+            </div>
+            <div className="frow">
+              <label className="flbl">Terms of Use URL</label>
+              <input name="terms_url" className="finp" defaultValue={get("terms_url")} placeholder="/en/terms" />
             </div>
           </div>
         </div>

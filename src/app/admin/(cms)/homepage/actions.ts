@@ -23,7 +23,7 @@ export async function saveSection(key: string, statCount: number, withSuffix: bo
   const stats = statCount > 0 ? readStats(fd, statCount, withSuffix) : undefined;
 
   const extra: Record<string, string> = {};
-  for (const name of ["headingEn", "headingAr", "cta2LabelEn", "cta2LabelAr", "cta2Href"]) {
+  for (const name of ["headingEn", "headingAr", "cta2LabelEn", "cta2LabelAr", "cta2Href", "bgImage", "learnMoreEn", "learnMoreAr", "scrollHintEn", "scrollHintAr"]) {
     const v = fd.get(name) as string | null;
     if (v) extra[name] = v;
   }

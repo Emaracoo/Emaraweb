@@ -11,11 +11,11 @@ export const metadata: Metadata = { title: "Homepage" };
 const SECTIONS = [
   { key: "hero",     label: "Hero Banner",    statCount: 4, withSuffix: true,  titleHint: "Eyebrow tagline shown above the hero heading", hasHeading: false, hasCta2: true,  fieldsHint: undefined },
   { key: "about",    label: "About Teaser",   statCount: 3, withSuffix: false, titleHint: "Eyebrow (Heading is below)", hasHeading: true, hasCta2: false, fieldsHint: undefined },
-  { key: "services", label: "Services Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
+  { key: "services", label: "Services Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined, hasMicrocopy: true },
   { key: "projects", label: "Projects Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
   { key: "partners", label: "Partners Strip", statCount: 0, withSuffix: false, titleHint: undefined, hasHeading: false, hasCta2: false, fieldsHint: "Only Title is shown on the homepage (the small 'Trusted By' label) — Body/CTA fields are unused here." },
   { key: "blog",     label: "Blog Row",       statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
-  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
+  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined, hasBgImage: true },
 ];
 
 export default async function HomepagePage() {
@@ -32,7 +32,7 @@ export default async function HomepagePage() {
 
       {SECTIONS.map(sec => {
         const data = get(sec.key);
-        const d = (data?.data as { stats?: { value: string; suffix?: string; labelEn: string; labelAr: string }[]; headingEn?: string; headingAr?: string; cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string } | null) ?? {};
+        const d = (data?.data as { stats?: { value: string; suffix?: string; labelEn: string; labelAr: string }[]; headingEn?: string; headingAr?: string; cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string; bgImage?: string; learnMoreEn?: string; learnMoreAr?: string; scrollHintEn?: string; scrollHintAr?: string } | null) ?? {};
         const stats = d.stats ?? [];
         const action = saveSection.bind(null, sec.key, sec.statCount, sec.withSuffix);
         return (
@@ -51,6 +51,12 @@ export default async function HomepagePage() {
                   <input name="titleAr" className="finp" dir="rtl" defaultValue={data?.titleAr ?? ""} />
                 </div>
               </div>
+
+              {"hasBgImage" in sec && sec.hasBgImage && (
+                <div className="frow">
+                  <ImageUploadField name="bgImage" label="Background Image" defaultValue={d.bgImage ?? ""} folder="homepage" />
+                </div>
+              )}
 
               {sec.hasHeading && (
                 <div className="g2">
@@ -89,6 +95,32 @@ export default async function HomepagePage() {
                   <input name="ctaHref" className="finp" defaultValue={data?.ctaHref ?? ""} placeholder="/en/projects" />
                 </div>
               </div>
+
+              {"hasMicrocopy" in sec && sec.hasMicrocopy && (
+                <>
+                  <p className="fsec">Card Microcopy</p>
+                  <div className="g2">
+                    <div className="frow">
+                      <label className="flbl">"Learn More" Label (EN)</label>
+                      <input name="learnMoreEn" className="finp" defaultValue={d.learnMoreEn ?? ""} placeholder="Learn more →" />
+                    </div>
+                    <div className="frow">
+                      <label className="flbl">"Learn More" Label (AR)</label>
+                      <input name="learnMoreAr" className="finp" dir="rtl" defaultValue={d.learnMoreAr ?? ""} placeholder="اعرف أكثر ←" />
+                    </div>
+                  </div>
+                  <div className="g2">
+                    <div className="frow">
+                      <label className="flbl">Scroll Hint (EN)</label>
+                      <input name="scrollHintEn" className="finp" defaultValue={d.scrollHintEn ?? ""} placeholder="scroll or tap" />
+                    </div>
+                    <div className="frow">
+                      <label className="flbl">Scroll Hint (AR)</label>
+                      <input name="scrollHintAr" className="finp" dir="rtl" defaultValue={d.scrollHintAr ?? ""} placeholder="اسحب أو اضغط" />
+                    </div>
+                  </div>
+                </>
+              )}
 
               {sec.hasCta2 && (
                 <>
