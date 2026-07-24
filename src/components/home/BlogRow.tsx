@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
-const LABELS = {
+const FALLBACK = {
   en: { eyebrow: "Journal", heading: "A world of\nArt and Engineering.", cta: "Visit the blog →" },
   ar: { eyebrow: "المدونة", heading: "عالم من\nالفن والهندسة.", cta: "زيارة المدونة ←" },
 };
@@ -13,19 +13,27 @@ function formatDate(d: Date, lang: "en" | "ar") {
 interface Props { lang: "en" | "ar" }
 
 export default async function BlogRow({ lang }: Props) {
-  const posts = await prisma.blogPost.findMany({
-    where:   { status: "PUBLISHED" },
-    orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
-    take: 3,
-    select: {
-      slug: true, titleEn: true, titleAr: true, excerptEn: true, excerptAr: true,
-      coverImage: true, category: true, publishedAt: true, createdAt: true,
-    },
-  });
+  const [posts, section] = await Promise.all([
+    prisma.blogPost.findMany({
+      where:   { status: "PUBLISHED" },
+      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+      take: 3,
+      select: {
+        slug: true, titleEn: true, titleAr: true, excerptEn: true, excerptAr: true,
+        coverImage: true, category: true, publishedAt: true, createdAt: true,
+      },
+    }),
+    prisma.homepageSection.findUnique({ where: { key: "blog" } }),
+  ]);
 
   if (posts.length === 0) return null;
 
-  const lbl = LABELS[lang];
+  const fb  = FALLBACK[lang];
+  const lbl = {
+    eyebrow: (lang === "ar" ? section?.bodyAr : section?.bodyEn) || fb.eyebrow,
+    heading: (lang === "ar" ? section?.titleAr : section?.titleEn) || fb.heading,
+    cta:     (lang === "ar" ? section?.ctaLabelAr : section?.ctaLabelEn) || fb.cta,
+  };
   const f   = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs  = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 

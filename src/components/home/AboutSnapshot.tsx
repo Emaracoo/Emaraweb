@@ -27,21 +27,22 @@ const FALLBACK = {
 };
 
 interface Stat { value: string; labelEn: string; labelAr: string }
+interface Data { headingEn?: string; headingAr?: string; stats?: Stat[] }
 
 interface Props { lang: "en" | "ar" }
 
 export default async function AboutSnapshot({ lang }: Props) {
   const section = await prisma.homepageSection.findUnique({ where: { key: "about" } });
   const fb = FALLBACK[lang];
+  const d = (section?.data as Data | null) ?? {};
 
   const eyebrow = (lang === "ar" ? section?.titleAr : section?.titleEn) || fb.eyebrow;
-  const heading = fb.heading; // structural heading kept as-is; body/cta below are editable
+  const heading = (lang === "ar" ? d.headingAr : d.headingEn) || fb.heading;
   const body    = (lang === "ar" ? section?.bodyAr : section?.bodyEn) || fb.body;
   const cta     = (lang === "ar" ? section?.ctaLabelAr : section?.ctaLabelEn) || fb.cta;
 
-  const rawStats = (section?.data as { stats?: Stat[] } | null)?.stats;
-  const stats = rawStats && rawStats.length > 0
-    ? rawStats.map(s => ({ value: s.value, label: (lang === "ar" ? s.labelAr : s.labelEn) || "" }))
+  const stats = d.stats && d.stats.length > 0
+    ? d.stats.map(s => ({ value: s.value, label: (lang === "ar" ? s.labelAr : s.labelEn) || "" }))
     : fb.stats;
 
   const t   = { eyebrow, heading, body, cta, stats };

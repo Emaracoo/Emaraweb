@@ -9,11 +9,13 @@ import { saveSection, addSlide, updateSlide, deleteSlide, moveSlide } from "./ac
 export const metadata: Metadata = { title: "Homepage" };
 
 const SECTIONS = [
-  { key: "hero",     label: "Hero Banner",    statCount: 4, withSuffix: true,  titleHint: "Eyebrow tagline shown above the hero heading" },
-  { key: "about",    label: "About Teaser",   statCount: 3, withSuffix: false, titleHint: undefined },
-  { key: "services", label: "Services Teaser", statCount: 0, withSuffix: false, titleHint: undefined },
-  { key: "projects", label: "Projects Teaser", statCount: 0, withSuffix: false, titleHint: undefined },
-  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline (Body field is the small eyebrow line above it)" },
+  { key: "hero",     label: "Hero Banner",    statCount: 4, withSuffix: true,  titleHint: "Eyebrow tagline shown above the hero heading", hasHeading: false, hasCta2: true,  fieldsHint: undefined },
+  { key: "about",    label: "About Teaser",   statCount: 3, withSuffix: false, titleHint: "Eyebrow (Heading is below)", hasHeading: true, hasCta2: false, fieldsHint: undefined },
+  { key: "services", label: "Services Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
+  { key: "projects", label: "Projects Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
+  { key: "partners", label: "Partners Strip", statCount: 0, withSuffix: false, titleHint: undefined, hasHeading: false, hasCta2: false, fieldsHint: "Only Title is shown on the homepage (the small 'Trusted By' label) — Body/CTA fields are unused here." },
+  { key: "blog",     label: "Blog Row",       statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
+  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
 ];
 
 export default async function HomepagePage() {
@@ -30,11 +32,13 @@ export default async function HomepagePage() {
 
       {SECTIONS.map(sec => {
         const data = get(sec.key);
-        const stats = (data?.data as { stats?: { value: string; suffix?: string; labelEn: string; labelAr: string }[] } | null)?.stats ?? [];
+        const d = (data?.data as { stats?: { value: string; suffix?: string; labelEn: string; labelAr: string }[]; headingEn?: string; headingAr?: string; cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string } | null) ?? {};
+        const stats = d.stats ?? [];
         const action = saveSection.bind(null, sec.key, sec.statCount, sec.withSuffix);
         return (
           <div key={sec.key} className="frm" style={{ marginBottom: "1.25rem" }}>
             <p className="fsec">{sec.label}</p>
+            {sec.fieldsHint && <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8, marginBottom: 12 }}>{sec.fieldsHint}</p>}
             <form action={action}>
               <div className="g2">
                 <div className="frow">
@@ -47,6 +51,20 @@ export default async function HomepagePage() {
                   <input name="titleAr" className="finp" dir="rtl" defaultValue={data?.titleAr ?? ""} />
                 </div>
               </div>
+
+              {sec.hasHeading && (
+                <div className="g2">
+                  <div className="frow">
+                    <label className="flbl">Heading (EN)</label>
+                    <input name="headingEn" className="finp" defaultValue={d.headingEn ?? ""} />
+                  </div>
+                  <div className="frow">
+                    <label className="flbl">Heading (AR)</label>
+                    <input name="headingAr" className="finp" dir="rtl" defaultValue={d.headingAr ?? ""} />
+                  </div>
+                </div>
+              )}
+
               <div className="g2">
                 <div className="frow">
                   <label className="flbl">Body (EN)</label>
@@ -71,6 +89,26 @@ export default async function HomepagePage() {
                   <input name="ctaHref" className="finp" defaultValue={data?.ctaHref ?? ""} placeholder="/en/projects" />
                 </div>
               </div>
+
+              {sec.hasCta2 && (
+                <>
+                  <p className="fsec">Secondary Button</p>
+                  <div className="g3">
+                    <div className="frow">
+                      <label className="flbl">Label (EN)</label>
+                      <input name="cta2LabelEn" className="finp" defaultValue={d.cta2LabelEn ?? ""} placeholder="About Emara" />
+                    </div>
+                    <div className="frow">
+                      <label className="flbl">Label (AR)</label>
+                      <input name="cta2LabelAr" className="finp" dir="rtl" defaultValue={d.cta2LabelAr ?? ""} />
+                    </div>
+                    <div className="frow">
+                      <label className="flbl">Link</label>
+                      <input name="cta2Href" className="finp" defaultValue={d.cta2Href ?? ""} placeholder="/en/about" />
+                    </div>
+                  </div>
+                </>
+              )}
 
               {sec.statCount > 0 && (
                 <>

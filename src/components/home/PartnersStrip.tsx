@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 
-const LABELS = {
+const FALLBACK_LABEL = {
   en: "Trusted By",
   ar: "يثق بنا",
 };
@@ -8,12 +8,16 @@ const LABELS = {
 interface Props { lang: "en" | "ar" }
 
 export default async function PartnersStrip({ lang }: Props) {
-  const partners = await prisma.partner.findMany({
-    where:   { status: "PUBLISHED" },
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-  });
+  const [partners, section] = await Promise.all([
+    prisma.partner.findMany({
+      where:   { status: "PUBLISHED" },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+    }),
+    prisma.homepageSection.findUnique({ where: { key: "partners" } }),
+  ]);
   if (partners.length === 0) return null;
 
+  const label = (lang === "ar" ? section?.titleAr : section?.titleEn) || FALLBACK_LABEL[lang];
   const LOGOS = partners.map(p => ({ name: lang === "ar" && p.nameAr ? p.nameAr : p.nameEn, src: p.logo }));
 
   const f = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
@@ -26,7 +30,7 @@ export default async function PartnersStrip({ lang }: Props) {
         className="text-xs text-center"
         style={{ fontFamily: f, color: "var(--em-muted)", marginBottom: "2rem" }}
       >
-        {LABELS[lang]}
+        {label}
       </p>
 
       <div className="ticker-track" style={{ display: "flex", alignItems: "center", gap: "0", width: "max-content" }}>

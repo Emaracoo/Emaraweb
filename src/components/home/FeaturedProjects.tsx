@@ -1,28 +1,30 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
-const LABELS = {
-  en: {
-    eyebrow: "Our Portfolio", heading: "Project\nhighlights.", cta: "View all projects →",
-    catLabels: { Residential: "Residential", Administrative: "Administrative", Industrial: "Industrial", Commercial: "Commercial" } as Record<string, string>,
-  },
-  ar: {
-    eyebrow: "أعمالنا",        heading: "أبرز\nالمشاريع.",     cta: "عرض جميع المشاريع ←",
-    catLabels: { Residential: "سكني", Administrative: "إداري", Industrial: "صناعي", Commercial: "تجاري" } as Record<string, string>,
-  },
+const FALLBACK = {
+  en: { eyebrow: "Our Portfolio", heading: "Project\nhighlights.", cta: "View all projects →" },
+  ar: { eyebrow: "أعمالنا",        heading: "أبرز\nالمشاريع.",     cta: "عرض جميع المشاريع ←" },
 };
 
 interface Props { lang: "en" | "ar" }
 
 export default async function FeaturedProjects({ lang }: Props) {
-  const FEATURED = await prisma.project.findMany({
-    where:   { featured: true, status: "PUBLISHED" },
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-    take: 3,
-  });
+  const [FEATURED, section] = await Promise.all([
+    prisma.project.findMany({
+      where:   { featured: true, status: "PUBLISHED" },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+      take: 3,
+    }),
+    prisma.homepageSection.findUnique({ where: { key: "projects" } }),
+  ]);
   if (FEATURED.length === 0) return null;
 
-  const lbl = LABELS[lang];
+  const fb  = FALLBACK[lang];
+  const lbl = {
+    eyebrow: (lang === "ar" ? section?.bodyAr : section?.bodyEn) || fb.eyebrow,
+    heading: (lang === "ar" ? section?.titleAr : section?.titleEn) || fb.heading,
+    cta:     (lang === "ar" ? section?.ctaLabelAr : section?.ctaLabelEn) || fb.cta,
+  };
   const f   = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs  = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
@@ -63,7 +65,7 @@ export default async function FeaturedProjects({ lang }: Props) {
                 </div>
                 <div style={{ paddingTop: "1.25rem" }}>
                   <p className="text-xs tracking-[0.25em] uppercase" style={{ fontFamily: f, color: "#993434" }}>
-                    {lbl.catLabels[category] ?? category}
+                    {category}
                   </p>
                   <p className="font-light" style={{ fontFamily: fs, fontSize: "1.25rem", color: "var(--em-text)", marginTop: "0.4rem" }}>
                     {title}

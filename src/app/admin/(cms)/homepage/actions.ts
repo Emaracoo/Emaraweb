@@ -21,7 +21,15 @@ function readStats(fd: FormData, count: number, withSuffix: boolean): Stat[] {
 
 export async function saveSection(key: string, statCount: number, withSuffix: boolean, fd: FormData) {
   const stats = statCount > 0 ? readStats(fd, statCount, withSuffix) : undefined;
-  const data = stats ? ({ stats } as unknown as Prisma.InputJsonValue) : undefined;
+
+  const extra: Record<string, string> = {};
+  for (const name of ["headingEn", "headingAr", "cta2LabelEn", "cta2LabelAr", "cta2Href"]) {
+    const v = fd.get(name) as string | null;
+    if (v) extra[name] = v;
+  }
+
+  const hasData = !!stats || Object.keys(extra).length > 0;
+  const data = hasData ? ({ ...(stats ? { stats } : {}), ...extra } as unknown as Prisma.InputJsonValue) : undefined;
 
   const fields = {
     titleEn:    (fd.get("titleEn") as string) || null,

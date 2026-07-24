@@ -46,9 +46,18 @@ interface Props {
   stats?: HeroStat[];
   eyebrowEn?: string | null;
   eyebrowAr?: string | null;
+  cta1LabelEn?: string | null;
+  cta1LabelAr?: string | null;
+  cta1Href?: string | null;
+  cta2LabelEn?: string | null;
+  cta2LabelAr?: string | null;
+  cta2Href?: string | null;
 }
 
-export default function HomeHero({ slides: slidesProp, stats: statsProp, eyebrowEn, eyebrowAr }: Props) {
+export default function HomeHero({
+  slides: slidesProp, stats: statsProp, eyebrowEn, eyebrowAr,
+  cta1LabelEn, cta1LabelAr, cta1Href, cta2LabelEn, cta2LabelAr, cta2Href,
+}: Props) {
   const lang    = useLang();
   const isAr    = lang === "ar";
   const rawSlides = slidesProp && slidesProp.length > 0 ? slidesProp : FALLBACK_SLIDES;
@@ -56,6 +65,8 @@ export default function HomeHero({ slides: slidesProp, stats: statsProp, eyebrow
   const rawStats = statsProp && statsProp.length > 0 ? statsProp : FALLBACK_STATS;
   const STATS   = rawStats.map(s => ({ target: s.value, suffix: s.suffix, label: (isAr ? s.labelAr : s.labelEn) || s.labelEn }));
   const eyebrow = (isAr ? eyebrowAr : eyebrowEn) || (isAr ? "عالم من الواقع" : "A World Of Reality");
+  const cta1 = { label: (isAr ? cta1LabelAr : cta1LabelEn) || (isAr ? "اكتشف أعمالنا" : "View Our Work"), href: cta1Href || `/${lang}/projects` };
+  const cta2 = { label: (isAr ? cta2LabelAr : cta2LabelEn) || (isAr ? "عن إعمار" : "About Emara"), href: cta2Href || `/${lang}/about` };
   const f       = isAr ? "var(--font-cairo)" : "var(--font-saira)";
   const fSerif  = isAr ? "var(--font-cairo)" : "var(--font-cormorant)";
 
@@ -161,22 +172,22 @@ export default function HomeHero({ slides: slidesProp, stats: statsProp, eyebrow
 
           <div className="flex items-center gap-6 lg:gap-10 flex-wrap">
             <Link
-              href={`/${lang}/projects`}
+              href={cta1.href}
               className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
               style={{ fontFamily: f, color: "rgba(255,255,255,0.8)", borderColor: "rgba(255,255,255,0.35)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "#993434"; e.currentTarget.style.borderColor = "#993434"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
             >
-              {isAr ? "اكتشف أعمالنا" : "View Our Work"}
+              {cta1.label}
             </Link>
             <Link
-              href={`/${lang}/about`}
+              href={cta2.href}
               className="text-xs tracking-[0.25em] uppercase pb-px border-b transition-all duration-300"
               style={{ fontFamily: f, color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
             >
-              {isAr ? "عن إعمار" : "About Emara"}
+              {cta2.label}
             </Link>
           </div>
         </div>

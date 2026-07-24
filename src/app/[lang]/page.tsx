@@ -20,9 +20,10 @@ export default async function HomePage({ params }: Props) {
   if (!hasLocale(lang)) notFound();
   const l = lang as "en" | "ar";
 
-  const [heroSlides, heroSection, services, ctaSection] = await Promise.all([
+  const [heroSlides, heroSection, servicesSection, services, ctaSection] = await Promise.all([
     prisma.homeSlide.findMany({ orderBy: { sortOrder: "asc" } }),
     prisma.homepageSection.findUnique({ where: { key: "hero" } }),
+    prisma.homepageSection.findUnique({ where: { key: "services" } }),
     prisma.service.findMany({
       where:   { status: "PUBLISHED" },
       orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
@@ -31,6 +32,7 @@ export default async function HomePage({ params }: Props) {
   ]);
 
   const heroStats = (heroSection?.data as { stats?: HeroStat[] } | null)?.stats;
+  const heroData  = (heroSection?.data as { cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string } | null) ?? {};
 
   return (
     <>
@@ -41,9 +43,24 @@ export default async function HomePage({ params }: Props) {
           stats={heroStats}
           eyebrowEn={heroSection?.titleEn}
           eyebrowAr={heroSection?.titleAr}
+          cta1LabelEn={heroSection?.ctaLabelEn}
+          cta1LabelAr={heroSection?.ctaLabelAr}
+          cta1Href={heroSection?.ctaHref}
+          cta2LabelEn={heroData.cta2LabelEn}
+          cta2LabelAr={heroData.cta2LabelAr}
+          cta2Href={heroData.cta2Href}
         />
         <AboutSnapshot lang={l} />
-        <ServicesGrid lang={l} services={services} />
+        <ServicesGrid
+          lang={l}
+          services={services}
+          eyebrowEn={servicesSection?.bodyEn}
+          eyebrowAr={servicesSection?.bodyAr}
+          headingEn={servicesSection?.titleEn}
+          headingAr={servicesSection?.titleAr}
+          ctaEn={servicesSection?.ctaLabelEn}
+          ctaAr={servicesSection?.ctaLabelAr}
+        />
         <FeaturedProjects lang={l} />
         <PartnersStrip lang={l} />
         <BlogRow lang={l} />

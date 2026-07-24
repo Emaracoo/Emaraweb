@@ -14,23 +14,28 @@ export interface ServiceDTO {
   badgeEn: string | null; badgeAr: string | null;
 }
 
-const LABELS = {
+const FALLBACK = {
   en: { eyebrow: "Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
   ar: { eyebrow: "خدمات",   heading: "كل التخصصات،\nفي استوديو واحد.",  cta: "عرض جميع الخدمات ←" },
 };
 
-interface Props { lang: "en" | "ar"; services: ServiceDTO[] }
+interface Props {
+  lang: "en" | "ar"; services: ServiceDTO[];
+  eyebrowEn?: string | null; eyebrowAr?: string | null;
+  headingEn?: string | null; headingAr?: string | null;
+  ctaEn?: string | null; ctaAr?: string | null;
+}
 
 const STACK_DEPTH = 3;
 const CARD_H      = 380; // px — front card height
 const PEEK        = 18;  // px — how much each hidden card peeks below
 
-export default function ServicesGrid({ lang, services: servicesProp }: Props) {
-  if (servicesProp.length === 0) return null;
-  return <ServicesStack lang={lang} services={servicesProp} />;
+export default function ServicesGrid(props: Props) {
+  if (props.services.length === 0) return null;
+  return <ServicesStack {...props} />;
 }
 
-function ServicesStack({ lang, services: servicesProp }: Props) {
+function ServicesStack({ lang, services: servicesProp, eyebrowEn, eyebrowAr, headingEn, headingAr, ctaEn, ctaAr }: Props) {
   const [active,  setActive]  = useState(0);
   const [exiting, setExiting] = useState<number | null>(null);
   const [paused,  setPaused]  = useState(false);
@@ -46,8 +51,13 @@ function ServicesStack({ lang, services: servicesProp }: Props) {
     desc:  (lang === "ar" ? s.descriptionAr : s.descriptionEn) || "",
     badge: (lang === "ar" ? s.badgeAr : s.badgeEn) || null,
   }));
-  const n = services.length;
-  const lbl      = LABELS[lang];
+  const n  = services.length;
+  const fb  = FALLBACK[lang];
+  const lbl = {
+    eyebrow: (lang === "ar" ? eyebrowAr : eyebrowEn) || fb.eyebrow,
+    heading: (lang === "ar" ? headingAr : headingEn) || fb.heading,
+    cta:     (lang === "ar" ? ctaAr : ctaEn) || fb.cta,
+  };
   const f        = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs       = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
