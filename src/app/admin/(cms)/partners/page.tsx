@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { S } from "@/lib/admin-styles";
-import { deletePartner } from "./actions";
+import { deletePartner, savePartnersStats } from "./actions";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import type { Metadata } from "next";
 
@@ -11,9 +11,11 @@ export const metadata: Metadata = { title: "Partners" };
 const SC: Record<string, string> = { PUBLISHED: "p", DRAFT: "d", ARCHIVED: "a" };
 
 export default async function PartnersPage() {
-  const partners = await prisma.partner.findMany({
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-  });
+  const [partners, statsSection] = await Promise.all([
+    prisma.partner.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+    prisma.homepageSection.findUnique({ where: { key: "partners_stats" } }),
+  ]);
+  const stats = (statsSection?.data as { stats?: { value: string; labelEn: string; labelAr: string }[] } | null)?.stats ?? [];
 
   return (
     <>
@@ -22,6 +24,35 @@ export default async function PartnersPage() {
         <h1 className="apt">Partners & Clients <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: "14px" }}>({partners.length})</span></h1>
         <Link href="/admin/partners/new" className="ab ab-p"><Plus size={13} strokeWidth={2} />Add Partner</Link>
       </div>
+
+      <div className="frm" style={{ marginBottom: "1.25rem" }}>
+        <p className="fsec">Partners Page Stats Strip</p>
+        <form action={savePartnersStats}>
+          {Array.from({ length: 4 }).map((_, i) => {
+            const stat = stats[i];
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 2fr 2fr", gap: "1rem", marginBottom: "0.75rem" }}>
+                <div className="frow" style={{ marginBottom: 0 }}>
+                  <label className="flbl">Value</label>
+                  <input name={`stat${i}_value`} className="finp" defaultValue={stat?.value ?? ""} placeholder="237" />
+                </div>
+                <div className="frow" style={{ marginBottom: 0 }}>
+                  <label className="flbl">Label (EN)</label>
+                  <input name={`stat${i}_labelEn`} className="finp" defaultValue={stat?.labelEn ?? ""} placeholder="Clients Served" />
+                </div>
+                <div className="frow" style={{ marginBottom: 0 }}>
+                  <label className="flbl">Label (AR)</label>
+                  <input name={`stat${i}_labelAr`} className="finp" dir="rtl" defaultValue={stat?.labelAr ?? ""} />
+                </div>
+              </div>
+            );
+          })}
+          <div style={{ paddingTop: ".75rem" }}>
+            <button type="submit" className="ab ab-s">Save Stats</button>
+          </div>
+        </form>
+      </div>
+
       <div className="aw">
         {partners.length === 0 ? (
           <div className="aempty">No partners yet. <Link href="/admin/partners/new" className="alink">Add the first →</Link></div>

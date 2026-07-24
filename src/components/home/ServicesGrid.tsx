@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Building2, Layers, PenLine, TreePine, Wrench, HardHat, Box } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { SERVICE_ICONS, DEFAULT_SERVICE_ICON } from "@/lib/service-icons";
 
 interface Service { icon: LucideIcon; title: string; desc: string; badge: string | null }
 
@@ -13,9 +13,6 @@ export interface ServiceDTO {
   icon: string | null;
   badgeEn: string | null; badgeAr: string | null;
 }
-
-const ICONS: Record<string, LucideIcon> = { Building2, Layers, PenLine, TreePine, Wrench, HardHat, Box };
-const DEFAULT_ICON = Box;
 
 const LABELS = {
   en: { eyebrow: "Services", heading: "Every discipline,\nin one studio.", cta: "View all services →" },
@@ -44,7 +41,7 @@ function ServicesStack({ lang, services: servicesProp }: Props) {
   const touchStartY  = useRef(0);
 
   const services: Service[] = servicesProp.map(s => ({
-    icon:  (s.icon && ICONS[s.icon]) || DEFAULT_ICON,
+    icon:  (s.icon && SERVICE_ICONS[s.icon]) || DEFAULT_SERVICE_ICON,
     title: (lang === "ar" && s.titleAr) || s.titleEn,
     desc:  (lang === "ar" ? s.descriptionAr : s.descriptionEn) || "",
     badge: (lang === "ar" ? s.badgeAr : s.badgeEn) || null,

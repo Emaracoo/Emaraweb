@@ -2,6 +2,26 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import type { Prisma } from "@prisma/client";
+
+export async function savePartnersStats(fd: FormData) {
+  const stats = [];
+  for (let i = 0; i < 4; i++) {
+    const value   = (fd.get(`stat${i}_value`) as string) || "";
+    const labelEn = (fd.get(`stat${i}_labelEn`) as string) || "";
+    const labelAr = (fd.get(`stat${i}_labelAr`) as string) || "";
+    if (!value && !labelEn && !labelAr) continue;
+    stats.push({ value, labelEn, labelAr });
+  }
+  const data = { stats } as unknown as Prisma.InputJsonValue;
+  await prisma.homepageSection.upsert({
+    where:  { key: "partners_stats" },
+    create: { key: "partners_stats", data },
+    update: { data },
+  });
+  revalidatePath("/admin/partners");
+  revalidatePath("/[lang]/partners", "page");
+}
 
 export async function createPartner(fd: FormData) {
   await prisma.partner.create({

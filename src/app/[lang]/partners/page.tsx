@@ -4,61 +4,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { hasLocale } from "../dictionaries";
+import { prisma } from "@/lib/prisma";
 
 interface Client { name: string; nameAr: string; logo: string }
 interface Sector { labelEn: string; labelAr: string; clients: Client[] }
 
-const SECTORS: Sector[] = [
-  {
-    labelEn: "Media & Broadcasting",
-    labelAr: "الإعلام والبث",
-    clients: [
-      { name: "Al-Arabiya",  nameAr: "قناة العربية", logo: "/clients/al-arabiya.png" },
-      { name: "MBC Group",   nameAr: "مجموعة MBC",   logo: "/clients/mbc.png"        },
-    ],
-  },
-  {
-    labelEn: "Hospitality",
-    labelAr: "الضيافة",
-    clients: [
-      { name: "InterContinental Cairo Semiramis", nameAr: "إنتركونتيننتال القاهرة سميراميس", logo: "/clients/intercontinental.png" },
-    ],
-  },
-  {
-    labelEn: "Retail & Fashion",
-    labelAr: "التجزئة والأزياء",
-    clients: [
-      { name: "United Colors of Benetton", nameAr: "يونايتد كولورز أوف بنيتون", logo: "/clients/benetton.png"        },
-      { name: "Farida Women Wear",         nameAr: "فريدة للأزياء النسائية",     logo: "/clients/farida.png"          },
-    ],
-  },
-  {
-    labelEn: "Industrial & Commercial",
-    labelAr: "الصناعي والتجاري",
-    clients: [
-      { name: "Oriental Weavers", nameAr: "الشرقية للسجاد", logo: "/clients/oriental-weavers.png" },
-      { name: "Mac Mocket",       nameAr: "ماك موكيت",       logo: "/clients/mac-mocket.png"       },
-      { name: "Nokia",            nameAr: "نوكيا",            logo: "/clients/nokia.png"            },
-      { name: "Moulinex",         nameAr: "مولينيكس",         logo: "/clients/moulinex.png"         },
-    ],
-  },
-  {
-    labelEn: "Government & Military",
-    labelAr: "الحكومي والعسكري",
-    clients: [
-      { name: "Egyptian National Police",  nameAr: "الشرطة المصرية",         logo: "/clients/egyptian-police.png"  },
-      { name: "Military Survey Authority", nameAr: "إدارة المساحة العسكرية", logo: "/clients/military-survey.png"  },
-    ],
-  },
-  {
-    labelEn: "Healthcare",
-    labelAr: "الرعاية الصحية",
-    clients: [
-      { name: "El Bialy Dental", nameAr: "عيادة البيلي لطب الأسنان", logo: "/clients/bialy-dental.png" },
-      { name: "Sphinx Cure",     nameAr: "سفنكس كيور",               logo: "/clients/sphinx.png"       },
-      { name: "MUP",             nameAr: "MUP",                       logo: "/clients/mup.png"          },
-    ],
-  },
+interface Stat { value: string; labelEn: string; labelAr: string }
+
+const FALLBACK_STATS: Stat[] = [
+  { value: "237",     labelEn: "Clients Served",      labelAr: "عميل"            },
+  { value: "40",      labelEn: "Years of Experience", labelAr: "عاماً من الخبرة" },
+  { value: "423",     labelEn: "Projects Delivered",  labelAr: "مشروع منجز"      },
+  { value: "397,587", labelEn: "Sq Feet",             labelAr: "قدم مربع"        },
 ];
 
 const T = {
@@ -67,12 +24,6 @@ const T = {
     title: "Built on",
     accent: "Trust",
     subtitle: "The clients and collaborators who have shaped four decades of practice.",
-    stats: [
-      { value: "237",     label: "Clients Served"      },
-      { value: "40",      label: "Years of Experience" },
-      { value: "423",     label: "Projects Delivered"  },
-      { value: "397,587", label: "Sq Feet"             },
-    ],
     allClients: "All Clients",
     ctaHeading: "Ready to join our client list?",
     ctaBtn:     "Start a Conversation →",
@@ -82,12 +33,6 @@ const T = {
     title:   "مبني على",
     accent:  "الثقة",
     subtitle: "العملاء والشركاء الذين شكّلوا أربعة عقود من الممارسة.",
-    stats: [
-      { value: "٢٣٧",     label: "عميل"        },
-      { value: "٤٠",      label: "عاماً من الخبرة" },
-      { value: "٤٢٣",     label: "مشروع منجز"  },
-      { value: "٣٩٧٬٥٨٧", label: "قدم مربع"    },
-    ],
     allClients: "جميع العملاء",
     ctaHeading: "هل أنت مستعد للانضمام إلى قائمة عملائنا؟",
     ctaBtn:     "ابدأ محادثة ←",
@@ -104,6 +49,28 @@ export default async function PartnersPage({ params }: Props) {
   const f  = l === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
+  const [partners, statsSection] = await Promise.all([
+    prisma.partner.findMany({
+      where:   { status: "PUBLISHED" },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+    }),
+    prisma.homepageSection.findUnique({ where: { key: "partners_stats" } }),
+  ]);
+
+  const SECTORS: Sector[] = [];
+  for (const p of partners) {
+    let sector = SECTORS.find(s => s.labelEn === p.sector);
+    if (!sector) {
+      sector = { labelEn: p.sector, labelAr: p.sectorAr ?? p.sector, clients: [] };
+      SECTORS.push(sector);
+    }
+    sector.clients.push({ name: p.nameEn, nameAr: p.nameAr ?? p.nameEn, logo: p.logo });
+  }
+
+  const rawStats = (statsSection?.data as { stats?: Stat[] } | null)?.stats;
+  const stats = (rawStats && rawStats.length > 0 ? rawStats : FALLBACK_STATS)
+    .map(s => ({ value: s.value, label: (l === "ar" ? s.labelAr : s.labelEn) || "" }));
+
   return (
     <>
       <Header />
@@ -114,11 +81,11 @@ export default async function PartnersPage({ params }: Props) {
         <div style={{ background: "var(--em-surface)", borderBottom: "1px solid var(--em-border)" }}>
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="grid grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--em-border)" }}>
-              {t.stats.map((s, i) => (
+              {stats.map((s, i) => (
                 <div
                   key={s.label}
                   className="py-8 px-6 lg:px-10"
-                  style={{ borderInlineEnd: i < t.stats.length - 1 ? "1px solid var(--em-border)" : "none" }}
+                  style={{ borderInlineEnd: i < stats.length - 1 ? "1px solid var(--em-border)" : "none" }}
                 >
                   <p className="font-light mb-1" style={{ fontFamily: fs, fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#993434" }}>
                     {s.value}
