@@ -68,3 +68,29 @@ export async function deleteProject(id: string) {
   revalidatePath("/admin/projects");
   redirect("/admin/projects");
 }
+
+export async function toggleProjectFeatured(id: string) {
+  const row = await prisma.project.findUnique({ where: { id } });
+  if (!row) return;
+  await prisma.project.update({ where: { id }, data: { featured: !row.featured } });
+  revalidatePath("/admin/projects");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
+
+export async function moveProjectOrder(id: string, direction: "up" | "down") {
+  const rows = await prisma.project.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] });
+  const idx = rows.findIndex(r => r.id === id);
+  if (idx === -1) return;
+  const swapWith = direction === "up" ? idx - 1 : idx + 1;
+  if (swapWith < 0 || swapWith >= rows.length) return;
+  const a = rows[idx];
+  const b = rows[swapWith];
+  await prisma.$transaction([
+    prisma.project.update({ where: { id: a.id }, data: { sortOrder: b.sortOrder } }),
+    prisma.project.update({ where: { id: b.id }, data: { sortOrder: a.sortOrder } }),
+  ]);
+  revalidatePath("/admin/projects");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}

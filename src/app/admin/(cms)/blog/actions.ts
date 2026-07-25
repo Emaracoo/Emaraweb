@@ -62,3 +62,19 @@ export async function deleteBlogPost(id: string) {
   revalidatePath("/admin/blog");
   redirect("/admin/blog");
 }
+
+export async function toggleBlogStatus(id: string) {
+  const row = await prisma.blogPost.findUnique({ where: { id } });
+  if (!row) return;
+  const nextStatus = row.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED";
+  await prisma.blogPost.update({
+    where: { id },
+    data: {
+      status: nextStatus,
+      publishedAt: nextStatus === "PUBLISHED" && !row.publishedAt ? new Date() : row.publishedAt,
+    },
+  });
+  revalidatePath("/admin/blog");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}

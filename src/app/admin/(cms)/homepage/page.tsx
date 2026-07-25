@@ -1,10 +1,15 @@
 import { prisma } from "@/lib/prisma";
 import { S } from "@/lib/admin-styles";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Plus } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { saveSection, addSlide, updateSlide, deleteSlide, moveSlide, moveSection, toggleSection } from "./actions";
+import { toggleServiceStatus, moveServiceOrder } from "../services/actions";
+import { toggleProjectFeatured, moveProjectOrder } from "../projects/actions";
+import { togglePartnerStatus, movePartnerOrder } from "../partners/actions";
+import { toggleBlogStatus } from "../blog/actions";
 
 export const metadata: Metadata = { title: "Homepage" };
 
@@ -19,9 +24,13 @@ const SECTIONS = [
 ];
 
 export default async function HomepagePage() {
-  const [sections, slides] = await Promise.all([
+  const [sections, slides, services, projects, partners, blogPosts] = await Promise.all([
     prisma.homepageSection.findMany(),
     prisma.homeSlide.findMany({ orderBy: { sortOrder: "asc" } }),
+    prisma.service.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+    prisma.project.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+    prisma.partner.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] }),
+    prisma.blogPost.findMany({ orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }], take: 10 }),
   ]);
   const sectionByKey = new Map(SECTIONS.map(s => [s.key, s]));
   const orderedRows = [...sections]
@@ -197,6 +206,68 @@ export default async function HomepagePage() {
                 <button type="submit" className="ab ab-s">Save {sec.label}</button>
               </div>
             </form>
+
+            {sec.key === "services" && (
+              <div style={{ borderTop: "1px solid #F0EEEA", marginTop: "1.25rem", paddingTop: "1rem" }}>
+                <p className="fsec" style={{ marginTop: 0 }}>Service Cards <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({services.length}) — shown on the homepage in this order, published only</span></p>
+                {services.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No services yet.</p>}
+                {services.map((svc, si) => (
+                  <div key={svc.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: svc.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <span style={{ flex: 1, fontSize: 13 }}>{svc.titleEn}{svc.status !== "PUBLISHED" && " (draft — hidden)"}</span>
+                    <form action={moveServiceOrder.bind(null, svc.id, "up")}><button type="submit" className="ab ab-s" disabled={si === 0}>↑</button></form>
+                    <form action={moveServiceOrder.bind(null, svc.id, "down")}><button type="submit" className="ab ab-s" disabled={si === services.length - 1}>↓</button></form>
+                    <form action={toggleServiceStatus.bind(null, svc.id)}><button type="submit" className="ab ab-s">{svc.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
+                    <Link href={`/admin/services/${svc.id}/edit`} className="ab ab-s">Edit →</Link>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {sec.key === "projects" && (
+              <div style={{ borderTop: "1px solid #F0EEEA", marginTop: "1.25rem", paddingTop: "1rem" }}>
+                <p className="fsec" style={{ marginTop: 0 }}>Project Cards <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({projects.length}) — the top 3 Featured &amp; Published projects, in this order, show on the homepage</span></p>
+                {projects.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No projects yet.</p>}
+                {projects.map((p, pi) => (
+                  <div key={p.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.featured && p.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <span style={{ flex: 1, fontSize: 13 }}>{p.titleEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}{!p.featured && " (not featured)"}</span>
+                    <form action={moveProjectOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
+                    <form action={moveProjectOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === projects.length - 1}>↓</button></form>
+                    <form action={toggleProjectFeatured.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.featured ? "Unfeature" : "Feature"}</button></form>
+                    <Link href={`/admin/projects/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {sec.key === "partners" && (
+              <div style={{ borderTop: "1px solid #F0EEEA", marginTop: "1.25rem", paddingTop: "1rem" }}>
+                <p className="fsec" style={{ marginTop: 0 }}>Partner Logos <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({partners.length}) — all Published partners show in the "Trusted By" strip, in this order</span></p>
+                {partners.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No partners yet.</p>}
+                {partners.map((p, pi) => (
+                  <div key={p.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <span style={{ flex: 1, fontSize: 13 }}>{p.nameEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}</span>
+                    <form action={movePartnerOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
+                    <form action={movePartnerOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === partners.length - 1}>↓</button></form>
+                    <form action={togglePartnerStatus.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
+                    <Link href={`/admin/partners/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {sec.key === "blog" && (
+              <div style={{ borderTop: "1px solid #F0EEEA", marginTop: "1.25rem", paddingTop: "1rem" }}>
+                <p className="fsec" style={{ marginTop: 0 }}>Blog Posts <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>— the latest 3 Published posts show on the homepage</span></p>
+                {blogPosts.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No posts yet.</p>}
+                {blogPosts.map((post) => (
+                  <div key={post.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: post.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <span style={{ flex: 1, fontSize: 13 }}>{post.titleEn}{post.status !== "PUBLISHED" && " (draft — hidden)"}</span>
+                    <form action={toggleBlogStatus.bind(null, post.id)}><button type="submit" className="ab ab-s">{post.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
+                    <Link href={`/admin/blog/${post.id}/edit`} className="ab ab-s">Edit →</Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}
