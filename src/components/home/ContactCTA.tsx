@@ -50,30 +50,14 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
   const f           = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs          = lang === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const sectionRef  = useRef<HTMLElement>(null);
-  const bgRef       = useRef<HTMLDivElement>(null);
   const mainTextRef = useRef<HTMLHeadingElement>(null);
   const ghostRefs   = useRef<(HTMLHeadingElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const bg      = bgRef.current;
     const main    = mainTextRef.current;
     const ghosts  = ghostRefs.current.filter(Boolean) as HTMLHeadingElement[];
     if (!section || !main || ghosts.length === 0) return;
-
-    // Pins the background image itself (not the whole section) to the viewport for as long as
-    // the section is scrolling past, so the image holds still while the text/content scrolls
-    // over it. Uses ScrollTrigger's element pinning (real position:fixed under the hood) rather
-    // than CSS `background-attachment: fixed`, which has a long history of bugs on iOS Safari.
-    const pin = bg
-      ? ScrollTrigger.create({
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          pin: bg,
-          pinSpacing: false,
-        })
-      : null;
 
     const tl = gsap.timeline({
       scrollTrigger: { trigger: section, start: "top 80%", end: "center 40%", scrub: 1.4 },
@@ -95,7 +79,6 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
     });
 
     return () => {
-      pin?.kill();
       tl.scrollTrigger?.kill();
       tl.kill();
     };
@@ -126,13 +109,12 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
       style={{ minHeight: "520px", display: "flex", alignItems: "center", justifyContent: "center" }}
     >
       <div
-        ref={bgRef}
         className="absolute inset-0"
         style={{
-          transform: "scale(1.3)",
           backgroundImage: `url('${bgImage || DEFAULT_BG}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundAttachment: "fixed",
         }}
       />
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(26,10,10,0.88) 0%, rgba(68,25,25,0.78) 100%)" }} />
