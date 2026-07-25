@@ -21,10 +21,12 @@ const NAV_LABELS = {
 
 interface Props {
   logoUrl?: string | null;
+  companyName?: string | null;
 }
 
-export default function HeaderClient({ logoUrl }: Props) {
+export default function HeaderClient({ logoUrl, companyName }: Props) {
   const logo      = logoUrl || "/logo.png";
+  const company   = companyName || "Emara Co.";
   const lang      = useLang();
   const t         = NAV_LABELS[lang];
   const pathname  = usePathname();
@@ -96,7 +98,7 @@ export default function HeaderClient({ logoUrl }: Props) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={logo}
-              alt="Emara Co."
+              alt={company}
               style={{
                 height: "88px",
                 width: "auto",
