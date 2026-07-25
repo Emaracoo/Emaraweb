@@ -20,8 +20,7 @@ export function proxy(request: NextRequest) {
   if (hasLocale) return;
 
   const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
 }
 
 export const config = {
