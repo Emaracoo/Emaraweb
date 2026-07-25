@@ -91,7 +91,7 @@ export default function HeaderClient({ logoUrl, companyName }: Props) {
           borderBottom:   solid ? "1px solid var(--em-header-border)" : "none",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-28">
 
           {/* Logo */}
           <Link href={`/${lang}`} className="flex items-center group">
@@ -100,7 +100,7 @@ export default function HeaderClient({ logoUrl, companyName }: Props) {
               src={logo}
               alt={company}
               style={{
-                height: "88px",
+                height: "108px",
                 width: "auto",
                 filter: (!solid || dark) ? "brightness(0) invert(1)" : "none",
                 transition: "filter 0.4s ease",
