@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Plus } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { DeleteButton } from "@/components/admin/DeleteButton";
-import { saveSection, addSlide, updateSlide, deleteSlide, moveSlide } from "./actions";
+import { saveSection, addSlide, updateSlide, deleteSlide, moveSlide, moveSection, toggleSection } from "./actions";
 
 export const metadata: Metadata = { title: "Homepage" };
 
@@ -23,21 +23,41 @@ export default async function HomepagePage() {
     prisma.homepageSection.findMany(),
     prisma.homeSlide.findMany({ orderBy: { sortOrder: "asc" } }),
   ]);
-  const get = (key: string) => sections.find(s => s.key === key);
+  const sectionByKey = new Map(SECTIONS.map(s => [s.key, s]));
+  const orderedRows = [...sections]
+    .filter(row => sectionByKey.has(row.key))
+    .sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
     <>
       <style>{S}</style>
       <div className="aph"><h1 className="apt">Homepage Editor</h1></div>
+      <p style={{ fontSize: 12, color: "#9A9A9A", marginTop: -8, marginBottom: 16 }}>Use ↑ / ↓ to reorder sections on the homepage, and Hide / Show to toggle a section off entirely.</p>
 
-      {SECTIONS.map(sec => {
-        const data = get(sec.key);
+      {orderedRows.map((data, i) => {
+        const sec = sectionByKey.get(data.key)!;
         const d = (data?.data as { stats?: { value: string; suffix?: string; labelEn: string; labelAr: string }[]; headingEn?: string; headingAr?: string; cta2LabelEn?: string; cta2LabelAr?: string; cta2Href?: string; bgImage?: string; learnMoreEn?: string; learnMoreAr?: string; scrollHintEn?: string; scrollHintAr?: string } | null) ?? {};
         const stats = d.stats ?? [];
         const action = saveSection.bind(null, sec.key, sec.statCount, sec.withSuffix);
         return (
-          <div key={sec.key} className="frm" style={{ marginBottom: "1.25rem" }}>
-            <p className="fsec">{sec.label}</p>
+          <div key={sec.key} className="frm" style={{ marginBottom: "1.25rem", opacity: data.enabled ? 1 : 0.55 }}>
+            <div className="aph" style={{ marginBottom: "0.5rem" }}>
+              <p className="fsec" style={{ margin: 0, border: "none", padding: 0 }}>
+                {sec.label}
+                {!data.enabled && <span style={{ fontWeight: 400, fontSize: 11, color: "#9A9A9A" }}> (hidden on homepage)</span>}
+              </p>
+              <div className="aact">
+                <form action={moveSection.bind(null, sec.key, "up")}>
+                  <button type="submit" className="ab ab-s" disabled={i === 0}>↑ Move up</button>
+                </form>
+                <form action={moveSection.bind(null, sec.key, "down")}>
+                  <button type="submit" className="ab ab-s" disabled={i === orderedRows.length - 1}>↓ Move down</button>
+                </form>
+                <form action={toggleSection.bind(null, sec.key)}>
+                  <button type="submit" className="ab ab-s">{data.enabled ? "Hide" : "Show"}</button>
+                </form>
+              </div>
+            </div>
             {sec.fieldsHint && <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8, marginBottom: 12 }}>{sec.fieldsHint}</p>}
             <form action={action}>
               <div className="g2">

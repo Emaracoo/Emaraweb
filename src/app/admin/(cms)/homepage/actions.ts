@@ -92,3 +92,28 @@ export async function moveSlide(id: string, direction: "up" | "down") {
   ]);
   revalidatePath("/admin/homepage");
 }
+
+export async function moveSection(key: string, direction: "up" | "down") {
+  const rows = await prisma.homepageSection.findMany({ orderBy: { sortOrder: "asc" } });
+  const idx = rows.findIndex(s => s.key === key);
+  if (idx === -1) return;
+  const swapWith = direction === "up" ? idx - 1 : idx + 1;
+  if (swapWith < 0 || swapWith >= rows.length) return;
+
+  const a = rows[idx];
+  const b = rows[swapWith];
+  await prisma.$transaction([
+    prisma.homepageSection.update({ where: { id: a.id }, data: { sortOrder: b.sortOrder } }),
+    prisma.homepageSection.update({ where: { id: b.id }, data: { sortOrder: a.sortOrder } }),
+  ]);
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
+
+export async function toggleSection(key: string) {
+  const row = await prisma.homepageSection.findUnique({ where: { key } });
+  if (!row) return;
+  await prisma.homepageSection.update({ where: { key }, data: { enabled: !row.enabled } });
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
