@@ -127,8 +127,9 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
     >
       <div
         ref={bgRef}
-        className="absolute inset-0"
+        className="absolute inset-x-0"
         style={{
+          top: "-60%", bottom: "-60%",
           backgroundImage: `url('${bgImage || DEFAULT_BG}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
