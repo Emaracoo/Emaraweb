@@ -63,6 +63,14 @@ export async function toggleServiceStatus(id: string) {
   revalidatePath("/[lang]", "page");
 }
 
+export async function updateServiceCoverImage(id: string, fd: FormData) {
+  const coverImage = fd.get("coverImage") as string;
+  await prisma.service.update({ where: { id }, data: { coverImage: coverImage || null } });
+  revalidatePath("/admin/services");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
+
 export async function moveServiceOrder(id: string, direction: "up" | "down") {
   const rows = await prisma.service.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] });
   const idx = rows.findIndex(r => r.id === id);

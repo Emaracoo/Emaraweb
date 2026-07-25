@@ -64,6 +64,15 @@ export async function deletePartner(id: string) {
   redirect("/admin/partners");
 }
 
+export async function updatePartnerLogo(id: string, fd: FormData) {
+  const logo = fd.get("logo") as string;
+  if (!logo) return;
+  await prisma.partner.update({ where: { id }, data: { logo } });
+  revalidatePath("/admin/partners");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
+
 export async function togglePartnerStatus(id: string) {
   const row = await prisma.partner.findUnique({ where: { id } });
   if (!row) return;

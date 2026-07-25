@@ -6,9 +6,9 @@ import { Plus } from "lucide-react";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { saveSection, addSlide, updateSlide, deleteSlide, moveSlide, moveSection, toggleSection } from "./actions";
-import { toggleServiceStatus, moveServiceOrder } from "../services/actions";
-import { toggleProjectFeatured, moveProjectOrder } from "../projects/actions";
-import { togglePartnerStatus, movePartnerOrder } from "../partners/actions";
+import { toggleServiceStatus, moveServiceOrder, updateServiceCoverImage } from "../services/actions";
+import { toggleProjectFeatured, moveProjectOrder, updateProjectCoverImage } from "../projects/actions";
+import { togglePartnerStatus, movePartnerOrder, updatePartnerLogo } from "../partners/actions";
 import { toggleBlogStatus } from "../blog/actions";
 
 export const metadata: Metadata = { title: "Homepage" };
@@ -253,12 +253,27 @@ export default async function HomepagePage() {
                 <p className="fsec" style={{ marginTop: 0 }}>Service Cards <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({services.length}) — shown on the homepage in this order, published only</span></p>
                 {services.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No services yet.</p>}
                 {services.map((svc, si) => (
-                  <div key={svc.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: svc.status === "PUBLISHED" ? 1 : 0.5 }}>
-                    <span style={{ flex: 1, fontSize: 13 }}>{svc.titleEn}{svc.status !== "PUBLISHED" && " (draft — hidden)"}</span>
-                    <form action={moveServiceOrder.bind(null, svc.id, "up")}><button type="submit" className="ab ab-s" disabled={si === 0}>↑</button></form>
-                    <form action={moveServiceOrder.bind(null, svc.id, "down")}><button type="submit" className="ab ab-s" disabled={si === services.length - 1}>↓</button></form>
-                    <form action={toggleServiceStatus.bind(null, svc.id)}><button type="submit" className="ab ab-s">{svc.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
-                    <Link href={`/admin/services/${svc.id}/edit`} className="ab ab-s">Edit →</Link>
+                  <div key={svc.id} style={{ padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: svc.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                      {svc.coverImage ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={svc.coverImage} alt="" style={{ width: 48, height: 34, objectFit: "cover", flexShrink: 0, border: "1px solid #E5E3DF" }} />
+                      ) : (
+                        <span style={{ width: 48, height: 34, flexShrink: 0, border: "1px solid #E5E3DF", background: "#F5F4F2" }} />
+                      )}
+                      <span style={{ flex: 1, fontSize: 13 }}>{svc.titleEn}{svc.status !== "PUBLISHED" && " (draft — hidden)"}</span>
+                      <form action={moveServiceOrder.bind(null, svc.id, "up")}><button type="submit" className="ab ab-s" disabled={si === 0}>↑</button></form>
+                      <form action={moveServiceOrder.bind(null, svc.id, "down")}><button type="submit" className="ab ab-s" disabled={si === services.length - 1}>↓</button></form>
+                      <form action={toggleServiceStatus.bind(null, svc.id)}><button type="submit" className="ab ab-s">{svc.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
+                      <Link href={`/admin/services/${svc.id}/edit`} className="ab ab-s">Edit →</Link>
+                    </div>
+                    <details style={{ marginTop: "0.5rem", marginInlineStart: "56px" }}>
+                      <summary style={{ fontSize: 12, color: "#993434", cursor: "pointer" }}>Change cover photo</summary>
+                      <form action={updateServiceCoverImage.bind(null, svc.id)} style={{ marginTop: "0.5rem", maxWidth: 360 }}>
+                        <ImageUploadField name="coverImage" label="Cover Image" defaultValue={svc.coverImage ?? ""} folder="services" />
+                        <button type="submit" className="ab ab-s">Save Photo</button>
+                      </form>
+                    </details>
                   </div>
                 ))}
               </div>
@@ -269,12 +284,23 @@ export default async function HomepagePage() {
                 <p className="fsec" style={{ marginTop: 0 }}>Project Cards <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({projects.length}) — the top 3 Featured &amp; Published projects, in this order, show on the homepage</span></p>
                 {projects.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No projects yet.</p>}
                 {projects.map((p, pi) => (
-                  <div key={p.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.featured && p.status === "PUBLISHED" ? 1 : 0.5 }}>
-                    <span style={{ flex: 1, fontSize: 13 }}>{p.titleEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}{!p.featured && " (not featured)"}</span>
-                    <form action={moveProjectOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
-                    <form action={moveProjectOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === projects.length - 1}>↓</button></form>
-                    <form action={toggleProjectFeatured.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.featured ? "Unfeature" : "Feature"}</button></form>
-                    <Link href={`/admin/projects/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                  <div key={p.id} style={{ padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.featured && p.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.coverImage} alt="" style={{ width: 48, height: 34, objectFit: "cover", flexShrink: 0, border: "1px solid #E5E3DF" }} />
+                      <span style={{ flex: 1, fontSize: 13 }}>{p.titleEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}{!p.featured && " (not featured)"}</span>
+                      <form action={moveProjectOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
+                      <form action={moveProjectOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === projects.length - 1}>↓</button></form>
+                      <form action={toggleProjectFeatured.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.featured ? "Unfeature" : "Feature"}</button></form>
+                      <Link href={`/admin/projects/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                    </div>
+                    <details style={{ marginTop: "0.5rem", marginInlineStart: "56px" }}>
+                      <summary style={{ fontSize: 12, color: "#993434", cursor: "pointer" }}>Change cover photo</summary>
+                      <form action={updateProjectCoverImage.bind(null, p.id)} style={{ marginTop: "0.5rem", maxWidth: 360 }}>
+                        <ImageUploadField name="coverImage" label="Cover Image" defaultValue={p.coverImage} folder="projects" />
+                        <button type="submit" className="ab ab-s">Save Photo</button>
+                      </form>
+                    </details>
                   </div>
                 ))}
               </div>
@@ -285,12 +311,23 @@ export default async function HomepagePage() {
                 <p className="fsec" style={{ marginTop: 0 }}>Partner Logos <span style={{ fontWeight: 400, color: "#9A9A9A", fontSize: 12 }}>({partners.length}) — all Published partners show in the "Trusted By" strip, in this order</span></p>
                 {partners.length === 0 && <p style={{ fontSize: 13, color: "#9A9A9A" }}>No partners yet.</p>}
                 {partners.map((p, pi) => (
-                  <div key={p.id} style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.status === "PUBLISHED" ? 1 : 0.5 }}>
-                    <span style={{ flex: 1, fontSize: 13 }}>{p.nameEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}</span>
-                    <form action={movePartnerOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
-                    <form action={movePartnerOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === partners.length - 1}>↓</button></form>
-                    <form action={togglePartnerStatus.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
-                    <Link href={`/admin/partners/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                  <div key={p.id} style={{ padding: "0.5rem 0", borderBottom: "1px solid #F5F4F2", opacity: p.status === "PUBLISHED" ? 1 : 0.5 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.logo} alt="" style={{ width: 48, height: 34, objectFit: "contain", flexShrink: 0, border: "1px solid #E5E3DF", background: "#fff" }} />
+                      <span style={{ flex: 1, fontSize: 13 }}>{p.nameEn}{p.status !== "PUBLISHED" && " (draft — hidden)"}</span>
+                      <form action={movePartnerOrder.bind(null, p.id, "up")}><button type="submit" className="ab ab-s" disabled={pi === 0}>↑</button></form>
+                      <form action={movePartnerOrder.bind(null, p.id, "down")}><button type="submit" className="ab ab-s" disabled={pi === partners.length - 1}>↓</button></form>
+                      <form action={togglePartnerStatus.bind(null, p.id)}><button type="submit" className="ab ab-s">{p.status === "PUBLISHED" ? "Unpublish" : "Publish"}</button></form>
+                      <Link href={`/admin/partners/${p.id}/edit`} className="ab ab-s">Edit →</Link>
+                    </div>
+                    <details style={{ marginTop: "0.5rem", marginInlineStart: "56px" }}>
+                      <summary style={{ fontSize: 12, color: "#993434", cursor: "pointer" }}>Change logo</summary>
+                      <form action={updatePartnerLogo.bind(null, p.id)} style={{ marginTop: "0.5rem", maxWidth: 360 }}>
+                        <ImageUploadField name="logo" label="Logo" defaultValue={p.logo} folder="partners" />
+                        <button type="submit" className="ab ab-s">Save Logo</button>
+                      </form>
+                    </details>
                   </div>
                 ))}
               </div>

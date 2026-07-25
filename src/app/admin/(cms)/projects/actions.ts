@@ -78,6 +78,15 @@ export async function toggleProjectFeatured(id: string) {
   revalidatePath("/[lang]", "page");
 }
 
+export async function updateProjectCoverImage(id: string, fd: FormData) {
+  const coverImage = fd.get("coverImage") as string;
+  if (!coverImage) return;
+  await prisma.project.update({ where: { id }, data: { coverImage } });
+  revalidatePath("/admin/projects");
+  revalidatePath("/admin/homepage");
+  revalidatePath("/[lang]", "page");
+}
+
 export async function moveProjectOrder(id: string, direction: "up" | "down") {
   const rows = await prisma.project.findMany({ orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }] });
   const idx = rows.findIndex(r => r.id === id);
