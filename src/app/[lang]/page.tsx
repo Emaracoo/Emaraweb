@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeHero, { type HeroStat } from "@/components/home/HomeHero";
@@ -13,6 +14,26 @@ import { prisma } from "@/lib/prisma";
 
 interface Props {
   params: Promise<{ lang: string }>;
+}
+
+const SEO_FALLBACK = {
+  en: { title: "Emara — Architecture Studio", description: "Award-winning architecture and design studio crafting spaces that endure." },
+  ar: { title: "إعمار — استوديو معماري", description: "استوديو تصميم وعمارة حائز على جوائز، يصنع مساحات تدوم." },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  const l = lang as "en" | "ar";
+  const fb = SEO_FALLBACK[l];
+
+  const rows = await prisma.siteSetting.findMany({ where: { group: "seo" } });
+  const get = (key: string) => rows.find(r => r.key === key)?.value || undefined;
+
+  return {
+    title: get(`home_title_${l}`) ?? fb.title,
+    description: get(`home_desc_${l}`) ?? fb.description,
+  };
 }
 
 export default async function HomePage({ params }: Props) {
