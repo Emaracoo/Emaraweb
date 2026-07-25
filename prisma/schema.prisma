@@ -173,12 +173,13 @@ model HomepageSection {
 }
 
 model HomeSlide {
-  id        String   @id @default(cuid())
-  image     String
-  titleEn   String
-  titleAr   String?
-  sortOrder Int      @default(0)
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  image       String
+  mobileImage String?
+  titleEn     String
+  titleAr     String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
 }
 
 model ActivityLog {

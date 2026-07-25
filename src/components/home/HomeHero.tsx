@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/components/LangProvider";
 
-export interface HeroSlide { image: string; titleEn: string; titleAr: string | null }
+export interface HeroSlide { image: string; mobileImage?: string | null; titleEn: string; titleAr: string | null }
 export interface HeroStat { value: number; suffix: string; labelEn: string; labelAr: string }
 
 /* Fallbacks used only if the database has no slides/stats configured yet */
@@ -61,7 +61,7 @@ export default function HomeHero({
   const lang    = useLang();
   const isAr    = lang === "ar";
   const rawSlides = slidesProp && slidesProp.length > 0 ? slidesProp : FALLBACK_SLIDES;
-  const slides  = rawSlides.map(s => ({ image: s.image, title: (isAr ? s.titleAr : s.titleEn) || s.titleEn }));
+  const slides  = rawSlides.map(s => ({ image: s.image, mobileImage: s.mobileImage, title: (isAr ? s.titleAr : s.titleEn) || s.titleEn }));
   const rawStats = statsProp && statsProp.length > 0 ? statsProp : FALLBACK_STATS;
   const STATS   = rawStats.map(s => ({ target: s.value, suffix: s.suffix, label: (isAr ? s.labelAr : s.labelEn) || s.labelEn }));
   const eyebrow = (isAr ? eyebrowAr : eyebrowEn) || (isAr ? "عالم من الواقع" : "A World Of Reality");
@@ -132,7 +132,11 @@ export default function HomeHero({
         style={{ opacity: fading ? 0 : 1, transition: "opacity 0.6s ease" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={slide.image} alt="" className="ken-burns w-full h-full object-cover" style={{ opacity: 0.75 }} />
+        <picture>
+          {slide.mobileImage && <source media="(max-width: 767px)" srcSet={slide.mobileImage} />}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={slide.image} alt="" className="ken-burns w-full h-full object-cover" style={{ opacity: 0.75 }} />
+        </picture>
         <div className="absolute inset-0" style={{ background: `linear-gradient(to ${isAr ? "left" : "right"}, rgba(26,25,22,0.92) 30%, rgba(26,25,22,0.35) 75%, rgba(26,25,22,0.15) 100%)` }} />
         <div className="absolute inset-x-0 top-0 h-40" style={{ background: "linear-gradient(to bottom, rgba(26,25,22,0.6) 0%, transparent 100%)" }} />
       </div>

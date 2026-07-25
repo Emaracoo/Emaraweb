@@ -221,7 +221,11 @@ export default async function HomepagePage() {
                 {slides.map((slide, si) => (
                   <div key={slide.id} style={{ borderTop: "1px solid #F0EEEA", paddingTop: "1rem", marginTop: "1rem" }}>
                     <form action={updateSlide.bind(null, slide.id)}>
-                      <ImageUploadField name="image" label={`Slide ${si + 1} Image`} defaultValue={slide.image} folder="homepage" />
+                      <div className="g2">
+                        <ImageUploadField name="image" label={`Slide ${si + 1} Image (Desktop)`} defaultValue={slide.image} folder="homepage" />
+                        <ImageUploadField name="mobileImage" label={`Slide ${si + 1} Image (Mobile — optional)`} defaultValue={slide.mobileImage ?? ""} folder="homepage" />
+                      </div>
+                      <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8, marginBottom: 12 }}>If no mobile image is set, the desktop image is used on phones too.</p>
                       <div className="g2">
                         <div className="frow">
                           <label className="flbl">Title (EN)</label>

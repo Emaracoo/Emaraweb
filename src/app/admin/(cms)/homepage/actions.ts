@@ -62,9 +62,10 @@ export async function updateSlide(id: string, fd: FormData) {
   await prisma.homeSlide.update({
     where: { id },
     data: {
-      image:   (fd.get("image") as string) || "",
-      titleEn: (fd.get("titleEn") as string) || "",
-      titleAr: (fd.get("titleAr") as string) || null,
+      image:       (fd.get("image") as string) || "",
+      mobileImage: (fd.get("mobileImage") as string) || null,
+      titleEn:     (fd.get("titleEn") as string) || "",
+      titleAr:     (fd.get("titleAr") as string) || null,
     },
   });
   revalidatePath("/admin/homepage");
