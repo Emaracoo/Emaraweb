@@ -139,7 +139,7 @@ export default function HeaderClient({ logoUrl, companyName }: Props) {
           <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="w-8 h-8 flex items-center justify-center transition-colors duration-300"
+              className="w-11 h-11 lg:w-8 lg:h-8 flex items-center justify-center transition-colors duration-300"
               style={{ color: solid ? "var(--em-header-text)" : "rgba(255,255,255,0.65)" }}
               aria-label="Toggle dark mode"
             >
@@ -173,7 +173,7 @@ export default function HeaderClient({ logoUrl, companyName }: Props) {
             </Link>
 
             <button
-              className="lg:hidden p-1 transition-colors"
+              className="lg:hidden p-2.5 transition-colors"
               style={{ color: solid ? "var(--em-header-text)" : "#fff" }}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"

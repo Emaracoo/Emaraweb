@@ -52,6 +52,8 @@ export default async function PartnersStrip({ lang }: Props) {
             <img
               src={logo.src}
               alt={logo.name}
+              loading="lazy"
+              decoding="async"
               style={{ maxHeight: "72px", maxWidth: "160px", objectFit: "contain" }}
             />
           </div>

@@ -145,6 +145,8 @@ export default async function PartnersPage({ params }: Props) {
                         <img
                           src={client.logo}
                           alt={client.name}
+                          loading="lazy"
+                          decoding="async"
                           className="grayscale group-hover:grayscale-0 transition-all duration-500"
                           style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain" }}
                         />

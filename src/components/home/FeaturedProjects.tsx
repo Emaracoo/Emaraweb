@@ -61,7 +61,7 @@ export default async function FeaturedProjects({ lang }: Props) {
               <Link key={raw.slug} href={`/${lang}/projects/${raw.slug}`} className="group block" style={{ textDecoration: "none" }}>
                 <div className="overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={raw.coverImage} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={raw.coverImage} alt={title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div style={{ paddingTop: "1.25rem" }}>
                   <p className="text-xs tracking-[0.25em] uppercase" style={{ fontFamily: f, color: "#993434" }}>

@@ -69,7 +69,7 @@ export default async function BlogPage({ params }: Props) {
                     <div className="overflow-hidden" style={{ aspectRatio: "16 / 10", background: "var(--em-surface-2)" }}>
                       {post.coverImage && (
                         /* eslint-disable-next-line @next/next/no-img-element */
-                        <img src={post.coverImage} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <img src={post.coverImage} alt={title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                       )}
                     </div>
                     <div className="flex gap-3" style={{ marginTop: "1.25rem" }}>

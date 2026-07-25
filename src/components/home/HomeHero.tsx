@@ -74,11 +74,15 @@ export default function HomeHero({
   const [fading,  setFading]  = useState(false);
   const [counts,  setCounts]  = useState(STATS.map(() => 0));
   const statsRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef(0);
 
   const go = (i: number) => {
     setFading(true);
     setTimeout(() => { setActive(i); setFading(false); }, 500);
   };
+
+  const advance = () => go((active + 1) % slides.length);
+  const goBack  = () => go((active - 1 + slides.length) % slides.length);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -114,6 +118,13 @@ export default function HomeHero({
     <section
       className="relative overflow-hidden flex flex-col"
       style={{ height: "100svh", minHeight: "640px", background: "#441919" }}
+      onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+      onTouchEnd={(e) => {
+        const delta = touchStartX.current - e.changedTouches[0].clientX;
+        if (Math.abs(delta) < 40) return;
+        const forward = isAr ? delta < 0 : delta > 0;
+        if (forward) advance(); else goBack();
+      }}
     >
       <div
         key={active}
@@ -192,6 +203,26 @@ export default function HomeHero({
           </div>
         </div>
       </div>
+
+      {/* Slide dots — mobile only */}
+      {slides.length > 1 && (
+        <div className="relative z-10 flex lg:hidden items-center justify-center gap-2 shrink-0" style={{ paddingBottom: "1rem" }}>
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="transition-all duration-300"
+              style={{
+                width: i === active ? "20px" : "6px",
+                height: "6px",
+                borderRadius: "9999px",
+                background: i === active ? "#993434" : "rgba(255,255,255,0.35)",
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Stats strip */}
       <div
