@@ -33,6 +33,7 @@ const FOOTER_T = {
 };
 
 interface Social { label: string; href: string }
+interface WorkCategory { categoryEn: string; categoryAr: string | null }
 
 interface Props {
   logoUrl?: string | null;
@@ -44,9 +45,10 @@ interface Props {
   socials: Social[];
   privacyUrl?: string | null;
   termsUrl?: string | null;
+  workCategories: WorkCategory[];
 }
 
-export default function FooterClient({ logoUrl, companyName, taglineEn, taglineAr, addressEn, addressAr, socials, privacyUrl, termsUrl }: Props) {
+export default function FooterClient({ logoUrl, companyName, taglineEn, taglineAr, addressEn, addressAr, socials, privacyUrl, termsUrl, workCategories }: Props) {
   const lang = useLang();
   const t    = FOOTER_T[lang];
   const f    = "var(--font-saira)";
@@ -72,12 +74,17 @@ export default function FooterClient({ logoUrl, companyName, taglineEn, taglineA
       { label: t.supervision,  href: `/${lang}/services#construction-supervision` },
       { label: t.maquettes,    href: `/${lang}/services#model-making` },
     ],
-    [t.work]: [
-      { label: t.residential,    href: `/${lang}/projects?cat=Residential` },
-      { label: t.commercial,     href: `/${lang}/projects?cat=Commercial` },
-      { label: t.industrial,     href: `/${lang}/projects?cat=Industrial` },
-      { label: t.administrative, href: `/${lang}/projects?cat=Administrative` },
-    ],
+    [t.work]: workCategories.length > 0
+      ? workCategories.map(c => ({
+          label: (lang === "ar" && c.categoryAr) || c.categoryEn,
+          href: `/${lang}/projects?cat=${encodeURIComponent(c.categoryEn)}`,
+        }))
+      : [
+          { label: t.residential,    href: `/${lang}/projects?cat=Residential` },
+          { label: t.commercial,     href: `/${lang}/projects?cat=Commercial` },
+          { label: t.industrial,     href: `/${lang}/projects?cat=Industrial` },
+          { label: t.administrative, href: `/${lang}/projects?cat=Administrative` },
+        ],
   };
 
   return (

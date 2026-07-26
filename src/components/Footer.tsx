@@ -2,7 +2,15 @@ import { prisma } from "@/lib/prisma";
 import FooterClient from "./FooterClient";
 
 export default async function Footer() {
-  const rows = await prisma.siteSetting.findMany();
+  const [rows, categories] = await Promise.all([
+    prisma.siteSetting.findMany(),
+    prisma.project.findMany({
+      where: { status: "PUBLISHED" },
+      select: { categoryEn: true, categoryAr: true },
+      distinct: ["categoryEn"],
+      orderBy: { categoryEn: "asc" },
+    }),
+  ]);
   const get = (key: string) => rows.find(r => r.key === key)?.value || null;
 
   const socials = [
@@ -23,6 +31,7 @@ export default async function Footer() {
       socials={socials}
       privacyUrl={get("privacy_url")}
       termsUrl={get("terms_url")}
+      workCategories={categories.map(c => ({ categoryEn: c.categoryEn, categoryAr: c.categoryAr }))}
     />
   );
 }
