@@ -100,6 +100,7 @@ export default function ContactCTA({ eyebrowEn, eyebrowAr, headlineEn, headlineA
     willChange: "transform, opacity, filter",
     margin: 0,
     padding: 0,
+    pointerEvents: "none",
   };
 
   return (
