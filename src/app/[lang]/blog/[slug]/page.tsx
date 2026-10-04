@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { prisma } from "@/lib/prisma";
+import { blogCategoryLabel } from "@/lib/labels";
 import { hasLocale } from "../../dictionaries";
 
 const T = {
@@ -46,8 +47,8 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="relative z-10 max-w-4xl mx-auto w-full px-6 lg:px-12 pb-16">
             <div className="flex items-center gap-3 mb-6 flex-wrap">
               <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: f, color: "#B34040" }}>{t.journal}</span>
-              {post.category && (
-                <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: f, color: "rgba(255,255,255,0.5)" }}>· {post.category}</span>
+              {blogCategoryLabel(post.category, post.categoryAr, l) && (
+                <span className="text-xs tracking-[0.3em] uppercase" style={{ fontFamily: f, color: "rgba(255,255,255,0.5)" }}>· {blogCategoryLabel(post.category, post.categoryAr, l)}</span>
               )}
               <span className="text-xs" style={{ fontFamily: f, color: "rgba(255,255,255,0.4)" }}>
                 {formatDate(post.publishedAt ?? post.createdAt, l)}

@@ -58,6 +58,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* Stops any stray wide element from making the whole page scroll sideways on phones
+       (in RTL this shows up as the page being shifted off the right edge) */
+    overflow-x: clip;
   }
 
   body {
@@ -66,7 +69,7 @@
     font-family: var(--font-saira), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    overflow-x: clip;
     margin: 0;
     padding: 0;
   }

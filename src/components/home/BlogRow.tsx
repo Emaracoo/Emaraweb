@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { blogCategoryLabel } from "@/lib/labels";
 
 const FALLBACK = {
   en: { eyebrow: "Journal", heading: "A world of\nArt and Engineering.", cta: "Visit the blog →" },
@@ -20,7 +21,7 @@ export default async function BlogRow({ lang }: Props) {
       take: 3,
       select: {
         slug: true, titleEn: true, titleAr: true, excerptEn: true, excerptAr: true,
-        coverImage: true, category: true, publishedAt: true, createdAt: true,
+        coverImage: true, category: true, categoryAr: true, publishedAt: true, createdAt: true,
       },
     }),
     prisma.homepageSection.findUnique({ where: { key: "blog" } }),
@@ -77,8 +78,8 @@ export default async function BlogRow({ lang }: Props) {
                   <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "var(--em-muted)" }}>
                     {formatDate(post.publishedAt ?? post.createdAt, lang)}
                   </span>
-                  {post.category && (
-                    <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "#993434" }}>{post.category}</span>
+                  {blogCategoryLabel(post.category, post.categoryAr, lang) && (
+                    <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "#993434" }}>{blogCategoryLabel(post.category, post.categoryAr, lang)}</span>
                   )}
                 </div>
                 <p className="font-light" style={{ fontFamily: fs, fontSize: "1.15rem", color: "var(--em-text)", lineHeight: 1.3, marginTop: "0.5rem" }}>

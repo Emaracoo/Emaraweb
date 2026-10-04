@@ -66,7 +66,7 @@ export default function HomeHero({
   const STATS   = rawStats.map(s => ({ target: s.value, suffix: s.suffix, label: (isAr ? s.labelAr : s.labelEn) || s.labelEn }));
   const eyebrow = (isAr ? eyebrowAr : eyebrowEn) || (isAr ? "عالم من الواقع" : "A World Of Reality");
   const cta1 = { label: (isAr ? cta1LabelAr : cta1LabelEn) || (isAr ? "اكتشف أعمالنا" : "View Our Work"), href: cta1Href || `/${lang}/projects` };
-  const cta2 = { label: (isAr ? cta2LabelAr : cta2LabelEn) || (isAr ? "عن إعمار" : "About Emara"), href: cta2Href || `/${lang}/about` };
+  const cta2 = { label: (isAr ? cta2LabelAr : cta2LabelEn) || (isAr ? "عن عمارة" : "About Emara"), href: cta2Href || `/${lang}/about` };
   const f       = isAr ? "var(--font-cairo)" : "var(--font-saira)";
   const fSerif  = isAr ? "var(--font-cairo)" : "var(--font-cormorant)";
 

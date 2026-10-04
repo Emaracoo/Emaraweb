@@ -1,37 +1,39 @@
 import { prisma } from "@/lib/prisma";
+import { getContactInfo, getSettings } from "@/lib/site-settings";
 import FooterClient from "./FooterClient";
 
 export default async function Footer() {
-  const [rows, categories] = await Promise.all([
-    prisma.siteSetting.findMany(),
+  const [get, contactEn, contactAr, categories, services] = await Promise.all([
+    getSettings(),
+    getContactInfo("en"),
+    getContactInfo("ar"),
     prisma.project.findMany({
-      where: { status: "PUBLISHED" },
-      select: { categoryEn: true, categoryAr: true },
-      distinct: ["categoryEn"],
-      orderBy: { categoryEn: "asc" },
+      where:   { status: "PUBLISHED" },
+      select:  { categoryEn: true, categoryAr: true },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+    }),
+    prisma.service.findMany({
+      where:   { status: "PUBLISHED" },
+      select:  { slug: true, titleEn: true, titleAr: true },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
     }),
   ]);
-  const get = (key: string) => rows.find(r => r.key === key)?.value || null;
-
-  const socials = [
-    { label: "Instagram", href: get("instagram_url") || "https://www.instagram.com/emaraconstruction/" },
-    { label: "Facebook",  href: get("facebook_url")  || "https://www.facebook.com/emaraconstruction/" },
-    { label: "LinkedIn",  href: get("linkedin_url") },
-    { label: "X",         href: get("twitter_url") },
-  ].filter((s): s is { label: string; href: string } => !!s.href);
 
   return (
     <FooterClient
-      logoUrl={get("logo_url")}
+      logoUrl={get("footer_logo_url")}
       companyName={get("company_name")}
       taglineEn={get("footer_tagline_en")}
       taglineAr={get("footer_tagline_ar")}
-      addressEn={get("address_en")}
-      addressAr={get("address_ar")}
-      socials={socials}
+      addressEn={contactEn.address}
+      addressAr={contactAr.address}
+      phone={contactEn.phone}
+      email={contactEn.email}
+      socials={contactEn.socials}
       privacyUrl={get("privacy_url")}
       termsUrl={get("terms_url")}
-      workCategories={categories.map(c => ({ categoryEn: c.categoryEn, categoryAr: c.categoryAr }))}
+      categories={categories}
+      services={services}
     />
   );
 }

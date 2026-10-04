@@ -9,7 +9,7 @@ function str(fd: FormData, name: string): string | null {
 
 function revalidateAbout() {
   revalidatePath("/admin/about");
-  revalidatePath("/[lang]/about", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function saveAboutHero(fd: FormData) {

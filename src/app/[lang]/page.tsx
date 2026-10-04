@@ -19,7 +19,7 @@ interface Props {
 
 const SEO_FALLBACK = {
   en: { title: "Emara — Architecture Studio", description: "Award-winning architecture and design studio crafting spaces that endure." },
-  ar: { title: "إعمار — استوديو معماري", description: "استوديو تصميم وعمارة حائز على جوائز، يصنع مساحات تدوم." },
+  ar: { title: "عمارة — استوديو معماري", description: "استوديو تصميم وعمارة حائز على جوائز، يصنع مساحات تدوم." },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

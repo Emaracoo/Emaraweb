@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { S } from "@/lib/admin-styles";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { saveAboutHero, saveAboutStory, saveAboutVision, saveAboutTeam } from "./actions";
 
 export const metadata: Metadata = { title: "About Page" };
@@ -31,6 +32,9 @@ export default async function AboutPage() {
     <>
       <style>{S}</style>
       <div className="aph"><h1 className="apt">About Page Editor</h1></div>
+      <p style={{ fontSize: 12, color: "#9A9A9A", marginTop: -8, marginBottom: 16 }}>
+        The About page photos (hero and &quot;Who We Are&quot;) are changed in <Link href="/admin/settings" style={{ color: "#993434" }}>Settings → Page Images</Link>.
+      </p>
 
       {/* ── Hero / Mission Statement ─────────────────────────────── */}
       <div className="frm" style={{ marginBottom: "1.25rem" }}>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { localizeDigits, projectCategoryLabel } from "@/lib/labels";
 
 const FALLBACK = {
   en: { eyebrow: "Our Portfolio", heading: "Project\nhighlights.", cta: "View all projects →" },
@@ -55,7 +56,7 @@ export default async function FeaturedProjects({ lang }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {FEATURED.map((raw) => {
             const title    = lang === "ar" && raw.titleAr    ? raw.titleAr    : raw.titleEn;
-            const category = lang === "ar" && raw.categoryAr ? raw.categoryAr : raw.categoryEn;
+            const category = projectCategoryLabel(raw.categoryEn, lang, FEATURED);
             const location = lang === "ar" && raw.locationAr ? raw.locationAr : (raw.locationEn ?? "");
             return (
               <Link key={raw.slug} href={`/${lang}/projects/${raw.slug}`} className="group block" style={{ textDecoration: "none" }}>
@@ -72,7 +73,7 @@ export default async function FeaturedProjects({ lang }: Props) {
                   </p>
                   <div className="flex justify-between" style={{ marginTop: "0.5rem" }}>
                     <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{location}</span>
-                    <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{raw.year}</span>
+                    <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>{localizeDigits(raw.year, lang)}</span>
                   </div>
                 </div>
               </Link>

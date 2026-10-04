@@ -1,6 +1,9 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { PAGE_IMAGE_DEFAULTS } from "@/lib/site-settings";
+
+const PAGE_IMAGE_KEYS = Object.keys(PAGE_IMAGE_DEFAULTS);
 
 export async function saveSettings(fd: FormData) {
   const pairs: { key: string; value: string; group: string }[] = [
@@ -9,15 +12,19 @@ export async function saveSettings(fd: FormData) {
     { key: "email_enquiry",   value: fd.get("email_enquiry") as string ?? "",  group: "contact" },
     { key: "address_en",      value: fd.get("address_en") as string ?? "",     group: "contact" },
     { key: "address_ar",      value: fd.get("address_ar") as string ?? "",     group: "contact" },
+    { key: "hours_en",        value: fd.get("hours_en") as string ?? "",       group: "contact" },
+    { key: "hours_ar",        value: fd.get("hours_ar") as string ?? "",       group: "contact" },
     { key: "instagram_url",   value: fd.get("instagram_url") as string ?? "",  group: "social"  },
     { key: "facebook_url",    value: fd.get("facebook_url") as string ?? "",   group: "social"  },
     { key: "linkedin_url",    value: fd.get("linkedin_url") as string ?? "",   group: "social"  },
     { key: "twitter_url",     value: fd.get("twitter_url") as string ?? "",    group: "social"  },
     { key: "whatsapp_number", value: fd.get("whatsapp_number") as string ?? "", group: "social" },
     { key: "logo_url",          value: fd.get("logo_url") as string ?? "",          group: "branding" },
+    { key: "footer_logo_url",   value: fd.get("footer_logo_url") as string ?? "",   group: "branding" },
     { key: "company_name",      value: fd.get("company_name") as string ?? "",      group: "branding" },
     { key: "footer_tagline_en", value: fd.get("footer_tagline_en") as string ?? "", group: "branding" },
     { key: "footer_tagline_ar", value: fd.get("footer_tagline_ar") as string ?? "", group: "branding" },
+    ...PAGE_IMAGE_KEYS.map(key => ({ key, value: fd.get(key) as string ?? "", group: "pages" })),
     { key: "privacy_url",     value: fd.get("privacy_url") as string ?? "",    group: "legal"   },
     { key: "terms_url",       value: fd.get("terms_url") as string ?? "",      group: "legal"   },
   ];
@@ -32,5 +39,5 @@ export async function saveSettings(fd: FormData) {
     ),
   );
   revalidatePath("/admin/settings");
-  revalidatePath("/[lang]", "layout");
+  revalidatePath("/", "layout");
 }

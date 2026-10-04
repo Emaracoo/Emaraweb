@@ -64,6 +64,7 @@ model Project {
   locationEn    String?
   locationAr    String?
   area          String?
+  areaAr        String?
   clientEn      String?
   clientAr      String?
   descriptionEn String?
@@ -109,6 +110,7 @@ model BlogPost {
   coverImage  String?
   tags        String[]
   category    String?
+  categoryAr  String?
   status      PublishStatus @default(DRAFT)
   publishedAt DateTime?
   authorId    String?

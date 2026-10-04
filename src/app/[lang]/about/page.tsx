@@ -5,8 +5,11 @@ import PageHero from "@/components/PageHero";
 import StudioStory from "@/components/about/StudioStory";
 import Values from "@/components/about/Values";
 import BuiltOnExpertise from "@/components/about/BuiltOnExpertise";
+import SiteCTA from "@/components/SiteCTA";
 import { hasLocale } from "../dictionaries";
 import { prisma } from "@/lib/prisma";
+import { getPageImage } from "@/lib/site-settings";
+import { localizeDigits } from "@/lib/labels";
 
 interface Stat { value: string; labelEn: string; labelAr: string }
 interface ValueRow { titleEn: string; titleAr: string; descEn: string; descAr: string }
@@ -61,7 +64,7 @@ const FALLBACK = {
     ],
     studioEyebrow: "الاستوديو",
     studioHeading: "مبني على الخبرة",
-    p1: "تأسست إعمار في مصر الجديدة بالقاهرة — ولا يزال هذا موطننا. يتجذّر عملنا في البيئة العمرانية المصرية: مواصفاتها ومناخها ومواد بنائها وعملاؤها. على مدى أربعة عقود، راكمنا عمقاً من المعرفة المحلية لا يُكتسب من مشروع بعينه.",
+    p1: "تأسست عمارة في مصر الجديدة بالقاهرة — ولا يزال هذا موطننا. يتجذّر عملنا في البيئة العمرانية المصرية: مواصفاتها ومناخها ومواد بنائها وعملاؤها. على مدى أربعة عقود، راكمنا عمقاً من المعرفة المحلية لا يُكتسب من مشروع بعينه.",
     p2: "تمتد ممارستنا لتشمل الهندسة الإنشائية والتصميم المعماري والعمارة الداخلية وتنسيق الحدائق والترميم والإشراف على التنفيذ وصناعة النماذج المعمارية التي كانت البداية. هذا الاتساع ليس عرضياً — فكل تخصص يُغذّي الآخر، وكل مشروع يستفيد من المنظومة كلها.",
     p3: "نحن ملتزمون بدفع حدود الابتكار والتميز — مستلهمين المعايير المصرية والدولية على حدٍّ سواء، ومقدِّمين نتائج تشهد على صرامة الحرفة.",
   },
@@ -77,9 +80,13 @@ export default async function AboutPage({ params }: Props) {
   const fs = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
   const fb = FALLBACK[l];
 
-  const sections = await prisma.homepageSection.findMany({
-    where: { key: { in: ["about_hero", "about_story", "about_vision", "about_team"] } },
-  });
+  const [sections, heroImage, storyImage] = await Promise.all([
+    prisma.homepageSection.findMany({
+      where: { key: { in: ["about_hero", "about_story", "about_vision", "about_team"] } },
+    }),
+    getPageImage("hero_image_about"),
+    getPageImage("about_story_image"),
+  ]);
   const get = (key: string) => sections.find(s => s.key === key);
 
   const hero    = get("about_hero");
@@ -93,9 +100,10 @@ export default async function AboutPage({ params }: Props) {
 
   const pick = (v: string | null | undefined, fallback: string) => v || fallback;
 
-  const heroStats = storyD.stats && storyD.stats.length > 0
-    ? storyD.stats.map(s => ({ value: s.value, label: pick(l === "ar" ? s.labelAr : s.labelEn, "") }))
-    : fb.stats;
+  const heroStats = (storyD.stats && storyD.stats.length > 0
+    ? storyD.stats.map((s, i) => ({ value: s.value, label: pick(l === "ar" ? s.labelAr : s.labelEn, fb.stats[i]?.label ?? "") }))
+    : fb.stats
+  ).map(s => ({ ...s, value: localizeDigits(s.value, l) }));
 
   const values = visionD.values && visionD.values.length > 0
     ? visionD.values.map((v, i) => ({
@@ -115,7 +123,7 @@ export default async function AboutPage({ params }: Props) {
           title={pick(l === "ar" ? hero?.titleAr : hero?.titleEn, fb.heroTitle)}
           titleAccent={pick(l === "ar" ? heroD.accentAr : heroD.accentEn, fb.heroAccent)}
           subtitle={pick(l === "ar" ? hero?.bodyAr : hero?.bodyEn, fb.heroSubtitle)}
-          image="/projects/villa-tn/01.jpg"
+          image={heroImage}
         />
         <StudioStory
           f={f} fs={fs}
@@ -124,7 +132,7 @@ export default async function AboutPage({ params }: Props) {
           body1={pick(l === "ar" ? story?.bodyAr : story?.bodyEn, fb.body1)}
           body2={pick(l === "ar" ? storyD.body2Ar : storyD.body2En, fb.body2)}
           stats={heroStats}
-          image="/projects/al-arabiya-studios/02.jpg"
+          image={storyImage}
         />
         <Values
           f={f} fs={fs}
@@ -139,6 +147,7 @@ export default async function AboutPage({ params }: Props) {
           p2={pick(l === "ar" ? teamD.p2Ar : teamD.p2En, fb.p2)}
           p3={pick(l === "ar" ? teamD.p3Ar : teamD.p3En, fb.p3)}
         />
+        <SiteCTA />
       </main>
       <Footer />
     </>

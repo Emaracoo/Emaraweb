@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { localizeDigits, projectCategoryLabel } from "@/lib/labels";
 
 type Project = {
   slug: string;
@@ -13,15 +14,6 @@ type Project = {
   locationAr: string | null;
   year: string;
   coverImage: string;
-};
-
-const CAT_LABELS_EN: Record<string, string> = {
-  All: "All", Residential: "Residential", Administrative: "Administrative",
-  Industrial: "Industrial", Commercial: "Commercial", Maquettes: "Maquettes",
-};
-const CAT_LABELS_AR: Record<string, string> = {
-  All: "الكل", Residential: "سكني", Administrative: "إداري",
-  Industrial: "صناعي", Commercial: "تجاري", Maquettes: "مجسمات",
 };
 
 interface Props {
@@ -45,7 +37,7 @@ export default function ProjectsGrid({ projects, lang, initialCategory }: Props)
   const t   = lang === "ar"
     ? { all: "الكل", viewProject: "عرض المشروع ←" }
     : { all: "All",  viewProject: "View project →" };
-  const catLabels = lang === "ar" ? CAT_LABELS_AR : CAT_LABELS_EN;
+  const catLabel  = (cat: string) => cat === "All" ? t.all : projectCategoryLabel(cat, lang, projects);
 
   const uniqueCategories = Array.from(new Set(projects.map(p => p.categoryEn)));
   const allCategories = ["All", ...uniqueCategories];
@@ -85,7 +77,7 @@ export default function ProjectsGrid({ projects, lang, initialCategory }: Props)
                   }
                 }}
               >
-                {catLabels[cat] ?? cat}
+                {catLabel(cat)}
               </button>
             );
           })}
@@ -95,7 +87,7 @@ export default function ProjectsGrid({ projects, lang, initialCategory }: Props)
           {filtered.map((p) => {
             const title    = lang === "ar" && p.titleAr    ? p.titleAr    : p.titleEn;
             const location = lang === "ar" && p.locationAr ? p.locationAr : (p.locationEn ?? "");
-            const category = lang === "ar" && p.categoryAr ? p.categoryAr : p.categoryEn;
+            const category = catLabel(p.categoryEn);
 
             return (
               <Link key={p.slug} href={`/${lang}/projects/${p.slug}`} className="group block">
@@ -129,7 +121,7 @@ export default function ProjectsGrid({ projects, lang, initialCategory }: Props)
                       {location}
                     </span>
                     <span style={{ fontFamily: f, fontWeight: 300, fontSize: "0.75rem", color: "var(--em-muted)" }}>
-                      {p.year}
+                      {localizeDigits(p.year, lang)}
                     </span>
                   </div>
                 </div>

@@ -47,7 +47,7 @@ export default function NewProjectPage() {
           </div>
 
           <p className="fsec">Details</p>
-          <div className="g3">
+          <div className="g2">
             <div className="frow">
               <label className="flbl">Location (EN)</label>
               <input name="locationEn" className="finp" placeholder="Cairo, Egypt" />
@@ -56,9 +56,15 @@ export default function NewProjectPage() {
               <label className="flbl">Location (AR)</label>
               <input name="locationAr" className="finp" dir="rtl" />
             </div>
+          </div>
+          <div className="g2">
             <div className="frow">
-              <label className="flbl">Area</label>
+              <label className="flbl">Area (EN)</label>
               <input name="area" className="finp" placeholder="450 m²" />
+            </div>
+            <div className="frow">
+              <label className="flbl">Area (AR)</label>
+              <input name="areaAr" className="finp" dir="rtl" placeholder="٤٥٠ م²" />
             </div>
           </div>
           <div className="g2">

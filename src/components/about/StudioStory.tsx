@@ -34,8 +34,8 @@ export default function StudioStory({ f, fs, eyebrow, heading, body1, body2, sta
             <p className="leading-relaxed mb-12" style={{ fontFamily: f, fontWeight: 300, fontSize: "0.9rem", color: "var(--em-muted)" }}>{body2}</p>
             <div className="grid grid-cols-3 gap-0 border-t" style={{ borderColor: "var(--em-border)" }}>
               {stats.map((stat, i) => (
-                <div key={stat.label} className="pt-8 pr-6" style={{ borderRight: i < stats.length - 1 ? "1px solid var(--em-border)" : "none", paddingLeft: i > 0 ? "1.5rem" : 0 }}>
-                  <div className="font-light leading-none mb-1" style={{ fontFamily: fs, fontSize: "2.5rem", color: "#993434" }}>{stat.value}</div>
+                <div key={stat.label} className="pt-8 pe-4 sm:pe-6" style={{ borderInlineEnd: i < stats.length - 1 ? "1px solid var(--em-border)" : "none", paddingInlineStart: i > 0 ? "1.25rem" : 0 }}>
+                  <div className="font-light leading-none mb-1" style={{ fontFamily: fs, fontSize: "clamp(1.9rem, 6vw, 2.5rem)", color: "#993434" }}>{stat.value}</div>
                   <div className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "var(--em-muted)" }}>{stat.label}</div>
                 </div>
               ))}

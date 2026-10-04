@@ -3,7 +3,10 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import SiteCTA from "@/components/SiteCTA";
+import { getPageImage } from "@/lib/site-settings";
 import { prisma } from "@/lib/prisma";
+import { blogCategoryLabel } from "@/lib/labels";
 import { hasLocale } from "../dictionaries";
 
 const T = {
@@ -39,12 +42,13 @@ export default async function BlogPage({ params }: Props) {
   const f  = l === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
+  const heroImage = await getPageImage("hero_image_blog");
   const posts = await prisma.blogPost.findMany({
     where:   { status: "PUBLISHED" },
     orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
     select: {
       slug: true, titleEn: true, titleAr: true, excerptEn: true, excerptAr: true,
-      coverImage: true, category: true, publishedAt: true, createdAt: true,
+      coverImage: true, category: true, categoryAr: true, publishedAt: true, createdAt: true,
     },
   });
 
@@ -52,7 +56,7 @@ export default async function BlogPage({ params }: Props) {
     <>
       <Header />
       <main>
-        <PageHero lang={l} eyebrow={t.eyebrow} title={t.title} titleAccent={t.accent} subtitle={t.subtitle} />
+        <PageHero lang={l} eyebrow={t.eyebrow} title={t.title} titleAccent={t.accent} subtitle={t.subtitle} image={heroImage} />
 
         {posts.length === 0 ? (
           <p style={{ textAlign: "center", padding: "8rem 2rem", color: "var(--em-muted)", fontFamily: f, fontSize: "0.875rem" }}>
@@ -76,8 +80,8 @@ export default async function BlogPage({ params }: Props) {
                       <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "var(--em-muted)" }}>
                         {formatDate(post.publishedAt ?? post.createdAt, l)}
                       </span>
-                      {post.category && (
-                        <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "#993434" }}>{post.category}</span>
+                      {blogCategoryLabel(post.category, post.categoryAr, l) && (
+                        <span className="text-xs tracking-[0.15em] uppercase" style={{ fontFamily: f, color: "#993434" }}>{blogCategoryLabel(post.category, post.categoryAr, l)}</span>
                       )}
                     </div>
                     <h2 className="font-light" style={{ fontFamily: fs, fontSize: "1.35rem", color: "var(--em-text)", lineHeight: 1.3, marginTop: "0.5rem" }}>
@@ -95,6 +99,8 @@ export default async function BlogPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        <SiteCTA />
       </main>
       <Footer />
     </>

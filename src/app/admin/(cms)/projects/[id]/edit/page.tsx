@@ -62,7 +62,7 @@ export default async function EditProjectPage({
           </div>
 
           <p className="fsec">Details</p>
-          <div className="g3">
+          <div className="g2">
             <div className="frow">
               <label className="flbl">Location (EN)</label>
               <input name="locationEn" className="finp" defaultValue={p.locationEn ?? ""} />
@@ -71,9 +71,15 @@ export default async function EditProjectPage({
               <label className="flbl">Location (AR)</label>
               <input name="locationAr" className="finp" dir="rtl" defaultValue={p.locationAr ?? ""} />
             </div>
+          </div>
+          <div className="g2">
             <div className="frow">
-              <label className="flbl">Area</label>
+              <label className="flbl">Area (EN)</label>
               <input name="area" className="finp" defaultValue={p.area ?? ""} />
+            </div>
+            <div className="frow">
+              <label className="flbl">Area (AR)</label>
+              <input name="areaAr" className="finp" dir="rtl" defaultValue={p.areaAr ?? ""} />
             </div>
           </div>
           <div className="g2">

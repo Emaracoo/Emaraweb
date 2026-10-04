@@ -4,6 +4,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { Prisma } from "@prisma/client";
 
+/** Partners are grouped under one heading per Sector (EN), so an Arabic sector name applies to the whole group. */
+async function syncSectorAr(sector: string, sectorAr: string | null) {
+  if (!sectorAr) return;
+  await prisma.partner.updateMany({ where: { sector }, data: { sectorAr } });
+}
+
 export async function savePartnersStats(fd: FormData) {
   const stats = [];
   for (let i = 0; i < 4; i++) {
@@ -20,7 +26,7 @@ export async function savePartnersStats(fd: FormData) {
     update: { data },
   });
   revalidatePath("/admin/partners");
-  revalidatePath("/[lang]/partners", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function createPartner(fd: FormData) {
@@ -36,7 +42,9 @@ export async function createPartner(fd: FormData) {
       sortOrder: parseInt(fd.get("sortOrder") as string) || 0,
     },
   });
+  await syncSectorAr(fd.get("sector") as string, (fd.get("sectorAr") as string) || null);
   revalidatePath("/admin/partners");
+  revalidatePath("/", "layout");
   redirect("/admin/partners");
 }
 
@@ -54,13 +62,16 @@ export async function updatePartner(id: string, fd: FormData) {
       sortOrder: parseInt(fd.get("sortOrder") as string) || 0,
     },
   });
+  await syncSectorAr(fd.get("sector") as string, (fd.get("sectorAr") as string) || null);
   revalidatePath("/admin/partners");
+  revalidatePath("/", "layout");
   redirect("/admin/partners");
 }
 
 export async function deletePartner(id: string) {
   await prisma.partner.delete({ where: { id } });
   revalidatePath("/admin/partners");
+  revalidatePath("/", "layout");
   redirect("/admin/partners");
 }
 
@@ -70,7 +81,7 @@ export async function updatePartnerLogo(id: string, fd: FormData) {
   await prisma.partner.update({ where: { id }, data: { logo } });
   revalidatePath("/admin/partners");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function togglePartnerStatus(id: string) {
@@ -79,7 +90,7 @@ export async function togglePartnerStatus(id: string) {
   await prisma.partner.update({ where: { id }, data: { status: row.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED" } });
   revalidatePath("/admin/partners");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function movePartnerOrder(id: string, direction: "up" | "down") {
@@ -96,5 +107,5 @@ export async function movePartnerOrder(id: string, direction: "up" | "down") {
   ]);
   revalidatePath("/admin/partners");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

@@ -10,7 +10,11 @@ interface Props {
   folder?: string;
 }
 
+// Formats that can carry transparency (logos) are kept as PNG; photos are re-encoded as JPEG
+const TRANSPARENT_TYPES = ["image/png", "image/webp", "image/gif"];
+
 async function compressToBlob(file: File, maxWidth = 1600, quality = 0.80): Promise<Blob> {
+  const keepAlpha = TRANSPARENT_TYPES.includes(file.type);
   return new Promise((resolve, reject) => {
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
@@ -21,7 +25,7 @@ async function compressToBlob(file: File, maxWidth = 1600, quality = 0.80): Prom
       canvas.width  = Math.round(img.naturalWidth  * scale);
       canvas.height = Math.round(img.naturalHeight * scale);
       canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("Compression failed")), "image/jpeg", quality);
+      canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("Compression failed")), keepAlpha ? "image/png" : "image/jpeg", quality);
     };
     img.onerror = reject;
     img.src = objectUrl;
@@ -41,7 +45,8 @@ export function ImageUploadField({ name, label, defaultValue = "", required, fol
     setError("");
     setUploading(true);
     try {
-      const blob = await compressToBlob(file);
+      // SVGs are vector — upload untouched
+      const blob = file.type === "image/svg+xml" ? file : await compressToBlob(file);
       const fd   = new FormData();
       fd.append("file", blob, file.name);
       fd.append("folder", folder);

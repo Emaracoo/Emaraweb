@@ -47,7 +47,7 @@ export async function saveSection(key: string, statCount: number, withSuffix: bo
     update: { ...fields, ...(data ? { data } : {}) },
   });
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function addSlide() {
@@ -56,6 +56,7 @@ export async function addSlide() {
     data: { image: "", titleEn: "New Slide", titleAr: null, sortOrder: (last?.sortOrder ?? -1) + 1 },
   });
   revalidatePath("/admin/homepage");
+  revalidatePath("/", "layout");
 }
 
 export async function updateSlide(id: string, fd: FormData) {
@@ -69,13 +70,13 @@ export async function updateSlide(id: string, fd: FormData) {
     },
   });
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteSlide(id: string) {
   await prisma.homeSlide.delete({ where: { id } });
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function moveSlide(id: string, direction: "up" | "down") {
@@ -92,6 +93,7 @@ export async function moveSlide(id: string, direction: "up" | "down") {
     prisma.homeSlide.update({ where: { id: b.id }, data: { sortOrder: a.sortOrder } }),
   ]);
   revalidatePath("/admin/homepage");
+  revalidatePath("/", "layout");
 }
 
 export async function moveSection(key: string, direction: "up" | "down") {
@@ -108,7 +110,7 @@ export async function moveSection(key: string, direction: "up" | "down") {
     prisma.homepageSection.update({ where: { id: b.id }, data: { sortOrder: a.sortOrder } }),
   ]);
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function toggleSection(key: string) {
@@ -116,5 +118,5 @@ export async function toggleSection(key: string) {
   if (!row) return;
   await prisma.homepageSection.update({ where: { key }, data: { enabled: !row.enabled } });
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

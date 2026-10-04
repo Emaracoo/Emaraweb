@@ -33,6 +33,9 @@ export default async function PartnersStrip({ lang }: Props) {
         {label}
       </p>
 
+      {/* The marquee always runs left-to-right: under an RTL parent the track is anchored to the
+          right edge and animates further off-screen, leaving the strip empty */}
+      <div dir="ltr">
       <div className="ticker-track" style={{ display: "flex", alignItems: "center", gap: "0", width: "max-content" }}>
         {track.map((logo, i) => (
           <div
@@ -45,19 +48,19 @@ export default async function PartnersStrip({ lang }: Props) {
               height: "110px",
               padding: "0 2rem",
               flexShrink: 0,
-              borderInlineEnd: "1px solid var(--em-border)",
+              borderRight: "1px solid var(--em-border)",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={logo.src}
               alt={logo.name}
-              loading="lazy"
               decoding="async"
               style={{ maxHeight: "72px", maxWidth: "160px", objectFit: "contain" }}
             />
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

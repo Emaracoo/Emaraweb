@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import NextProjectLink from "@/components/NextProjectLink";
 import { prisma } from "@/lib/prisma";
 import { hasLocale } from "../../dictionaries";
+import { localizeDigits, projectCategoryLabel } from "@/lib/labels";
 
 const LABELS = {
   en: {
@@ -31,22 +32,24 @@ export default async function ProjectDetailPage({ params }: Props) {
   const fs  = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
   // Fetch current project and all published projects for "next" navigation
-  const [project, allProjects] = await Promise.all([
+  const [project, allProjects, categorySources] = await Promise.all([
     prisma.project.findUnique({ where: { slug } }),
     prisma.project.findMany({
       where:   { status: "PUBLISHED" },
       orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
       select: { slug: true, titleEn: true, titleAr: true, locationEn: true, locationAr: true, coverImage: true },
     }),
+    prisma.project.findMany({ where: { status: "PUBLISHED" }, select: { categoryEn: true, categoryAr: true } }),
   ]);
 
   if (!project || project.status !== "PUBLISHED") notFound();
 
   const title       = l === "ar" && project.titleAr       ? project.titleAr       : project.titleEn;
-  const category    = l === "ar" && project.categoryAr    ? project.categoryAr    : project.categoryEn;
+  const category    = projectCategoryLabel(project.categoryEn, l, categorySources);
   const location    = l === "ar" && project.locationAr    ? project.locationAr    : (project.locationEn ?? "");
   const description = l === "ar" && project.descriptionAr ? project.descriptionAr : (project.descriptionEn ?? "");
   const client      = l === "ar" && project.clientAr      ? project.clientAr      : (project.clientEn ?? "");
+  const area        = l === "ar" && project.areaAr ? localizeDigits(project.areaAr, l) : (project.area ?? "");
 
   const idx         = allProjects.findIndex(p => p.slug === slug);
   const nextRaw     = allProjects[(idx + 1) % allProjects.length];
@@ -99,11 +102,11 @@ export default async function ProjectDetailPage({ params }: Props) {
                   {[
                     { label: lbl.client,   value: client   },
                     { label: lbl.location, value: location },
-                    { label: lbl.area,     value: project.area ?? "" },
-                    { label: lbl.year,     value: project.year },
+                    { label: lbl.area,     value: area },
+                    { label: lbl.year,     value: localizeDigits(project.year, l) },
                     { label: lbl.category, value: category  },
                     { label: lbl.status,   value: lbl.completed },
-                  ].map(({ label, value }) => (
+                  ].filter(({ value }) => value).map(({ label, value }) => (
                     <div key={label}>
                       <p className="text-xs tracking-[0.25em] uppercase mb-1" style={{ fontFamily: f, color: "#993434" }}>
                         {label}

@@ -20,7 +20,7 @@ const SECTIONS = [
   { key: "projects", label: "Projects Teaser", statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
   { key: "partners", label: "Partners Strip", statCount: 0, withSuffix: false, titleHint: undefined, hasHeading: false, hasCta2: false, fieldsHint: "Only Title is shown on the homepage (the small 'Trusted By' label) — Body/CTA fields are unused here." },
   { key: "blog",     label: "Blog Row",       statCount: 0, withSuffix: false, titleHint: "Heading (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined },
-  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline (Body field is the small eyebrow line above it)", hasHeading: false, hasCta2: false, fieldsHint: undefined, hasBgImage: true },
+  { key: "cta",      label: "Call to Action", statCount: 0, withSuffix: false, titleHint: "Headline — press Enter to start a new line (Body field is the small eyebrow line above it). Also shown at the bottom of the About, Services, Projects, Blog and Contact pages.", hasHeading: false, hasCta2: false, fieldsHint: undefined, hasBgImage: true, multilineTitle: true },
 ];
 
 export default async function HomepagePage() {
@@ -72,12 +72,16 @@ export default async function HomepagePage() {
               <div className="g2">
                 <div className="frow">
                   <label className="flbl">Title (EN)</label>
-                  <input name="titleEn" className="finp" defaultValue={data?.titleEn ?? ""} />
+                  {"multilineTitle" in sec && sec.multilineTitle
+                    ? <textarea name="titleEn" className="ftxta" style={{ minHeight: 70 }} defaultValue={data?.titleEn ?? ""} />
+                    : <input name="titleEn" className="finp" defaultValue={data?.titleEn ?? ""} />}
                   {sec.titleHint && <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: 4 }}>{sec.titleHint}</p>}
                 </div>
                 <div className="frow">
                   <label className="flbl">Title (AR)</label>
-                  <input name="titleAr" className="finp" dir="rtl" defaultValue={data?.titleAr ?? ""} />
+                  {"multilineTitle" in sec && sec.multilineTitle
+                    ? <textarea name="titleAr" className="ftxta" dir="rtl" style={{ minHeight: 70 }} defaultValue={data?.titleAr ?? ""} />
+                    : <input name="titleAr" className="finp" dir="rtl" defaultValue={data?.titleAr ?? ""} />}
                 </div>
               </div>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { S } from "@/lib/admin-styles";
 import { createPartner } from "../actions";
 import type { Metadata } from "next";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 
 export const metadata: Metadata = { title: "Add Partner" };
 
@@ -33,10 +34,13 @@ export default function NewPartnerPage() {
               <input name="sectorAr" className="finp" dir="rtl" placeholder="العقارات" />
             </div>
           </div>
+          <p className="fhint" style={{ marginTop: -6, marginBottom: 12 }}>
+            The sector is the heading partners are grouped under on the Partners page (e.g. &quot;Retail &amp; Fashion&quot;).
+            Partners with the same Sector (EN) share one heading — changing the Arabic sector here renames it for all of them.
+          </p>
           <div className="frow">
-            <label className="flbl">Logo URL *</label>
-            <input name="logo" required className="finp" placeholder="https://…/logo.png" />
-            <p className="fhint">Paste the direct URL to the logo image (PNG, SVG)</p>
+            <ImageUploadField name="logo" label="Logo" required folder="partners" />
+            <p className="fhint" style={{ marginTop: -8 }}>Click &quot;Upload file&quot; to pick the logo from your computer. PNG with a transparent background works best — crop it close to the logo, as empty margins make it look small.</p>
           </div>
           <div className="frow">
             <label className="flbl">Website URL</label>

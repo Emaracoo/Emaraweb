@@ -26,5 +26,5 @@ export async function saveSEO(fd: FormData) {
     ),
   );
   revalidatePath("/admin/seo");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

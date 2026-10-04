@@ -5,6 +5,7 @@ import { S } from "@/lib/admin-styles";
 import { updateBlogPost, deleteBlogPost } from "../../actions";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import type { Metadata } from "next";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 
 export const metadata: Metadata = { title: "Edit Post" };
 
@@ -39,10 +40,14 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
               <input name="slug" required className="finp" defaultValue={post.slug} />
             </div>
           </div>
-          <div className="g2">
+          <div className="g3">
             <div className="frow">
-              <label className="flbl">Category</label>
+              <label className="flbl">Category (EN)</label>
               <input name="category" className="finp" defaultValue={post.category ?? ""} />
+            </div>
+            <div className="frow">
+              <label className="flbl">Category (AR)</label>
+              <input name="categoryAr" className="finp" dir="rtl" defaultValue={post.categoryAr ?? ""} />
             </div>
             <div className="frow">
               <label className="flbl">Tags</label>
@@ -73,8 +78,7 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
           <p className="fsec">Media & Settings</p>
           <div className="g2">
             <div className="frow">
-              <label className="flbl">Cover Image URL</label>
-              <input name="coverImage" className="finp" defaultValue={post.coverImage ?? ""} />
+              <ImageUploadField name="coverImage" label="Cover Image" defaultValue={post.coverImage ?? ""} folder="blog" />
             </div>
             <div className="frow">
               <label className="flbl">Status</label>

@@ -3,8 +3,19 @@ import { S } from "@/lib/admin-styles";
 import { saveSettings } from "./actions";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import type { Metadata } from "next";
+import { CONTACT_DEFAULTS, PAGE_IMAGE_DEFAULTS } from "@/lib/site-settings";
 
 export const metadata: Metadata = { title: "Settings" };
+
+const PAGE_IMAGES: { key: keyof typeof PAGE_IMAGE_DEFAULTS; label: string }[] = [
+  { key: "hero_image_about",    label: "About — Hero Photo" },
+  { key: "about_story_image",   label: "About — \"Who We Are\" Photo" },
+  { key: "hero_image_services", label: "Services — Hero Photo" },
+  { key: "hero_image_projects", label: "Projects — Hero Photo" },
+  { key: "hero_image_partners", label: "Partners — Hero Photo" },
+  { key: "hero_image_blog",     label: "Blog — Hero Photo" },
+  { key: "hero_image_contact",  label: "Contact — Hero Photo" },
+];
 
 export default async function SettingsPage() {
   const rows = await prisma.siteSetting.findMany();
@@ -20,17 +31,18 @@ export default async function SettingsPage() {
           <div className="g2">
             <div className="frow">
               <label className="flbl">Phone Number</label>
-              <input name="phone" className="finp" defaultValue={get("phone")} placeholder="+966 11 000 0000" />
+              <input name="phone" className="finp" dir="ltr" defaultValue={get("phone")} placeholder={CONTACT_DEFAULTS.phone} />
+              <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: 4 }}>Shown on the Contact page and in the footer.</p>
             </div>
             <div className="frow">
               <label className="flbl">WhatsApp Number</label>
-              <input name="whatsapp_number" className="finp" defaultValue={get("whatsapp_number")} placeholder="+966 5X XXX XXXX" />
+              <input name="whatsapp_number" className="finp" dir="ltr" defaultValue={get("whatsapp_number")} placeholder="+20 1X XXXX XXXX" />
             </div>
           </div>
           <div className="g2">
             <div className="frow">
               <label className="flbl">Contact Email</label>
-              <input name="email_contact" type="email" className="finp" defaultValue={get("email_contact")} placeholder="hello@emaraco.com" />
+              <input name="email_contact" type="email" className="finp" defaultValue={get("email_contact")} placeholder={CONTACT_DEFAULTS.email} />
             </div>
             <div className="frow">
               <label className="flbl">Enquiries Email</label>
@@ -40,11 +52,22 @@ export default async function SettingsPage() {
           <div className="g2">
             <div className="frow">
               <label className="flbl">Address (EN)</label>
-              <textarea name="address_en" className="ftxta" style={{ minHeight: 72 }} defaultValue={get("address_en")} placeholder="King Fahd Road, Riyadh 12211" />
+              <textarea name="address_en" className="ftxta" style={{ minHeight: 72 }} defaultValue={get("address_en")} placeholder={CONTACT_DEFAULTS.address_en} />
             </div>
             <div className="frow">
               <label className="flbl">Address (AR)</label>
-              <textarea name="address_ar" className="ftxta" dir="rtl" style={{ minHeight: 72 }} defaultValue={get("address_ar")} />
+              <textarea name="address_ar" className="ftxta" dir="rtl" style={{ minHeight: 72 }} defaultValue={get("address_ar")} placeholder={CONTACT_DEFAULTS.address_ar} />
+            </div>
+          </div>
+          <div className="g2">
+            <div className="frow">
+              <label className="flbl">Studio Hours (EN)</label>
+              <input name="hours_en" className="finp" defaultValue={get("hours_en")} placeholder={CONTACT_DEFAULTS.hours_en} />
+              <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: 4 }}>Wrap words in *asterisks* to show them in the red accent style.</p>
+            </div>
+            <div className="frow">
+              <label className="flbl">Studio Hours (AR)</label>
+              <input name="hours_ar" className="finp" dir="rtl" defaultValue={get("hours_ar")} placeholder={CONTACT_DEFAULTS.hours_ar} />
             </div>
           </div>
 
@@ -72,7 +95,11 @@ export default async function SettingsPage() {
 
           <p className="fsec">Branding</p>
           <div className="frow">
-            <ImageUploadField name="logo_url" label="Site Logo" defaultValue={get("logo_url")} folder="branding" />
+            <ImageUploadField name="logo_url" label="Site Logo (header)" defaultValue={get("logo_url")} folder="branding" />
+          </div>
+          <div className="frow">
+            <ImageUploadField name="footer_logo_url" label="Footer Logo (optional)" defaultValue={get("footer_logo_url")} folder="branding" />
+            <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8 }}>Leave empty to use the built-in logo. Upload a version cropped tight to the artwork (no empty margins) — it is shown in white.</p>
           </div>
           <div className="g2">
             <div className="frow">
@@ -90,6 +117,17 @@ export default async function SettingsPage() {
               <label className="flbl">Footer Tagline (AR)</label>
               <input name="footer_tagline_ar" className="finp" dir="rtl" defaultValue={get("footer_tagline_ar")} />
             </div>
+          </div>
+
+          <p className="fsec">Page Images</p>
+          <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8, marginBottom: 12 }}>The photos at the top of each page (they fill the right half of the banner on desktop). Leave a field empty to use the default photo.</p>
+          <div className="g2">
+            {PAGE_IMAGES.map(({ key, label }) => (
+              <div key={key} className="frow">
+                <ImageUploadField name={key} label={label} defaultValue={get(key)} folder="pages" />
+                {!get(key) && <p style={{ fontSize: 11, color: "#9A9A9A", marginTop: -8 }}>Currently using the default photo ({PAGE_IMAGE_DEFAULTS[key]})</p>}
+              </div>
+            ))}
           </div>
 
           <p className="fsec">Legal</p>

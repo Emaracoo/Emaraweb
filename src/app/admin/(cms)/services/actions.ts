@@ -22,6 +22,7 @@ export async function createService(fd: FormData) {
     },
   });
   revalidatePath("/admin/services");
+  revalidatePath("/", "layout");
   redirect("/admin/services");
 }
 
@@ -45,12 +46,14 @@ export async function updateService(id: string, fd: FormData) {
     },
   });
   revalidatePath("/admin/services");
+  revalidatePath("/", "layout");
   redirect("/admin/services");
 }
 
 export async function deleteService(id: string) {
   await prisma.service.delete({ where: { id } });
   revalidatePath("/admin/services");
+  revalidatePath("/", "layout");
   redirect("/admin/services");
 }
 
@@ -60,7 +63,7 @@ export async function toggleServiceStatus(id: string) {
   await prisma.service.update({ where: { id }, data: { status: row.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED" } });
   revalidatePath("/admin/services");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function updateServiceCoverImage(id: string, fd: FormData) {
@@ -68,7 +71,7 @@ export async function updateServiceCoverImage(id: string, fd: FormData) {
   await prisma.service.update({ where: { id }, data: { coverImage: coverImage || null } });
   revalidatePath("/admin/services");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function moveServiceOrder(id: string, direction: "up" | "down") {
@@ -85,5 +88,5 @@ export async function moveServiceOrder(id: string, direction: "up" | "down") {
   ]);
   revalidatePath("/admin/services");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

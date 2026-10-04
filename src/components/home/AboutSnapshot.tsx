@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { localizeDigits } from "@/lib/labels";
 
 const FALLBACK = {
   en: {
@@ -14,7 +15,7 @@ const FALLBACK = {
     ],
   },
   ar: {
-    eyebrow: "عن إعمار",
+    eyebrow: "عن عمارة",
     heading: "أربعة عقود من التصميم\nوالبناء والحرفية.",
     body: "بخبرة تمتد لأكثر من أربعة عقود، بدأت رحلتنا بصناعة النماذج المعمارية المصغّرة — نجمع بين الوظيفية والجماليات بعناية فائقة بالتفاصيل. من المنشآت الصناعية إلى القصور والفيلات، رسمنا ملامح المكان في أرجاء مصر.",
     cta: "اقرأ المزيد ←",
@@ -41,9 +42,11 @@ export default async function AboutSnapshot({ lang }: Props) {
   const body    = (lang === "ar" ? section?.bodyAr : section?.bodyEn) || fb.body;
   const cta     = (lang === "ar" ? section?.ctaLabelAr : section?.ctaLabelEn) || fb.cta;
 
-  const stats = d.stats && d.stats.length > 0
-    ? d.stats.map(s => ({ value: s.value, label: (lang === "ar" ? s.labelAr : s.labelEn) || "" }))
-    : fb.stats;
+  // A stat saved without an Arabic label falls back to the default label in that slot
+  const stats = (d.stats && d.stats.length > 0
+    ? d.stats.map((s, i) => ({ value: s.value, label: (lang === "ar" ? s.labelAr : s.labelEn) || fb.stats[i]?.label || "" }))
+    : fb.stats
+  ).map(s => ({ ...s, value: localizeDigits(s.value, lang) }));
 
   const t   = { eyebrow, heading, body, cta, stats };
   const f   = lang === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
@@ -78,8 +81,8 @@ export default async function AboutSnapshot({ lang }: Props) {
 
         {/* Right: stats */}
         <div className="flex flex-col divide-y" style={{ borderColor: "var(--em-border)" }}>
-          {t.stats.map((stat) => (
-            <div key={stat.label} className="py-8 first:pt-0 last:pb-0" style={{ borderColor: "var(--em-border)" }}>
+          {t.stats.map((stat, i) => (
+            <div key={i} className="py-8 first:pt-0 last:pb-0" style={{ borderColor: "var(--em-border)" }}>
               <p className="font-light leading-none mb-2" style={{ fontFamily: fs, fontSize: "clamp(3rem, 5vw, 4.5rem)", color: "#993434" }}>
                 {stat.value}
               </p>

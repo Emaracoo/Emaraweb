@@ -24,12 +24,14 @@ export async function createBlogPost(fd: FormData) {
       coverImage:  (fd.get("coverImage") as string) || null,
       tags:        parseTags(fd.get("tags") as string),
       category:    (fd.get("category") as string) || null,
+      categoryAr:  (fd.get("categoryAr") as string) || null,
       status:      statusVal as never,
       publishedAt: statusVal === "PUBLISHED" ? new Date() : null,
       authorId:    session?.user?.id ?? null,
     },
   });
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
   redirect("/admin/blog");
 }
 
@@ -49,17 +51,20 @@ export async function updateBlogPost(id: string, fd: FormData) {
       coverImage:  (fd.get("coverImage") as string) || null,
       tags:        parseTags(fd.get("tags") as string),
       category:    (fd.get("category") as string) || null,
+      categoryAr:  (fd.get("categoryAr") as string) || null,
       status:      statusVal as never,
       publishedAt: statusVal === "PUBLISHED" && !existing?.publishedAt ? new Date() : existing?.publishedAt,
     },
   });
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
   redirect("/admin/blog");
 }
 
 export async function deleteBlogPost(id: string) {
   await prisma.blogPost.delete({ where: { id } });
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
   redirect("/admin/blog");
 }
 
@@ -76,5 +81,5 @@ export async function toggleBlogStatus(id: string) {
   });
   revalidatePath("/admin/blog");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

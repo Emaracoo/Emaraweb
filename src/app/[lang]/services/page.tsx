@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import ContactCTA from "@/components/home/ContactCTA";
+import SiteCTA from "@/components/SiteCTA";
+import { getPageImage } from "@/lib/site-settings";
 import ServicesList from "@/components/services/ServicesList";
 import { hasLocale } from "../dictionaries";
 import { prisma } from "@/lib/prisma";
@@ -26,10 +27,13 @@ export default async function ServicesPage({ params }: Props) {
   const h   = HERO[l];
   const lbl = GRID_LABELS[l];
 
-  const rows = await prisma.service.findMany({
-    where:   { status: "PUBLISHED" },
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
-  });
+  const [rows, heroImage] = await Promise.all([
+    prisma.service.findMany({
+      where:   { status: "PUBLISHED" },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+    }),
+    getPageImage("hero_image_services"),
+  ]);
 
   const services = rows.map(s => ({
     slug:  s.slug,
@@ -42,7 +46,7 @@ export default async function ServicesPage({ params }: Props) {
     <>
       <Header />
       <main>
-        <PageHero lang={l} eyebrow={h.eyebrow} title={h.title} titleAccent={h.accent} subtitle={h.subtitle} />
+        <PageHero lang={l} eyebrow={h.eyebrow} title={h.title} titleAccent={h.accent} subtitle={h.subtitle} image={heroImage} />
         <ServicesList
           lang={l}
           services={services}
@@ -51,7 +55,7 @@ export default async function ServicesPage({ params }: Props) {
           learnMore={lbl.learnMore}
           contactHref={`/${l}/contact`}
         />
-        <ContactCTA />
+        <SiteCTA />
       </main>
       <Footer />
     </>

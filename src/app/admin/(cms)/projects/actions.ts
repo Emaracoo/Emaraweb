@@ -20,6 +20,7 @@ export async function createProject(fd: FormData) {
       locationEn:    (fd.get("locationEn") as string) || null,
       locationAr:    (fd.get("locationAr") as string) || null,
       area:          (fd.get("area") as string) || null,
+      areaAr:        (fd.get("areaAr") as string) || null,
       clientEn:      (fd.get("clientEn") as string) || null,
       clientAr:      (fd.get("clientAr") as string) || null,
       descriptionEn: (fd.get("descriptionEn") as string) || null,
@@ -32,6 +33,7 @@ export async function createProject(fd: FormData) {
     },
   });
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
   redirect("/admin/projects");
 }
 
@@ -48,6 +50,7 @@ export async function updateProject(id: string, fd: FormData) {
       locationEn:    (fd.get("locationEn") as string) || null,
       locationAr:    (fd.get("locationAr") as string) || null,
       area:          (fd.get("area") as string) || null,
+      areaAr:        (fd.get("areaAr") as string) || null,
       clientEn:      (fd.get("clientEn") as string) || null,
       clientAr:      (fd.get("clientAr") as string) || null,
       descriptionEn: (fd.get("descriptionEn") as string) || null,
@@ -60,12 +63,14 @@ export async function updateProject(id: string, fd: FormData) {
     },
   });
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
   redirect("/admin/projects");
 }
 
 export async function deleteProject(id: string) {
   await prisma.project.delete({ where: { id } });
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
   redirect("/admin/projects");
 }
 
@@ -75,7 +80,7 @@ export async function toggleProjectFeatured(id: string) {
   await prisma.project.update({ where: { id }, data: { featured: !row.featured } });
   revalidatePath("/admin/projects");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function updateProjectCoverImage(id: string, fd: FormData) {
@@ -84,7 +89,7 @@ export async function updateProjectCoverImage(id: string, fd: FormData) {
   await prisma.project.update({ where: { id }, data: { coverImage } });
   revalidatePath("/admin/projects");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }
 
 export async function moveProjectOrder(id: string, direction: "up" | "down") {
@@ -101,5 +106,5 @@ export async function moveProjectOrder(id: string, direction: "up" | "down") {
   ]);
   revalidatePath("/admin/projects");
   revalidatePath("/admin/homepage");
-  revalidatePath("/[lang]", "page");
+  revalidatePath("/", "layout");
 }

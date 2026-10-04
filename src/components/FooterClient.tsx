@@ -2,30 +2,21 @@
 
 import Link from "next/link";
 import { useLang } from "./LangProvider";
+import { projectCategoryLabel } from "@/lib/labels";
 
 const FOOTER_T = {
   en: {
     tagline: "Four decades of experience in design and construction. From industrial structures to villas and palaces — based in Heliopolis, Cairo.",
-    address: "5 Al-Hariry St, beside Tivoli Dome\nHeliopolis, Cairo, Egypt · Info@EmaraCo.com",
     studio: "Studio", services: "Services", work: "Work",
     about: "About Us", story: "Our Story", contact: "Contact",
-    structural: "Structural Design", architecture: "Architectural Design",
-    interior: "Interior Architecture", landscape: "Landscape Design",
-    restoration: "Restoration & Strengthening", supervision: "Construction Supervision",
-    maquettes: "Model Making (Maquettes)",
     residential: "Residential", commercial: "Commercial",
     industrial: "Industrial", administrative: "Administrative",
     privacy: "Privacy Policy", terms: "Terms of Use", rights: "All rights reserved.",
   },
   ar: {
     tagline: "أربعة عقود من الخبرة في التصميم والبناء. من المنشآت الصناعية إلى الفيلات والقصور — مقرنا في مصر الجديدة، القاهرة.",
-    address: "٥ شارع الحريري، بجوار تيفولي دوم\nمصر الجديدة، القاهرة، مصر · Info@EmaraCo.com",
     studio: "الاستوديو", services: "الخدمات", work: "الأعمال",
     about: "من نحن", story: "قصتنا", contact: "تواصل معنا",
-    structural: "التصميم الإنشائي", architecture: "التصميم المعماري",
-    interior: "العمارة الداخلية", landscape: "تصميم المناظر الطبيعية",
-    restoration: "الترميم والتقوية", supervision: "الإشراف على التنفيذ",
-    maquettes: "صناعة المجسمات",
     residential: "سكني", commercial: "تجاري",
     industrial: "صناعي", administrative: "إداري",
     privacy: "سياسة الخصوصية", terms: "شروط الاستخدام", rights: "جميع الحقوق محفوظة.",
@@ -34,30 +25,36 @@ const FOOTER_T = {
 
 interface Social { label: string; href: string }
 interface WorkCategory { categoryEn: string; categoryAr: string | null }
+interface ServiceLink { slug: string; titleEn: string; titleAr: string | null }
 
 interface Props {
   logoUrl?: string | null;
   companyName?: string | null;
   taglineEn?: string | null;
   taglineAr?: string | null;
-  addressEn?: string | null;
-  addressAr?: string | null;
+  addressEn: string;
+  addressAr: string;
+  phone: string;
+  email: string;
   socials: Social[];
   privacyUrl?: string | null;
   termsUrl?: string | null;
-  workCategories: WorkCategory[];
+  categories: WorkCategory[];
+  services: ServiceLink[];
 }
 
-export default function FooterClient({ logoUrl, companyName, taglineEn, taglineAr, addressEn, addressAr, socials, privacyUrl, termsUrl, workCategories }: Props) {
+export default function FooterClient({ logoUrl, companyName, taglineEn, taglineAr, addressEn, addressAr, phone, email, socials, privacyUrl, termsUrl, categories, services }: Props) {
   const lang = useLang();
   const t    = FOOTER_T[lang];
   const f    = "var(--font-saira)";
   const fa   = lang === "ar" ? "var(--font-cairo)" : f;
 
-  const logo    = logoUrl || "/logo.png";
+  // The master logo file is mostly empty canvas, so the footer uses a tightly cropped copy
+  const logo    = logoUrl || "/logo-trimmed.png";
   const company = companyName || "Emara Construction";
   const tagline = (lang === "ar" ? taglineAr : taglineEn) || t.tagline;
-  const address = (lang === "ar" ? addressAr : addressEn) || t.address;
+  const address = lang === "ar" ? addressAr : addressEn;
+  const workCategories = [...new Set(categories.map(c => c.categoryEn))];
 
   const nav = {
     [t.studio]: [
@@ -65,19 +62,14 @@ export default function FooterClient({ logoUrl, companyName, taglineEn, taglineA
       { label: t.story,   href: `/${lang}/about#story` },
       { label: t.contact, href: `/${lang}/contact` },
     ],
-    [t.services]: [
-      { label: t.structural,   href: `/${lang}/services#structural-design` },
-      { label: t.architecture, href: `/${lang}/services#architectural-design` },
-      { label: t.interior,     href: `/${lang}/services#interior-architecture` },
-      { label: t.landscape,    href: `/${lang}/services#landscape-design` },
-      { label: t.restoration,  href: `/${lang}/services#restoration-strengthening` },
-      { label: t.supervision,  href: `/${lang}/services#construction-supervision` },
-      { label: t.maquettes,    href: `/${lang}/services#model-making` },
-    ],
+    [t.services]: services.map(s => ({
+      label: (lang === "ar" && s.titleAr) || s.titleEn,
+      href:  `/${lang}/services#${s.slug}`,
+    })),
     [t.work]: workCategories.length > 0
-      ? workCategories.map(c => ({
-          label: (lang === "ar" && c.categoryAr) || c.categoryEn,
-          href: `/${lang}/projects?cat=${encodeURIComponent(c.categoryEn)}`,
+      ? workCategories.map(cat => ({
+          label: projectCategoryLabel(cat, lang, categories),
+          href: `/${lang}/projects?cat=${encodeURIComponent(cat)}`,
         }))
       : [
           { label: t.residential,    href: `/${lang}/projects?cat=Residential` },
@@ -100,14 +92,21 @@ export default function FooterClient({ logoUrl, companyName, taglineEn, taglineA
               <img
                 src={logo}
                 alt={company}
-                style={{ height: "64px", width: "auto", filter: "brightness(0) invert(1)" }}
+                className="h-16 lg:h-20 w-auto"
+                style={{ filter: "brightness(0) invert(1)" }}
               />
             </Link>
             <p className="text-sm leading-relaxed mb-8" style={{ fontFamily: fa, fontWeight: 300, color: "rgba(255,255,255,0.4)", maxWidth: "280px" }}>
               {tagline}
             </p>
-            <div className="text-xs leading-relaxed mb-10" style={{ fontFamily: fa, color: "rgba(255,255,255,0.2)", whiteSpace: "pre-line" }}>
-              {address}
+            <div className="text-xs leading-relaxed mb-10" style={{ fontFamily: fa, color: "rgba(255,255,255,0.45)" }}>
+              <p style={{ whiteSpace: "pre-line" }}>{address}</p>
+              <p className="mt-3">
+                <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} dir="ltr" className="hover:text-white transition-colors" style={{ unicodeBidi: "isolate" }}>{phone}</a>
+              </p>
+              <p className="mt-1">
+                <a href={`mailto:${email}`} dir="ltr" className="hover:text-white transition-colors" style={{ unicodeBidi: "isolate" }}>{email}</a>
+              </p>
             </div>
             <div className="flex items-center gap-5 flex-wrap">
               {socials.map((s) => (

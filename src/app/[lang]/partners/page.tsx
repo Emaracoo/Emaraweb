@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import SiteCTA from "@/components/SiteCTA";
 import { hasLocale } from "../dictionaries";
 import { prisma } from "@/lib/prisma";
+import { getPageImage } from "@/lib/site-settings";
+import { localizeDigits } from "@/lib/labels";
 
 interface Client { name: string; nameAr: string; logo: string }
 interface Sector { labelEn: string; labelAr: string; clients: Client[] }
@@ -24,18 +26,18 @@ const T = {
     title: "Built on",
     accent: "Trust",
     subtitle: "The clients and collaborators who have shaped four decades of practice.",
-    allClients: "All Clients",
+    ctaEyebrow: "Our Clients",
     ctaHeading: "Ready to join our client list?",
-    ctaBtn:     "Start a Conversation →",
+    ctaBtn:     "Start a Conversation",
   },
   ar: {
     eyebrow: "عملاؤنا",
     title:   "مبني على",
     accent:  "الثقة",
     subtitle: "العملاء والشركاء الذين شكّلوا أربعة عقود من الممارسة.",
-    allClients: "جميع العملاء",
+    ctaEyebrow: "عملاؤنا",
     ctaHeading: "هل أنت مستعد للانضمام إلى قائمة عملائنا؟",
-    ctaBtn:     "ابدأ محادثة ←",
+    ctaBtn:     "ابدأ محادثة",
   },
 };
 
@@ -49,33 +51,36 @@ export default async function PartnersPage({ params }: Props) {
   const f  = l === "ar" ? "var(--font-cairo)" : "var(--font-saira)";
   const fs = l === "ar" ? "var(--font-cairo)" : "var(--font-cormorant)";
 
-  const [partners, statsSection] = await Promise.all([
+  const [partners, statsSection, heroImage] = await Promise.all([
     prisma.partner.findMany({
       where:   { status: "PUBLISHED" },
       orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
     }),
     prisma.homepageSection.findUnique({ where: { key: "partners_stats" } }),
+    getPageImage("hero_image_partners"),
   ]);
 
   const SECTORS: Sector[] = [];
   for (const p of partners) {
     let sector = SECTORS.find(s => s.labelEn === p.sector);
     if (!sector) {
-      sector = { labelEn: p.sector, labelAr: p.sectorAr ?? p.sector, clients: [] };
+      sector = { labelEn: p.sector, labelAr: p.sectorAr || p.sector, clients: [] };
       SECTORS.push(sector);
+    } else if (p.sectorAr && sector.labelAr === sector.labelEn) {
+      sector.labelAr = p.sectorAr;
     }
     sector.clients.push({ name: p.nameEn, nameAr: p.nameAr ?? p.nameEn, logo: p.logo });
   }
 
   const rawStats = (statsSection?.data as { stats?: Stat[] } | null)?.stats;
   const stats = (rawStats && rawStats.length > 0 ? rawStats : FALLBACK_STATS)
-    .map(s => ({ value: s.value, label: (l === "ar" ? s.labelAr : s.labelEn) || "" }));
+    .map((s, i) => ({ value: localizeDigits(s.value, l), label: (l === "ar" ? s.labelAr : s.labelEn) || (l === "ar" ? FALLBACK_STATS[i]?.labelAr : FALLBACK_STATS[i]?.labelEn) || "" }));
 
   return (
     <>
       <Header />
       <main>
-        <PageHero lang={l} eyebrow={t.eyebrow} title={t.title} titleAccent={t.accent} subtitle={t.subtitle} />
+        <PageHero lang={l} eyebrow={t.eyebrow} title={t.title} titleAccent={t.accent} subtitle={t.subtitle} image={heroImage} />
 
         {/* ── Stats strip ──────────────────────────────────────────────── */}
         <div style={{ background: "var(--em-surface)", borderBottom: "1px solid var(--em-border)" }}>
@@ -83,9 +88,11 @@ export default async function PartnersPage({ params }: Props) {
             <div className="grid grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--em-border)" }}>
               {stats.map((s, i) => (
                 <div
-                  key={s.label}
-                  className="py-8 px-6 lg:px-10"
-                  style={{ borderInlineEnd: i < stats.length - 1 ? "1px solid var(--em-border)" : "none" }}
+                  key={i}
+                  // Dividers between columns: 2 per row on mobile, 4 on desktop
+                  className={`py-8 px-4 sm:px-6 lg:px-10 min-w-0 border-[var(--em-border)] ${
+                    i < stats.length - 1 ? (i % 2 === 0 ? "border-e" : "lg:border-e") : ""
+                  }`}
                 >
                   <p className="font-light mb-1" style={{ fontFamily: fs, fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#993434" }}>
                     {s.value}
@@ -117,18 +124,19 @@ export default async function PartnersPage({ params }: Props) {
 
                 {/* Logo grid — columns capped to client count so no empty grey cells */}
                 <div
+                  className="grid grid-cols-1 sm:grid-cols-[repeat(var(--cols-sm),minmax(0,1fr))] lg:grid-cols-[repeat(var(--cols-lg),minmax(0,1fr))]"
                   style={{
-                    display: "grid",
-                    gridTemplateColumns: `repeat(${Math.min(sector.clients.length, 4)}, minmax(0, 1fr))`,
+                    "--cols-sm": Math.min(sector.clients.length, 2),
+                    "--cols-lg": Math.min(sector.clients.length, 4),
                     gap: "1px",
                     background: "var(--em-border)",
-                  }}
+                  } as React.CSSProperties}
                 >
                   {sector.clients.map((client) => (
                     <div
                       key={client.name}
                       className="group relative flex flex-col items-center justify-center overflow-hidden"
-                      style={{ height: "230px", background: "var(--em-card)" }}
+                      style={{ height: "260px", background: "var(--em-card)" }}
                     >
                       {/* Red reveal line */}
                       <div
@@ -139,7 +147,7 @@ export default async function PartnersPage({ params }: Props) {
                       {/* White logo mount — ensures all logos read cleanly in any mode */}
                       <div
                         className="flex items-center justify-center rounded-sm transition-transform duration-300 group-hover:scale-95"
-                        style={{ width: "85%", height: "150px", background: "#fff", padding: "1.25rem" }}
+                        style={{ width: "88%", height: "200px", background: "#fff", padding: "1rem" }}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -166,24 +174,11 @@ export default async function PartnersPage({ params }: Props) {
           </div>
         </section>
 
-        {/* ── CTA ──────────────────────────────────────────────────────── */}
-        <section style={{ background: "#441919", padding: "clamp(5rem, 10vh, 8rem) clamp(1.5rem, 8vw, 5rem)" }}>
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xs mb-6" style={{ fontFamily: f, color: "rgba(255,255,255,0.4)" }}>
-              {t.allClients}
-            </p>
-            <h2 className="font-light leading-snug mb-10" style={{ fontFamily: fs, fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "#fff" }}>
-              {t.ctaHeading}
-            </h2>
-            <Link
-              href={`/${l}/contact`}
-              className="inline-flex items-center gap-3 px-10 py-4 text-sm text-white transition-all duration-300 hover:bg-white hover:text-[#441919]"
-              style={{ fontFamily: f, border: "1px solid rgba(255,255,255,0.4)", borderRadius: "9999px" }}
-            >
-              {t.ctaBtn}
-            </Link>
-          </div>
-        </section>
+        <SiteCTA
+          eyebrowEn={T.en.ctaEyebrow} eyebrowAr={T.ar.ctaEyebrow}
+          headlineEn={T.en.ctaHeading} headlineAr={T.ar.ctaHeading}
+          ctaEn={T.en.ctaBtn} ctaAr={T.ar.ctaBtn}
+        />
 
       </main>
       <Footer />

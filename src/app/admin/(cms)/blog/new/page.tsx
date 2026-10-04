@@ -2,6 +2,7 @@ import Link from "next/link";
 import { S } from "@/lib/admin-styles";
 import { createBlogPost } from "../actions";
 import type { Metadata } from "next";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 
 export const metadata: Metadata = { title: "New Post" };
 
@@ -28,10 +29,14 @@ export default function NewBlogPostPage() {
               <input name="slug" required className="finp" placeholder="post-title" />
             </div>
           </div>
-          <div className="g2">
+          <div className="g3">
             <div className="frow">
-              <label className="flbl">Category</label>
+              <label className="flbl">Category (EN)</label>
               <input name="category" className="finp" placeholder="Architecture, Design…" />
+            </div>
+            <div className="frow">
+              <label className="flbl">Category (AR)</label>
+              <input name="categoryAr" className="finp" dir="rtl" placeholder="عمارة، تصميم…" />
             </div>
             <div className="frow">
               <label className="flbl">Tags</label>
@@ -63,8 +68,7 @@ export default function NewBlogPostPage() {
           <p className="fsec">Media & Settings</p>
           <div className="g2">
             <div className="frow">
-              <label className="flbl">Cover Image URL</label>
-              <input name="coverImage" className="finp" placeholder="https://…" />
+              <ImageUploadField name="coverImage" label="Cover Image" folder="blog" />
             </div>
             <div className="frow">
               <label className="flbl">Status</label>
